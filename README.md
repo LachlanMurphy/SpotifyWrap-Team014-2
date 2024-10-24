@@ -5,10 +5,15 @@
 
  **Project Contributors:**
  Gavin Petruzzi - gape5988
+
  Lachlan Murphy - LachlanMurphy
+
  Cody Mattox - CodyMattox
+
  Brady Gaona - Braeden464
+
  Cole Younoszai - Coledy2004
+ 
  Joshua Wright - joshwright04
 
 **Technology Stack Utilized:**
