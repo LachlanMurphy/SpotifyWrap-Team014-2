@@ -2,8 +2,11 @@
 
 **Application Description:**
 
+A web application to display spotify listeners stats.
+
 
  **Project Contributors:**
+
  Gavin Petruzzi - gape5988
 
  Lachlan Murphy - LachlanMurphy
