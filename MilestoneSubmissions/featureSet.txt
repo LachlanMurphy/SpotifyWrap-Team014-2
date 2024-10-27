@@ -1,0 +1,7 @@
+Recommendations feature: User will type in a song/genre/artist and will be displayed with 10 songs that are similar to that song
+Like feature: User will be able to like songs that they search and songs will be put into a database 
+Search feature: Search for songs from spotify database
+Login: Logs in user
+Registration: Registers users 
+Logout: Logs out users 
+Nav bar: Navigating through pages

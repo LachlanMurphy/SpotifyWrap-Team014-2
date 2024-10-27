@@ -1,0 +1,4 @@
+env file?
+branches for github?
+What are we allowed to use?
+Docker?
