@@ -1,0 +1,6 @@
+Meeting 1: 
+-Everyone was present
+Plans for next week:
+-Assign jobs for everyone and start working on how Spotify API works 
+-Start figuring out login and registration
+-Create folders for each week meeting (not with TA)
