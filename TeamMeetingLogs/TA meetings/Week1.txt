@@ -1,0 +1,11 @@
+10/29/24
+-Everyone was present
+Plans for next week:
+- Assign jobs for everyone and start working on how spotify API works
+    Gavin and Cody -> Spotify API
+    Cole and Josh -> Front End HTML and css
+    Lachlan -> Index.js file
+    Brady -> Database sql creation 
+- start figuriing out login and registration
+- create folders for personal group meetings each week meeting(not with TA)
+- Add more specification to description of logs
