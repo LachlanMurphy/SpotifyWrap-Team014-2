@@ -84,6 +84,20 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
+app.get('/logout', (req, res) => {
+  res.render('pages/logout');
+});
+
+app.get('/register', (req, res) => {
+  res.render('pages/register');
+});
+
+
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
