@@ -84,6 +84,32 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.post('/login', async (req, res) => {
+  try {
+    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [req.body.username]);
+
+    if (!user) {
+      return res.render('pages/login', { error: 'Incorrect username or password.' });
+    }
+
+    const match = await bcrypt.compare(req.body.password, user.password);
+
+    if (!match) {
+      return res.render('pages/login', { error: 'Incorrect username or password.' });
+    }
+
+    // Save user details in the session
+    req.session.user = user;
+    req.session.save(() => {
+      res.redirect('/discover'); // Redirect to discover if login is successful
+    });
+  } catch (error) {
+    console.error('Error during login process:', error);
+    res.render('pages/login', { error: 'An error occurred. Please try again later.' });
+  }
+});
+
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
