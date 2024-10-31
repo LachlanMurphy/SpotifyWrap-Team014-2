@@ -1,0 +1,6 @@
+10/29/24
+-Everyone was preent
+Plans for next week:
+- Assign jobs for everyone and start working on how spotify API works
+- start figuriing out login and registration
+- create folders for each week meeting(not with TA)
