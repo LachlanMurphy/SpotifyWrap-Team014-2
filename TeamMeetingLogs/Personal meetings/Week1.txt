@@ -1,0 +1,6 @@
+10/27/24 
+- in person
+- everyone was there
+- We worked setting up the directory and repository
+- We started figuring out the spotify API call 
+- We discussed legistics and decided on what features we will include
