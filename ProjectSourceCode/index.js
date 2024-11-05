@@ -59,19 +59,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
 
 // initialize session variables
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     saveUninitialized: false,
-//     resave: false,
-//   })
-// );
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+  })
+);
 
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: true,
-//   })
-// );
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 // *****************************************************
 // <!-- Section 4 : API Routes -->
@@ -79,64 +79,64 @@ app.use(bodyParser.json()); // specify the usage of JSON for parsing request bod
 
 // Adapted code from this repository in order to fetch and update bearer access_token 
 // https://github.com/diana-moreno/spotify-express/blob/master/index.js
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID, 
-  clientSecret: process.env.CLIENT_SECRET
-});
+// const spotifyApi = new SpotifyWebApi({
+//   clientId: process.env.CLIENT_ID, 
+//   clientSecret: process.env.CLIENT_SECRET
+// });
 
 // GET TRACK BASED ON ARTIST ID
 // ----------------------------
-spotifyApi
-  .clientCredentialsGrant()
-  .then(function(data) {
-    spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
-    // Uncomment below line to view temporary bearer access_token in the terminal
-    // console.log(data.body); 
-    // const artist_id = req.body.userInput; // Update with function to take in user
-    artist_id = '11dFghVXANMlKmJXsNCbNl'; 
-    return spotifyApi.getTrack(artist_id); 
-  }) 
-  .then(function(data) { 
-    const track = data.body; 
-    // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
-    console.log('Artist:', track.album.artists[0].name); 
-    console.log('Track name:', track.name); 
-    console.log('Album:', track.album.name); 
-    console.log('Popularity:', track.popularity); 
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+// spotifyApi
+//   .clientCredentialsGrant()
+//   .then(function(data) {
+//     spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
+//     // Uncomment below line to view temporary bearer access_token in the terminal
+//     // console.log(data.body); 
+//     // const artist_id = req.body.userInput; // Update with function to take in user
+//     artist_id = '11dFghVXANMlKmJXsNCbNl'; 
+//     return spotifyApi.getTrack(artist_id); 
+//   }) 
+//   .then(function(data) { 
+//     const track = data.body; 
+//     // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
+//     console.log('Artist:', track.album.artists[0].name); 
+//     console.log('Track name:', track.name); 
+//     console.log('Album:', track.album.name); 
+//     console.log('Popularity:', track.popularity); 
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
 
-  spotifyApi
-  .clientCredentialsGrant()
-  .then(function (data) {
-    spotifyApi.setAccessToken(data.body['access_token']); 
+//   spotifyApi
+//   .clientCredentialsGrant()
+//   .then(function (data) {
+//     spotifyApi.setAccessToken(data.body['access_token']); 
 
-    return spotifyApi.getRecommendations({
-      min_energy: 0.4,
-      seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-      min_popularity: 50,
-    });
-  })
-  .then(function (data) {
-    const tracks = data.body.tracks; // Access the array of recommended tracks
+//     return spotifyApi.getRecommendations({
+//       min_energy: 0.4,
+//       seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
+//       min_popularity: 50,
+//     });
+//   })
+//   .then(function (data) {
+//     const tracks = data.body.tracks; // Access the array of recommended tracks
 
-    // Make sure there are tracks returned
-    if (tracks.length > 0) {
-      // Access the first track as an example
-      const track = tracks[0];
-      console.log('Artist:', track.artists[0].name);
-      console.log('Track name:', track.name);
-      console.log('Album:', track.album.name);
-      console.log('Popularity:', track.popularity);
-    } else {
-      console.log('No recommendations found.');
-    }
-  })
-  .catch(function (err) {
-    console.log('Error:', err);
-  });
+//     // Make sure there are tracks returned
+//     if (tracks.length > 0) {
+//       // Access the first track as an example
+//       const track = tracks[0];
+//       console.log('Artist:', track.artists[0].name);
+//       console.log('Track name:', track.name);
+//       console.log('Album:', track.album.name);
+//       console.log('Popularity:', track.popularity);
+//     } else {
+//       console.log('No recommendations found.');
+//     }
+//   })
+//   .catch(function (err) {
+//     console.log('Error:', err);
+//   });
 
   // More spotify api calls will go below 
 
@@ -149,28 +149,31 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  try {
-    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [req.body.username]);
+  //hash the password using bcrypt library
+  const hash = await bcrypt.hash(req.body.password, 10);
+  
+  // To-DO: Insert username and hashed password into the 'users' table
+  const query = 'select * from users where username = $1 limit 1;';
+  db.any(query, req.body.username).then(async user => {
+      user = user[0];
 
-    if (!user) {
-      return res.render('pages/login', { error: 'Incorrect username or password.' });
-    }
+      // check if password from request matches with password in DB
+      const match = await bcrypt.compare(req.body.password, user.password);
+      if (!match) {
+          res.render('pages/login', {
+              message: "Incorrect Passsword"
+          });
+      } else {
+          req.session.user = user;
+          req.session.save();
 
-    const match = await bcrypt.compare(req.body.password, user.password);
-
-    if (!match) {
-      return res.render('pages/login', { error: 'Incorrect username or password.' });
-    }
-
-    // Save user details in the session
-    req.session.user = user;
-    req.session.save(() => {
-      res.redirect('/discover'); // Redirect to discover if login is successful
-    });
-  } catch (error) {
-    console.error('Error during login process:', error);
-    res.render('pages/login', { error: 'An error occurred. Please try again later.' });
-  }
+          res.redirect('/home');
+      }
+  }).catch(err => {
+      res.render('pages/register', {
+          message: "User does not exist"
+      });
+  });
 });
 
 app.get('/home', (req, res) => {
@@ -185,30 +188,28 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
-<<<<<<< Updated upstream
 app.get('/search', (req, res) => {
   res.render('pages/search');
 });
-=======
-// app.post('/register', async (req, res) => {
 
-//   try {
-//   const hash = await bcrypt.hash(req.body.password, 10);
-//   const query = 'INSERT INTO users(username, hash) VALUES($1, $2)';
-//   const username =  req.body.username;
-//   await db.any(query, [username, hashedPassword]);
+app.post('/register', async (req, res) => {
+
+  //hash the password using bcrypt library
+  const hash = await bcrypt.hash(req.body.password, 10);
   
-//   res.redirect('/login');
-// } 
-// catch (error) {
-//   console.error('Error registering user:', error);
-
-  
-//   res.redirect('/register');
-// }
-
-// });
->>>>>>> Stashed changes
+  // To-DO: Insert username and hashed password into the 'users' table
+  const query = 'insert into users (username, password) values ($1, $2) returning *;';
+  db.any(query, [
+      req.body.username,
+      hash
+  ]).then(data => {
+      res.render('pages/login', {
+          message: "Registered successfully!"
+      });
+  }).catch(err => {
+      res.redirect('/register');
+  });
+});
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
