@@ -6,6 +6,6 @@ Plans for next week:
     Cole and Josh -> Front End HTML and css
     Lachlan -> Index.js file
     Brady -> Database sql creation 
-- start figuriing out login and registration
+- start figuring out login and registration
 - create folders for personal group meetings each week meeting(not with TA)
 - Add more specification to description of logs

@@ -185,9 +185,30 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
+<<<<<<< Updated upstream
 app.get('/search', (req, res) => {
   res.render('pages/search');
 });
+=======
+// app.post('/register', async (req, res) => {
+
+//   try {
+//   const hash = await bcrypt.hash(req.body.password, 10);
+//   const query = 'INSERT INTO users(username, hash) VALUES($1, $2)';
+//   const username =  req.body.username;
+//   await db.any(query, [username, hashedPassword]);
+  
+//   res.redirect('/login');
+// } 
+// catch (error) {
+//   console.error('Error registering user:', error);
+
+  
+//   res.redirect('/register');
+// }
+
+// });
+>>>>>>> Stashed changes
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
