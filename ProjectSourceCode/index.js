@@ -2,6 +2,9 @@
 // <!-- Section 1 : Import Dependencies -->
 // *****************************************************
 
+// Make sure to include spotify web api library in package.json file too 
+const SpotifyWebApi = require("spotify-web-api-node");
+
 const express = require('express'); // To build an application server or API
 const app = express();
 const handlebars = require('express-handlebars');
@@ -74,7 +77,38 @@ app.use(bodyParser.json()); // specify the usage of JSON for parsing request bod
 // <!-- Section 4 : API Routes -->
 // *****************************************************
 
-// TODO - Include your API routes here
+// Adapted code from this repository in order to fetch and update bearer access_token 
+// https://github.com/diana-moreno/spotify-express/blob/master/index.js
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID, 
+  clientSecret: process.env.CLIENT_SECRET
+});
+
+// GET TRACK BASED ON ARTIST ID
+// ----------------------------
+spotifyApi
+  .clientCredentialsGrant()
+  .then(function(data) {
+    spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
+    // Uncomment below line to view temporary bearer access_token in the terminal
+    // console.log(data.body); 
+    // const artist_id = req.body.userInput; // Update with function to take in user
+    artist_id = '11dFghVXANMlKmJXsNCbNl'; 
+    return spotifyApi.getTrack(artist_id); 
+  }) 
+  .then(function(data) { 
+    const track = data.body; 
+    // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
+    console.log('Artist:', track.album.artists[0].name); 
+    console.log('Track name:', track.name); 
+    console.log('Album:', track.album.name); 
+    console.log('Popularity:', track.popularity); 
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+
+  // More spotify api calls will go below 
 
 app.get('/', (req, res) => {
     res.redirect('/login');
@@ -120,6 +154,7 @@ app.get('/logout', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
