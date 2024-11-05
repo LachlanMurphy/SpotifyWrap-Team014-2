@@ -1,0 +1,26 @@
+10/29/24
+- Over zoom
+- Everyone was present
+- Met briefly after Tuesday's TA meeting
+- Discussed how we would begin splitting up project and topics we would begin looking into before Thursday's lab
+
+11/5/24 
+- In person
+- Everyone was present
+- Discussed commits that we all made throughout the week
+    -Josh and Cole
+        -> Front-end HTML for home.hbs, login.hbs, logout.hbs, search.hbs, and register.hbs
+    -Gavin and Cody
+        -> Updated .env file docker-compose.yaml, and package.json
+        -> API databse connection established in index.js, testing of getTrack and getRecommendations with console.log()
+    -Lachlan
+        -> package.json file, gitignore, .env, and index.js created so website correctly hosts on localhost:3000
+    -Brady
+        -> SQL database: login and registration
+- Updated epics and stories accordingly 
+- Changes we plan on making soon
+    -> Register and login links that redirect you to each page
+    -> Registration is correctly saved in SQL tables
+    -> Search page calls api and correctly displays results
+    -> Change team name
+    -> Determine exact specifics for getRecommendations and what it should return (ex: how many songs, what criteria should it use, how many artist IDs should it take in?)
