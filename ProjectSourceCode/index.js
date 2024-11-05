@@ -185,11 +185,9 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
-<<<<<<< Updated upstream
 app.get('/search', (req, res) => {
   res.render('pages/search');
 });
-=======
 // app.post('/register', async (req, res) => {
 
 //   try {
@@ -208,7 +206,6 @@ app.get('/search', (req, res) => {
 // }
 
 // });
->>>>>>> Stashed changes
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
