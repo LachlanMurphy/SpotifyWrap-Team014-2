@@ -108,6 +108,36 @@ spotifyApi
     console.log(err);
   });
 
+  spotifyApi
+  .clientCredentialsGrant()
+  .then(function (data) {
+    spotifyApi.setAccessToken(data.body['access_token']); 
+
+    return spotifyApi.getRecommendations({
+      min_energy: 0.4,
+      seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
+      min_popularity: 50,
+    });
+  })
+  .then(function (data) {
+    const tracks = data.body.tracks; // Access the array of recommended tracks
+
+    // Make sure there are tracks returned
+    if (tracks.length > 0) {
+      // Access the first track as an example
+      const track = tracks[0];
+      console.log('Artist:', track.artists[0].name);
+      console.log('Track name:', track.name);
+      console.log('Album:', track.album.name);
+      console.log('Popularity:', track.popularity);
+    } else {
+      console.log('No recommendations found.');
+    }
+  })
+  .catch(function (err) {
+    console.log('Error:', err);
+  });
+
   // More spotify api calls will go below 
 
 app.get('/', (req, res) => {
