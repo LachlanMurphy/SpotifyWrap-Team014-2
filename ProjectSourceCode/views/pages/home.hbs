@@ -9,14 +9,44 @@
         body {
             background-color: #121212; 
             color: #b3b3b3;
+            min-height: 100vh;
+            margin: 0;
+        } 
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
         }
-        h5, h2 {
+        .sidebar {
+            width: 100px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: start;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+        }
+        h5, h2, h1 {
             color: #ffffff; 
+            text-align: center;
         }
         .card {
+            width: 45rem; 
+            height: 18rem; 
             background-color: #181818;
-            border: none;
+            border: 2px solid #1DB954;
+            border-radius: 10px;
             color: #b3b3b3;
+            box-shadow: 0 0 10px 5px rgba(29, 185, 84, 0.5);
+        }
+        .card:hover {
+            box-shadow: 0 0 20px 10px rgba(29, 185, 84, 0.7);
         }
         .btn-primary {
             background-color: #1DB954; 
@@ -29,18 +59,33 @@
         .card-text {
             color: #b3b3b3;
         }
+        .card-container {
+            padding-top: 15vh;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
-<div class="container mt-5">
-    <div class="card" style="width: 18rem;">
-      <img src="your-image-url.jpg" class="card-img-top" alt="Playlist Image">
-      <div class="card-body">
-        <h5 class="card-title">Expert Generated Playlists</h5>
-        <p class="card-text">Generates a playlist crafted just for you, based on your top artists, songs, and genres.</p>
-        <a href="#" class="btn btn-primary">Get Started Here!!</a>
-      </div>
+    <h1 style="text-align: center; color: #ffffff;">Welcome to Spatify!</h1>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <p>Links</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="card-container">
+                <div class="card">
+                    <img src="https://cdn.logojoy.com/wp-content/uploads/20240517160549/05-16-24_Spotify-Logo-Evolution_HEADER.jpg" class="card-img-top" alt="Playlist Image" style="height: 8rem; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Expert Generated Playlists</h5>
+                        <p class="card-text">Generates a playlist crafted just for you, based on your top artists, songs, and genres.</p>
+                        <a href="#" class="btn btn-primary">Get Started Here!!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>
