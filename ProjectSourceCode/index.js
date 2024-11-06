@@ -16,6 +16,11 @@ const session = require('express-session'); // To set the session object. To sto
 const bcrypt = require('bcryptjs'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part C.
 
+const user = {
+  username: undefined,
+  email: undefined,
+};
+
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
 // *****************************************************
@@ -37,16 +42,6 @@ const dbConfig = {
 };
 
 const db = pgp(dbConfig);
-
-// test your database
-db.connect()
-  .then(obj => {
-    console.log('Database connection successful'); // you can view this message in the docker compose logs
-    obj.done(); // success, release the connection;
-  })
-  .catch(error => {
-    console.log('ERROR:', error.message || error);
-  });
 
 // *****************************************************
 // <!-- Section 3 : App Settings -->
@@ -72,6 +67,16 @@ app.use(
     extended: true,
   })
 );
+
+// test your database
+db.connect()
+  .then(obj => {
+    console.log('Database connection successful'); // you can view this message in the docker compose logs
+    obj.done(); // success, release the connection;
+  })
+  .catch(error => {
+    console.log('ERROR:', error.message || error);
+  });
 
 // *****************************************************
 // <!-- Section 4 : API Routes -->
@@ -152,32 +157,35 @@ app.post('/login', async (req, res) => {
   //hash the password using bcrypt library
   const hash = await bcrypt.hash(req.body.password, 10);
   
-  // To-DO: Insert username and hashed password into the 'users' table
-  const query = 'select * from users where username = $1 limit 1;';
-  db.any(query, req.body.username).then(async user => {
-      user = user[0];
+  // check if user exists in database
+  const query = 'select * from users where username = ($1) limit 1;';
+  db.one(query, [req.body.username]).then(async got => {
 
       // check if password from request matches with password in DB
-      const match = await bcrypt.compare(req.body.password, user.password);
+      const match = await bcrypt.compare(req.body.password, got.password);
       if (!match) {
           res.render('pages/login', {
-              message: "Incorrect Passsword"
+              message: "Incorrect Username/Password."
           });
       } else {
+          user.username = got.username;
+
           req.session.user = user;
           req.session.save();
 
-          res.redirect('/home');
+          res.render('pages/home', {user: user});
       }
   }).catch(err => {
-      res.render('pages/register', {
-          message: "User does not exist"
+      res.render('pages/login', {
+          message: "Incorrect Username/Password" + err
       });
   });
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home');
+  res.render('pages/home', {
+    user: user
+  });
 });
 
 app.get('/logout', (req, res) => {
@@ -197,17 +205,19 @@ app.post('/register', async (req, res) => {
   //hash the password using bcrypt library
   const hash = await bcrypt.hash(req.body.password, 10);
   
-  // To-DO: Insert username and hashed password into the 'users' table
+  // insert new user in users table
   const query = 'insert into users (username, password) values ($1, $2) returning *;';
   db.any(query, [
       req.body.username,
       hash
   ]).then(data => {
       res.render('pages/login', {
-          message: "Registered successfully!"
+          message: "Registered successfully!" + req.body.username
       });
   }).catch(err => {
-      res.redirect('/register');
+      res.render('/register', {
+        message: "Registration failed, internal error."
+      });
   });
 });
 
