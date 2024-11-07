@@ -177,11 +177,11 @@ app.post('/login', async (req, res) => {
           req.session.user = user;
           req.session.save();
 
-          res.render('pages/home', {user: user});
+          res.render('pages/home', {user: user, message: "logged in"});
       }
   }).catch(err => {
       res.render('pages/login', {
-          message: "Incorrect Username/Password" + err
+          message: "Incorrect Username/Password"
       });
   });
 });
@@ -215,8 +215,10 @@ app.post('/register', async (req, res) => {
       req.body.username,
       hash
   ]).then(data => {
+      res.status(200);
+      res.message("Registered successfully!");
       res.render('pages/login', {
-          message: "Registered successfully!" + req.body.username
+          message: "Registered successfully!"
       });
   }).catch(err => {
       res.render('pages/register', {
