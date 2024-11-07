@@ -215,7 +215,7 @@ app.post('/register', async (req, res) => {
           message: "Registered successfully!" + req.body.username
       });
   }).catch(err => {
-      res.render('/register', {
+      res.render('pages/register', {
         message: "Registration failed, internal error."
       });
   });
