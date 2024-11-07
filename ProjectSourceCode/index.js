@@ -221,6 +221,10 @@ app.post('/register', async (req, res) => {
   });
 });
 
+app.get('/profile',(req, res) => {
+  res.render('pages/profile');
+});
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
