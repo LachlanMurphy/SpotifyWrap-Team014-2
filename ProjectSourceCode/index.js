@@ -84,64 +84,64 @@ db.connect()
 
 // Adapted code from this repository in order to fetch and update bearer access_token 
 // https://github.com/diana-moreno/spotify-express/blob/master/index.js
-// const spotifyApi = new SpotifyWebApi({
-//   clientId: process.env.CLIENT_ID, 
-//   clientSecret: process.env.CLIENT_SECRET
-// });
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID, 
+  clientSecret: process.env.CLIENT_SECRET
+});
 
 // GET TRACK BASED ON ARTIST ID
 // ----------------------------
-// spotifyApi
-//   .clientCredentialsGrant()
-//   .then(function(data) {
-//     spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
-//     // Uncomment below line to view temporary bearer access_token in the terminal
-//     // console.log(data.body); 
-//     // const artist_id = req.body.userInput; // Update with function to take in user
-//     artist_id = '11dFghVXANMlKmJXsNCbNl'; 
-//     return spotifyApi.getTrack(artist_id); 
-//   }) 
-//   .then(function(data) { 
-//     const track = data.body; 
-//     // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
-//     console.log('Artist:', track.album.artists[0].name); 
-//     console.log('Track name:', track.name); 
-//     console.log('Album:', track.album.name); 
-//     console.log('Popularity:', track.popularity); 
-//   })
-//   .catch(function(err) {
-//     console.log(err);
-//   });
+spotifyApi
+  .clientCredentialsGrant()
+  .then(function(data) {
+    spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
+    // Uncomment below line to view temporary bearer access_token in the terminal
+    // console.log(data.body); 
+    // const artist_id = req.body.userInput; // Update with function to take in user
+    artist_id = '11dFghVXANMlKmJXsNCbNl'; 
+    return spotifyApi.getTrack(artist_id); 
+  }) 
+  .then(function(data) { 
+    const track = data.body; 
+    // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
+    console.log('Artist:', track.album.artists[0].name); 
+    console.log('Track name:', track.name); 
+    console.log('Album:', track.album.name); 
+    console.log('Popularity:', track.popularity); 
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 
-//   spotifyApi
-//   .clientCredentialsGrant()
-//   .then(function (data) {
-//     spotifyApi.setAccessToken(data.body['access_token']); 
+  spotifyApi
+  .clientCredentialsGrant()
+  .then(function (data) {
+    spotifyApi.setAccessToken(data.body['access_token']); 
 
-//     return spotifyApi.getRecommendations({
-//       min_energy: 0.4,
-//       seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-//       min_popularity: 50,
-//     });
-//   })
-//   .then(function (data) {
-//     const tracks = data.body.tracks; // Access the array of recommended tracks
+    return spotifyApi.getRecommendations({
+      min_energy: 0.4,
+      seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
+      min_popularity: 50,
+    });
+  })
+  .then(function (data) {
+    const tracks = data.body.tracks; // Access the array of recommended tracks
 
-//     // Make sure there are tracks returned
-//     if (tracks.length > 0) {
-//       // Access the first track as an example
-//       const track = tracks[0];
-//       console.log('Artist:', track.artists[0].name);
-//       console.log('Track name:', track.name);
-//       console.log('Album:', track.album.name);
-//       console.log('Popularity:', track.popularity);
-//     } else {
-//       console.log('No recommendations found.');
-//     }
-//   })
-//   .catch(function (err) {
-//     console.log('Error:', err);
-//   });
+    // Make sure there are tracks returned
+    if (tracks.length > 0) {
+      // Access the first track as an example
+      const track = tracks[0];
+      console.log('Artist:', track.artists[0].name);
+      console.log('Track name:', track.name);
+      console.log('Album:', track.album.name);
+      console.log('Popularity:', track.popularity);
+    } else {
+      console.log('No recommendations found.');
+    }
+  })
+  .catch(function (err) {
+    console.log('Error:', err);
+  });
 
   // More spotify api calls will go below 
 
