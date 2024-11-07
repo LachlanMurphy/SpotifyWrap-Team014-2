@@ -82,6 +82,10 @@ db.connect()
 // <!-- Section 4 : API Routes -->
 // *****************************************************
 
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
 // Adapted code from this repository in order to fetch and update bearer access_token 
 // https://github.com/diana-moreno/spotify-express/blob/master/index.js
 const spotifyApi = new SpotifyWebApi({
@@ -232,5 +236,5 @@ app.get('/profile',(req, res) => {
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000);
+module.exports = app.listen(3000);
 console.log('Server is listening on port 3000');
