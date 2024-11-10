@@ -93,29 +93,13 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET
 });
 
-// GET TRACK BASED ON ARTIST ID
-// ----------------------------
 spotifyApi
   .clientCredentialsGrant()
   .then(function(data) {
     spotifyApi.setAccessToken(data.body['access_token']); // Set temporary access token for one hour (3600 seconds)
     // Uncomment below line to view temporary bearer access_token in the terminal
-    // console.log(data.body); 
-    // const artist_id = req.body.userInput; // Update with function to take in user
-    artist_id = '11dFghVXANMlKmJXsNCbNl'; 
-    return spotifyApi.getTrack(artist_id); 
+    // console.log(data.body);  
   }) 
-  .then(function(data) { 
-    const track = data.body; 
-    // Comment these out later -> Testing to make sure track data is being correctly sourced from spotify 
-    console.log('Artist:', track.album.artists[0].name); 
-    console.log('Track name:', track.name); 
-    console.log('Album:', track.album.name); 
-    console.log('Popularity:', track.popularity); 
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
 
   spotifyApi
   .clientCredentialsGrant()
@@ -202,6 +186,24 @@ app.get('/register', (req, res) => {
 
 app.get('/search', (req, res) => {
   res.render('pages/search');
+});
+
+app.get('/songs', (req, res) => {
+    // Right now, the user has to input artist ID and it prints a song
+    // Need to find out how to write function that converts artist name into artist_id
+    // Doesn't seem like spotify has a way to do this?
+    // On the search page, look up '11dFghVXANMlKmJXsNCbNl' and it should display a song by Carly Rae Jepsen
+    const artist_id = req.query.song; 
+    return spotifyApi.getTrack(artist_id)
+  .then(function(data) { 
+    const track = data.body; 
+    res.render('pages/search', {
+      track,
+    });
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 });
 
 app.post('/register', async (req, res) => {
