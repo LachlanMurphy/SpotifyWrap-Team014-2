@@ -231,14 +231,14 @@ app.get('/profile',(req, res) => {
   res.render('pages/profile');
 });
 
-app.put('/profile', async (req, res) => {
-  try {
-    const user = await user.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});
+// app.put('/profile', async (req, res) => {
+//   try {
+//     const user = await user.findByIdAndUpdate(req.params.id, req.body, { new: true });
+//     res.json(user);
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// });
 
 
 // *****************************************************
