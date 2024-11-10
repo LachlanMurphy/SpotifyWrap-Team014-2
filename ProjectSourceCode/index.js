@@ -216,7 +216,6 @@ app.post('/register', async (req, res) => {
       hash
   ]).then(data => {
       res.status(200);
-      res.message("Registered successfully!");
       res.render('pages/login', {
           message: "Registered successfully!"
       });
