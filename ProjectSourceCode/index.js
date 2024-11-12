@@ -245,6 +245,43 @@ app.get('/searchArtist', (req, res) => {
     });
 });
 
+// potential search solution
+// app.get('/searchSong', (req, res) => {
+//   const songName = req.query.song;
+//   // const artistName = req.query.song;
+//   if (!songName) {
+//     return res.status(400).json({ error: "Please provide a song name." });
+//   }
+//   // if (!artistName){
+//   //   return res.status(400).json({ error: "Please provide an artist name." });
+//   // }
+
+//   spotifyApi
+//     .searchTracks(songName) // Use Spotify's search endpoint and add another input as artistName
+//     .then(function(data) { 
+//       const tracks = data.body.tracks.items;
+
+//       if (tracks.length === 0) {
+//         return res.status(404).json({ error: "No song found with that name." });
+//       }
+
+//       // change if we want more than 1 result 
+//       const track = tracks[0];
+
+//       console.log(`Song found: ${artist.name}`);
+//       res.render('pages/search', {
+//         track,
+//       });
+//       // res.json({ artistId }); // Return the ID as JSON
+//     })
+//     .catch(function(err) {
+//       console.error('Error searching for a track:', err);
+//       res.status(500).json({ error: "An error occurred while searching for the track." });
+//     });
+
+
+// });
+
 // SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
 
 // solution 2 combine the functionality
