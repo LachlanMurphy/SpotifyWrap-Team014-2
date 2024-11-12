@@ -7,6 +7,7 @@ const SpotifyWebApi = require("spotify-web-api-node");
 
 const express = require('express'); // To build an application server or API
 const app = express();
+app.use(express.static('public')); //added so that the style.css file works
 const handlebars = require('express-handlebars');
 const Handlebars = require('handlebars');
 const path = require('path');
