@@ -2,7 +2,12 @@
 - In person (before TA meeting)
 - Discussed commits that we all made throughout the week and planned for this upcoming week
     -Cole
-        ->
+        ->Finished html for home page - chnaged picture for copyright reasons
+        ->Made profile page html
+        -> Need to pull data from users table so that the profile information is filled in automatically
+        -> Next need to create a edit profile page so that usernames and other info can be changed
+        ->Started making a stylesheet but need to figure how to have seperate sheet for seperete html files
+        ->Style and create funcationality for saved playlists page
     -Josh
         ->
     -Gavin
