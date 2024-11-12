@@ -13,7 +13,10 @@
             -> Updated handlebars in search.hbs to collect user input in a separate search bar for artists and display
             -> You can now search by name for any spotify artist and it will display the returned name and profile picture of that artist
     -Cody
-        ->
+        -> Wrote two possible solutions to getArtist since we could not find out how to get artists ID which is needed to search for artist. Gavin then
+        integrated this function so we could search artists and return them.
+        -> Wrote a potential solution to our searchSong issue. Right now we can only get songs by ID which users don't know. I have almost figured out
+        how to get the song ID to search for the song.
     -Lachlan
         -> 
     -Brady
@@ -21,4 +24,4 @@
 - Updated epics and stories accordingly to reflect our changes throughout the week
 - Added any new features to project baord we plan on adding
 - Changes we plan on making soon
-    -> 
+    -> Gavin and Cody will make the search song work. Then work on the recommendations 
