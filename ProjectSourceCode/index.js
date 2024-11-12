@@ -333,6 +333,10 @@ app.get('/profile',(req, res) => {
 //   }
 // });
 
+app.get('/editProfile',(req, res) => {
+  res.render('pages/editProfile');
+});
+
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
