@@ -163,8 +163,7 @@ app.post('/login', async (req, res) => {
           req.session.save();
 
           res.render('pages/home', {
-            user: user,
-            message: "logged in"
+            user
           });
       }
   }).catch(err => {
