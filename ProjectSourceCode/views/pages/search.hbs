@@ -19,6 +19,7 @@
 
      <div class="artist-info">
         <h1 class="artist-name">{{artist.name}}</h1>
+        <h3 class="text-center" style="color:#ffffff">Followers: {{artist.followers.total}}</h3>
         <div class="text-center">
             <img src="{{artist.images.0.url}}" alt="Artist Cover" width="500" height="500"/>
         </div>
@@ -49,7 +50,7 @@
             
             <!-- Duration -->
             <div class="duration ms-3 text-muted">
-                <span> Duration: {{track.duration_ms}} ms</span>
+                <span> Duration: {{track.duration_ms}} sec</span>
             </div>
         </div>
     </div>
