@@ -162,7 +162,10 @@ app.post('/login', async (req, res) => {
           req.session.user = user;
           req.session.save();
 
-          res.render('pages/home', {user: user, message: "logged in"});
+          res.render('pages/home', {
+            user: user,
+            message: "logged in"
+          });
       }
   }).catch(err => {
       res.render('pages/login', {

@@ -18,7 +18,10 @@
         -> Wrote a potential solution to our searchSong issue. Right now we can only get songs by ID which users don't know. I have almost figured out
         how to get the song ID to search for the song.
     -Lachlan
-        -> 
+        -> Added messages to each page so if an event occurs (log in, register, etc) there is a message sent
+        -> Fixed bugs in the index.js file so that the database is consitently working.
+        -> Added user sessions to each page so a user is logged in when they are in the home page
+           When logged in they can click on thier username and go to a page ot edit thier profile.
     -Brady
         -> 
 - Updated epics and stories accordingly to reflect our changes throughout the week
