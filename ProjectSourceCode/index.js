@@ -20,6 +20,7 @@ const axios = require('axios'); // To make HTTP requests from our server. We'll 
 const user = {
   username: undefined,
   email: undefined,
+  logged_in: false,
 };
 
 // *****************************************************
@@ -158,6 +159,7 @@ app.post('/login', async (req, res) => {
           });
       } else {
           user.username = got.username;
+          user.logged_in = true
 
           req.session.user = user;
           req.session.save();

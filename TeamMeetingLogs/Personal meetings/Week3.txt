@@ -9,7 +9,9 @@
         ->Started making a stylesheet but need to figure how to have seperate sheet for seperete html files
         ->Style and create funcationality for saved playlists page
     -Josh
-        ->
+        -> Redesigned search.hbs html
+        -> Removed the lengthy <style> tag from search.hbs and replaced it with a CSS stylesheet
+        -> Added index.js support for CSS stylesheets
     -Gavin
         -> Created getTrack function that takes in song ID 
         -> Updated search.hbs with handlebars in order to collect user input and display information about the given song
