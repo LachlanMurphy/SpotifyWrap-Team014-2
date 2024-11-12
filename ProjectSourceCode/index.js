@@ -101,37 +101,37 @@ spotifyApi
     // console.log(data.body);  
   }) 
 
-  spotifyApi
-  .clientCredentialsGrant()
-  .then(function (data) {
-    spotifyApi.setAccessToken(data.body['access_token']); 
+  // spotifyApi
+  // .clientCredentialsGrant()
+  // .then(function (data) {
+  //   spotifyApi.setAccessToken(data.body['access_token']); 
 
-    return spotifyApi.getRecommendations({
-      min_energy: 0.4,
-      seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-      min_popularity: 50,
-    });
-  })
-  .then(function (data) {
-    const tracks = data.body.tracks; // Access the array of recommended tracks
+  //   return spotifyApi.getRecommendations({
+  //     min_energy: 0.4,
+  //     seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
+  //     min_popularity: 50,
+  //   });
+  // })
+  // .then(function (data) {
+  //   const tracks = data.body.tracks; // Access the array of recommended tracks
 
-    // Make sure there are tracks returned
-    if (tracks.length > 0) {
-      // Access the first track as an example
-      const track = tracks[0];
-      console.log('Artist:', track.artists[0].name);
-      console.log('Track name:', track.name);
-      console.log('Album:', track.album.name);
-      console.log('Popularity:', track.popularity);
-    } else {
-      console.log('No recommendations found.');
-    }
-  })
-  .catch(function (err) {
-    console.log('Error:', err);
-  });
+  //   // Make sure there are tracks returned
+  //   if (tracks.length > 0) {
+  //     // Access the first track as an example
+  //     const track = tracks[0];
+  //     console.log('Artist:', track.artists[0].name);
+  //     console.log('Track name:', track.name);
+  //     console.log('Album:', track.album.name);
+  //     console.log('Popularity:', track.popularity);
+  //   } else {
+  //     console.log('No recommendations found.');
+  //   }
+  // })
+  // .catch(function (err) {
+  //   console.log('Error:', err);
+  // });
 
-// More spotify api calls will go below 
+// Spotify api calls will go below 
 
 app.get('/', (req, res) => {
     res.redirect('/login');
@@ -188,13 +188,10 @@ app.get('/search', (req, res) => {
   res.render('pages/search');
 });
 
-
-
-app.get('/songs', (req, res) => {
-    // Right now, the user has to input artist ID and it prints a song
-    // Need to find out how to write function that converts artist name into artist_id
-    // Doesn't seem like spotify has a way to do this?
+app.get('/song', (req, res) => {
+    // Right now, the user has to input song ID and it prints that song
     // On the search page, look up '11dFghVXANMlKmJXsNCbNl' and it should display a song by Carly Rae Jepsen
+    // Or, for example, look up '7hm4HTk9encxT0LYC0J6oI' and it should display a song by the strokes
     const artist_id = req.query.song; 
     return spotifyApi.getTrack(artist_id)
   .then(function(data) { 
@@ -208,42 +205,49 @@ app.get('/songs', (req, res) => {
   });
 });
 
-// potential solutions to problem above
 
+// potential solutions to id problem above
+
+// FIXED SOLUTION 1 and added initial functionality to search page
 
 // solution 1 have a function that gets user ids from users names 
 // this function will search for an artist by its name and return its ID in a json object 
-// app.get('/searchArtist', (req, res) => {
-//   const artistName = req.query.artist; // Get artist name from query parameter
+app.get('/searchArtist', (req, res) => {
+  const artistName = req.query.artist; // Get artist name from query parameter
 
-//   if (!artistName) {
-//     return res.status(400).json({ error: "Please provide an artist name." });
-//   }
+  if (!artistName) {
+    return res.status(400).json({ error: "Please provide an artist name." });
+  }
 
-//   spotifyApi
-//     .searchArtists(artistName) // Use Spotify's search endpoint
-//     .then(function(data) {
-//       const artists = data.body.artists.items;
+  spotifyApi
+    .searchArtists(artistName) // Use Spotify's search endpoint
+    .then(function(data) {
+      const artists = data.body.artists.items;
 
-//       if (artists.length === 0) {
-//         return res.status(404).json({ error: "No artist found with that name." });
-//       }
+      if (artists.length === 0) {
+        return res.status(404).json({ error: "No artist found with that name." });
+      }
 
-//       // change if we want more than 1 result 
-//       const artist = artists[0];
-//       const artistId = artist.id;
+      // change if we want more than 1 result 
+      const artist = artists[0];
+      const artistId = artist.id;
 
-//       console.log(`Artist found: ${artist.name}, ID: ${artistId}`);
-//       res.json({ artistId }); // Return the ID as JSON
-//     })
-//     .catch(function(err) {
-//       console.error('Error searching for artist:', err);
-//       res.status(500).json({ error: "An error occurred while searching for the artist." });
-//     });
-// });
+      console.log(`Artist found: ${artist.name}, ID: ${artistId}`);
+      res.render('pages/search', {
+        artist,
+      });
+      // res.json({ artistId }); // Return the ID as JSON
+    })
+    .catch(function(err) {
+      console.error('Error searching for artist:', err);
+      res.status(500).json({ error: "An error occurred while searching for the artist." });
+    });
+});
+
+// SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
 
 // solution 2 combine the functionality
-// app.get('/songs', (req, res) => {
+// app.get('/song', (req, res) => {
 //   const artistName = req.query.artist; 
 
 //   if (!artistName) {
@@ -292,8 +296,6 @@ app.get('/songs', (req, res) => {
 //       res.status(500).json({ error: "An error occurred while fetching songs." });
 //     });
 // });
-
-
 
 app.post('/register', async (req, res) => {
 

@@ -98,8 +98,18 @@
 <body>
     
     {{> message}}
+    <h1 style="text-align: center; color: #ffffff;">Search for Artists</h1>
+    <form method="GET"  action="/searchArtist">
+        <input type="artist" name = "artist" class="search-bar" placeholder="Search..."/>
+        <input type="submit" value="Search"/>
+    </form>
+
+     <div class="artist-info">
+        <h1 class="artist-name">{{artist.name}}</h1>
+        <img src="{{artist.images.0.url}}" alt="Artist Cover" width="500" height="500"/>
+
     <h1 style="text-align: center; color: #ffffff;">Search for Songs</h1>
-    <form method="GET"  action="/songs">
+    <form method="GET"  action="/song">
         <input type="song" name = "song" class="search-bar" placeholder="Search..."/>
         <input type="submit" value="Search"/>
     </form>
@@ -127,6 +137,7 @@
         </div>
     </div>
 </div>
+
 
 </body>
 
