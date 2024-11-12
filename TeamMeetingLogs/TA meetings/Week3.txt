@@ -1,0 +1,14 @@
+11/12/2024
+-Everyone was present
+
+Plans for next week:
+Gavin and Cody will work on recommendations and solve the issue of searching for a song as well as artist
+Cole will work on edit profile
+Brady will work on connecting the edit profile page to the profile page 
+Josh will modify the search page so when the results come in from recommendations it gets displayed correctly
+Lachlan will work on making the api for the profile
+
+Notes from TA:
+-Looks good
+-Continue to be thorough on Personal meeting logs
+
