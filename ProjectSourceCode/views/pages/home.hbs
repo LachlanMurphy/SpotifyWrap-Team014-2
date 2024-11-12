@@ -13,7 +13,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: ;
         }
 
         .sidebar {
@@ -42,24 +41,25 @@
         .sidebar .list-group-item a:hover {
             color: #ffffff;
         }
+
         .container {
             display: flex;
-            width: 100vw;
-            height: 100vh;
-            margin-left: 200px;
+            width: calc(100vw - 150px);
+            margin-left: 150px;
             padding: 40px;
         }
+
         .main-content {
-            flex-grow: 1;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
             gap: 20px;
         }
 
         h1, h5 {
             color: #ffffff; 
+            text-align: center;
         }
         h1 {
             font-size: 3rem;
@@ -77,10 +77,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
         }
+
         .card {
-            width: 50rem; 
+            width: 100%; 
             background-color: #181818;
             border: none;
             border-radius: 15px;
@@ -89,26 +92,25 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 30px rgba(0, 255, 128, 0.6);
-        }
+
+
         .card img {
             height: 200px;
             object-fit: cover;
         }
-        .card-body {
-            padding: 20px;
-        }
+
         .card-title {
             font-size: 1.8rem;
             color: #ffffff;
             font-weight: 600;
+            text-align: center;
         }
+
         .card-text {
             font-size: 1rem;
             color: #cccccc;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .btn-primary {
@@ -119,7 +121,10 @@
             font-weight: 600;
             color: #ffffff;
             transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
         }
+
         .btn-primary:hover {
             background-color: #14a143;
             border: none;
@@ -130,15 +135,19 @@
             justify-content: center;
             gap: 1.5rem;
             color: #b3b3b3;
-            margin-top: 1rem;
             font-size: 1.1rem;
             font-weight: 500;
+            margin-top: 1.5rem;
+            text-align: center;
+            max-width: 800px;
         }
+
         .steps span {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+
         .steps span::before {
             content: "•";
             color: #1DB954;
@@ -148,8 +157,8 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Welcome to Spatify!</h1>
-    <h5 style="text-align: center;">Find the best playlists for YOU</h5>
+    <h1>Welcome to Spatify!</h1>
+    <h5>Find the best playlists for YOU</h5>
 
     <!-- Sidebar -->
     <div class="sidebar">
