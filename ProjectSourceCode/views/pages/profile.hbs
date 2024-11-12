@@ -11,7 +11,7 @@
             color: white;
         }
         .text-black {
-            color: #333; /* Dark text */
+            color: #333;
         }
         .btn-green {
             background-color: #09712d;
@@ -29,11 +29,12 @@
             border-radius: .5rem;
         }
         .text-muted {
-            color: #bbbbbb !important; /* Slightly lighter gray for muted text */
+            color: #bbbbbb !important;
         }
     </style>
 </head>
 <body>
+
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -43,7 +44,7 @@
             <div class="col-md-4 gradient-custom text-center">
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-              <h5 class="text-black">Jane Doe</h5>
+              <h5 id="username" class="text-black">Loading...</h5>
               <p class="text-black">Occupation</p>
               <button class="btn btn-green mb-5">Edit Profile</button>
             </div>
@@ -52,13 +53,13 @@
                 <h6>Information</h6>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
-                  <div class="col-6 mb-3" id="dynamic-content">
+                  <div class="col-6 mb-3">
                     <h6>Username</h6>
-                    <p class="text-muted">info@example</p>
+                    <p id="username-info" class="text-muted">Loading...</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Phone</h6>
-                    <p class="text-muted">123 456 7889</p>
+                    <p id="phone" class="text-muted">Loading...</p>
                   </div>
                 </div>
                 <h6>Playlists</h6>
@@ -66,11 +67,11 @@
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Most Recent</h6>
-                    <p class="text-muted">Silly Strokes Saturday</p>
+                    <p id="most-recent" class="text-muted">Loading...</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Most Viewed</h6>
-                    <p class="text-muted">Diddy Party AUX</p>
+                    <p id="most-viewed" class="text-muted">Loading...</p>
                   </div>
                 </div>
                 <div class="d-flex justify-content-start">
