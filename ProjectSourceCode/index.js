@@ -196,7 +196,8 @@ app.get('/song', (req, res) => {
     const artist_id = req.query.song; 
     return spotifyApi.getTrack(artist_id)
   .then(function(data) { 
-    const track = data.body; 
+    const track = data.body;
+    track.duration_ms /= 1000;
     res.render('pages/search', {
       track,
     });
