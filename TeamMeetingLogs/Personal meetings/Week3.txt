@@ -23,7 +23,7 @@
         -> Added user sessions to each page so a user is logged in when they are in the home page
            When logged in they can click on thier username and go to a page ot edit thier profile.
     -Brady
-        -> 
+        -> Created edit profile page and have been working on a way to have user information from the login show up on profile page.
 - Updated epics and stories accordingly to reflect our changes throughout the week
 - Added any new features to project baord we plan on adding
 - Changes we plan on making soon
