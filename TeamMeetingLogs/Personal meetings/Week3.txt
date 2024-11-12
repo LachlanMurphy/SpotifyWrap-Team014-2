@@ -28,3 +28,4 @@
 - Added any new features to project baord we plan on adding
 - Changes we plan on making soon
     -> Gavin and Cody will make the search song work. Then work on the recommendations 
+    -> Brady will be working on edit page and favorite songs table
