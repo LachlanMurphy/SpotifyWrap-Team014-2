@@ -1,0 +1,24 @@
+11/12/24 
+- In person (before TA meeting)
+- Discussed commits that we all made throughout the week and planned for this upcoming week
+    -Cole
+        ->
+    -Josh
+        ->
+    -Gavin
+        -> Created getTrack function that takes in song ID 
+        -> Updated search.hbs with handlebars in order to collect user input and display information about the given song
+            -> Needs to be converted into a function that takes in song name rather than song ID (Cody's function 11/12 is working towards this solution)
+        -> Adapted Cody's getArtist (solution 1) function by changing a couple lines of code and making it render search page with an artist object as opposed to .json object
+            -> Updated handlebars in search.hbs to collect user input in a separate search bar for artists and display
+            -> You can now search by name for any spotify artist and it will display the returned name and profile picture of that artist
+    -Cody
+        ->
+    -Lachlan
+        -> 
+    -Brady
+        -> 
+- Updated epics and stories accordingly to reflect our changes throughout the week
+- Added any new features to project baord we plan on adding
+- Changes we plan on making soon
+    -> 
