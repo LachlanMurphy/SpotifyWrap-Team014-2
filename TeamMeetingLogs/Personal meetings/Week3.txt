@@ -22,6 +22,7 @@
         -> Fixed bugs in the index.js file so that the database is consitently working.
         -> Added user sessions to each page so a user is logged in when they are in the home page
            When logged in they can click on thier username and go to a page ot edit thier profile.
+        -> For next week: make post call for profile page, 
     -Brady
         -> Created edit profile page and have been working on a way to have user information from the login show up on profile page.
 - Updated epics and stories accordingly to reflect our changes throughout the week
