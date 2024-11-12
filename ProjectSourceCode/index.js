@@ -197,7 +197,10 @@ app.get('/song', (req, res) => {
     return spotifyApi.getTrack(artist_id)
   .then(function(data) { 
     const track = data.body;
-    track.duration_ms /= 1000;
+    // track.duration_ms /= 1000;
+    track.tot_sec = track.duration_ms / 10000;
+    track.min = Math.floor(track.tot_sec / 60);
+    track.sec = Math.floot(track.tot_sec % 60);
     res.render('pages/search', {
       track,
     });
