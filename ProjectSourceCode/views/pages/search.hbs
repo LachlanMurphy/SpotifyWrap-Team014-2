@@ -14,47 +14,48 @@
         <button type="submit" class="search-button">Search</button>
     </form>
 
-
-     <div class="artist-info">
-        <h1 class="artist-name">{{artist.name}}</h1>
-        <h3 class="text-center" style="color:#ffffff">Followers: {{artist.followers.total}}</h3>
-        <div class="text-center">
-            <img src="{{artist.images.0.url}}" alt="Artist Cover" width="500" height="500"/>
-        </div>
-        
-
-    {{!-- must figure out how to search for artist name and song name for search song --}}
-    <h1 style="text-align: center; color: #ffffff;">Search for Songs</h1>
-    <form method="GET"  action="/song" class="search-form">
-        <input type="song" name = "song" class="search-bar" placeholder="Search for a song..."/>
-        <button type="submit" class="search-button">Search</button>
-    </form>
-
-    <div class="container mt-4">
-    <div class="card song-result mb-3 p-3">
-        <div class="d-flex align-items-center">
-            <!-- Album Cover -->
-            <div class="album-cover me-3">
-                <img src="{{track.album.images.0.url}}" alt="Album Cover" class="rounded">
+    {{#if artist}}
+        <div class="artist-info">
+            <h1 class="artist-name">{{artist.name}}</h1>
+            <h3 class="text-center" style="color:#ffffff">Followers: {{artist.followers.total}}</h3>
+            <div class="text-center">
+                <img src="{{artist.images.0.url}}" alt="Artist Cover" width="500" height="500"/>
             </div>
+    {{/if}}
             
-            <!-- Song Details (Stacked Vertically) -->
-            <div class="song-info flex-grow-1">
-                <h1 class="song-name mb-1">{{track.name}}</h1>
-                <h5 class="artist-name mb-1">{{track.album.artists.0.name}}</h5>
-                <p class="album-title mb-0">{{track.album.name}}</p>
+        {{!-- must figure out how to search for artist name and song name for search song --}}
+        <h1 style="text-align: center; color: #ffffff;">Search for Songs</h1>
+        <form method="GET"  action="/song" class="search-form">
+            <input type="song" name = "song" class="search-bar" placeholder="Search for a song..."/>
+            <button type="submit" class="search-button">Search</button>
+        </form>
 
-            </div>
-            
-            <!-- Duration -->
-            <div class="duration ms-3 text-muted">
-                <span> Duration: {{track.min}}:{{track.sec}}</span>
+
+    {{#if track}}
+        <div class="container mt-4">
+        <div class="card song-result mb-3 p-3">
+            <div class="d-flex align-items-center">
+                <!-- Album Cover -->
+                <div class="album-cover me-3">
+                    <img src="{{track.album.images.0.url}}" alt="Album Cover" class="rounded">
+                </div>
+                
+                <!-- Song Details (Stacked Vertically) -->
+                <div class="song-info flex-grow-1">
+                    <h1 class="song-name mb-1">{{track.name}}</h1>
+                    <h5 class="artist-name mb-1">{{track.album.artists.0.name}}</h5>
+                    <p class="album-title mb-0">{{track.album.name}}</p>
+
+                </div>
+                
+                <!-- Duration -->
+                <div class="duration ms-3 text-muted">
+                    <span> Duration: {{track.min}}:{{track.sec}}</span>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
+        </div>
+    {{/if}}
 </body>
 
 </html>
