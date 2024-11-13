@@ -37,3 +37,4 @@
 - Changes we plan on making soon
     -> Gavin and Cody will make the search song work. Then work on the recommendations 
     -> Brady will be working on edit page and favorite songs table
+    -> Cole will work on style and create funcationality for saved playlists page.
