@@ -17,10 +17,10 @@ const session = require('express-session'); // To set the session object. To sto
 const bcrypt = require('bcryptjs'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server. We'll learn more about it in Part C.
 
+
 const user = {
   username: undefined,
   email: undefined,
-  logged_in: false,
 };
 
 // *****************************************************
@@ -159,14 +159,11 @@ app.post('/login', async (req, res) => {
           });
       } else {
           user.username = got.username;
-          user.logged_in = true
 
           req.session.user = user;
           req.session.save();
 
-          res.render('pages/home', {
-            user
-          });
+          res.render('pages/home', {user: user, message: "logged in"});
       }
   }).catch(err => {
       res.render('pages/login', {
@@ -380,6 +377,29 @@ app.get('/profile',(req, res) => {
 app.get('/editProfile',(req, res) => {
   res.render('pages/editProfile');
 });
+
+
+
+app.get('/users', (req, res) => {
+  const username = req.query.username;
+ //query to get user by username
+  db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+    if (err) {
+      console.error("Database query error:", err);
+      res.status(500).send("Error retrieving user data");
+      return;
+    }
+      //check if user is found
+    if (results.length > 0) {
+      const user = results[0];
+      // Render the page using Handlebars and pass the user data
+      res.render('/profile', { user });
+    } else {
+      res.status(404).send("User not found");
+    }
+  });
+});
+
 
 
 // *****************************************************
