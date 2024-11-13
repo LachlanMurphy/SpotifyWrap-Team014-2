@@ -1,5 +1,11 @@
 {{#if message}}
-  <div class="alert alert-{{#if error}}danger{{else}}success{{/if}} text-center" role="alert">
+  <div class="alert alert-{{#if error}}danger{{else}}success{{/if}} text-center" role="alert" id="message">
     {{ message }}
   </div>
+  <script>
+    setTimeout(function () {
+      document.getElementById("message").style.display = "none";
+
+    }, 5000);
+  </script>
 {{/if}}
