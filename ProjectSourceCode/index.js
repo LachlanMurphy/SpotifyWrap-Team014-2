@@ -359,7 +359,7 @@ app.post('/register', async (req, res) => {
       });
   }).catch(err => {
       res.render('pages/register', {
-        message: "Registration failed, internal error."
+        message: "Registration failed: username already exists."
       });
   });
 });
