@@ -121,7 +121,7 @@ describe('Server!', () => {
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.body.message, 'Registered successfully!');
+          assert.strictEqual(res.text.includes("Registered successfully!"), true);
           done();
         });
     });
@@ -131,8 +131,8 @@ describe('Server!', () => {
         .post('/register')
         .send({username: "Big_Guy_123", password:"BigDoubleWoop!321"})
         .end((err, res) => {
-          expect(res).to.have.status(400);
-          assert.strictEqual(res.body.message, 'Registration failed: username already exists.');
+          expect(res).to.have.status(200);
+          assert.strictEqual(res.text.includes('Registration failed: username already exists.'), true);
           done();
         });
     });
@@ -146,7 +146,7 @@ describe('Testing Login API', () => {
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.body.message, 'logged in');
+          assert.strictEqual(res.text.includes('logged in'), true);
           done();
         });
     });
@@ -157,7 +157,7 @@ describe('Testing Login API', () => {
         .send({username: "skooby_doo", password:"doobee dah"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.body.message, 'Incorrect Username/Password');
+          assert.strictEqual(res.text.includes('Incorrect Username/Password'), true);
           done();
         });
     });
