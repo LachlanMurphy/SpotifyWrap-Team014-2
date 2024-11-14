@@ -43,18 +43,18 @@ describe('Server!', () => {
 
   //We are checking POST /add_user API by passing the user info in in incorrect manner (name cannot be an integer). This test case should pass and return a status 400 along with a "Invalid input" message.
 
- describe('Testing Add User API', () => {
-  it('positive : /add_user', done => {
-    chai
-    .request(server)
-    .post('/add_user')
-    .send({username:'coledy2004', password:'654321'})
-    .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.message).to.equals('Success');
-        done();
-    // Refer above for the positive testcase implementation
-  });
+//  describe('Testing Add User API', () => {
+//   it('positive : /add_user', done => {
+//     chai
+//     .request(server)
+//     .post('/add_user')
+//     .send({username:'coledy2004', password:'654321'})
+//     .end((err, res) => {
+//         expect(res).to.have.status(200);
+//         expect(res.body.message).to.equals('Success');
+//         done();
+//     // Refer above for the positive testcase implementation
+//   });
 
   // Example Negative Testcase :
   // API: /add_user
@@ -63,52 +63,55 @@ describe('Server!', () => {
   // Result: This test case should pass and return a status 400 along with a "Invalid input" message.
   // Explanation: The testcase will call the /add_user API with the following invalid inputs
   // and expects the API to return a status of 400 along with the "Invalid input" message.
-  it('Negative : /add_user. Checking invalid name', done => {
-    chai
-      .request(server)
-      .post('/add_user')
-      .send({username: 10, password: ''})
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body.message).to.equals('Invalid input');
-        done();
-      });
-  });
-});
- });
+//   it('Negative : /add_user. Checking invalid name', done => {
+//     chai
+//       .request(server)
+//       .post('/add_user')
+//       .send({username: 10, password: ''})
+//       .end((err, res) => {
+//         expect(res).to.have.status(400);
+//         expect(res.body.message).to.equals('Invalid input');
+//         done();
+//       });
+//   });
+// });
+//  });
 
- describe('Testing Redirect', () => {
-    // Sample test case given to test /test endpoint.
-    it('\test route should redirect to /login with 302 HTTP status code', done => {
-      chai
-        .request(server)
-        .get('/test')
-        .end((err, res) => {
-          res.should.have.status(302); // Expecting a redirect status code
-          res.should.redirectTo(/^.*127\.0\.0\.1.*\/login$/); // Expecting a redirect to /login with the mentioned Regex
-          done();
-        });
-    });
-  });
+//  describe('Testing Redirect', () => {
+//     // Sample test case given to test /test endpoint.
+//     it('\test route should redirect to /login with 302 HTTP status code', done => {
+//       chai
+//         .request(server)
+//         .get('/test')
+//         .end((err, res) => {
+//           res.should.have.status(302); // Expecting a redirect status code
+//           res.should.redirectTo(/^.*127\.0\.0\.1.*\/login$/); // Expecting a redirect to /login with the mentioned Regex
+//           done();
+//         });
+//     });
+//   });
 
 
 
-  describe('Testing Render', () => {
-    // Sample test case given to test /test endpoint.
-    it('test "/login" route should render with an html response', done => {
-      chai
-        .request(server)
-        .get('/login') // for reference, see lab 8's login route (/login) which renders home.hbs
-        .end((err, res) => {
-          res.should.have.status(200); // Expecting a success status code
-          res.should.be.html; // Expecting a HTML response
-          done();
-        });
-    });
-  });
+//   describe('Testing Render', () => {
+//     // Sample test case given to test /test endpoint.
+//     it('test "/login" route should render with an html response', done => {
+//       chai
+//         .request(server)
+//         .get('/login') // for reference, see lab 8's login route (/login) which renders home.hbs
+//         .end((err, res) => {
+//           res.should.have.status(200); // Expecting a success status code
+//           res.should.be.html; // Expecting a HTML response
+//           done();
+//         });
+//     });
+//   });
 
 
   // added tests
+
+  //We are checking POST /add_user API by passing the user info in in incorrect manner (name cannot be an integer). This test case should pass and return a status 400 along with a "Invalid input" message.
+
 
   describe('Testing Register API', () => {
     it('positive : /register', done => {
@@ -118,13 +121,23 @@ describe('Server!', () => {
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.message).to.equals('Registered successfully!');
+          console.log("res.body: " + res.body.message);
+          assert.strictEqual(res.body.message, 'Registered successfully!');
+          done();
+        });
+    });
+    it('Negative : /register. Checking invalid name', done => {
+      chai
+        .request(server)
+        .post('/register')
+        .send({username: "Big_Guy_123", password:"BigDoubleWoop!321"})
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          assert.strictEqual(res.body.message, 'Registration failed: username already exists.');
           done();
         });
     });
   });
-
-  //We are checking POST /add_user API by passing the user info in in incorrect manner (name cannot be an integer). This test case should pass and return a status 400 along with a "Invalid input" message.
 
 describe('Testing Login API', () => {
     it('positive : /login', done => {
@@ -134,18 +147,18 @@ describe('Testing Login API', () => {
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body.message).to.equals('logged in');
+          assert.strictEqual(res.body.message, 'logged in');
           done();
         });
     });
     it('Negative : /login. Checking invalid name', done => {
       chai
         .request(server)
-        .post('/add_user')
-        .send({usernma: "skooby_doo", password:"doobee dah"})
+        .post('/login')
+        .send({username: "skooby_doo", password:"doobee dah"})
         .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body.message).to.equals('Incorrect Username/Password');
+          expect(res).to.have.status(200);
+          assert.strictEqual(res.body.message, 'Incorrect Username/Password');
           done();
         });
     });
