@@ -121,7 +121,6 @@ describe('Server!', () => {
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          console.log("res.body: " + res.body.message);
           assert.strictEqual(res.body.message, 'Registered successfully!');
           done();
         });
