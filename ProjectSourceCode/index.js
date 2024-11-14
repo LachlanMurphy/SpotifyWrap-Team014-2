@@ -302,7 +302,9 @@ app.post('/register', async (req, res) => {
   const query = 'insert into users (username, password, phone, name) values ($1, $2, $3, $4) returning *;';
   db.any(query, [
       req.body.username,
-      hash
+      hash,
+      req.body.phone,
+      req.body.name
   ]).then(data => {
       res.render('pages/login', {
           message: "Registered successfully!"
