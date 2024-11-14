@@ -1,21 +1,28 @@
-Three tests:
+Test Plan:
 
-1:A user must first register, then login successfully before accessing the home page
+1:A user must first register before they can login
     Mandatory steps:
         - User must register
-            - Must submit email and password
-        - User must login
-            - Must submit an email and corresponding password
-        - If user successfully completed previous steps, send to home page with logged in session
-        - If user does not succsffuly complete previous steps, send to where the error is (login or registration page)
-
+            - Must submit username and password
+            - Username must not already exist
+         -If user successfully completed previous steps, send to login page 
+        - If user does not successfully complete previous steps, display error on regiration page and clear input
     Postive test:
-        - Must return a success status when logged in and registered
+        - Must return a success status when username and password is successfully registered and stored
+    Negitive test:
+        - User attempts to register a username that already exists
+
+2:User must login before they can access the home page
+    Mandatory steps:
+            - Must submit a username and corresponding password that have been registered
+        - If user successfully completed previous steps, send to home page with logged in session
+        - If user does not successfully complete previous steps, display error on login page and clear input
+    Postive test:
+        - Must return a success status when logged in
     Negitive test:
         - A non registered user must not be able to log in
-        - A non logged in session must not be able to access the home page
 
-2:A user that is currently logged in should be able to access their profile from the home page
+3:A user that is currently logged in should be able to access their profile from the home page
     - To access their profile, a user can click on their profile name to go to their profile page
     - In the profile page the user can edit their username or password with the following fields:
         - current username
@@ -28,7 +35,7 @@ Three tests:
         - A non logged in session must not be able to access the profile page
     
 
-3:A logged in user should be able to insert three songs that they like and get similar songs that they may like
+4:A logged in user should be able to insert three songs that they like and get similar songs that they may like
     - Required fields for the search page:
         - Song #1
         - Song #2
