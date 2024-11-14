@@ -193,25 +193,61 @@ app.get('/search', (req, res) => {
   res.render('pages/search');
 });
 
+// app.get('/song', (req, res) => {
+//     // Right now, the user has to input song ID and it prints that song
+//     // On the search page, look up '11dFghVXANMlKmJXsNCbNl' and it should display a song by Carly Rae Jepsen
+//     // Or, for example, look up '7hm4HTk9encxT0LYC0J6oI' and it should display a song by the strokes
+//     const artist_id = req.query.song; 
+//     return spotifyApi.getTrack(artist_id)
+//   .then(function(data) { 
+//     const track = data.body;
+//     track.min = Math.floor(track.duration_ms / 60000);
+//     console.log(track.min, track.duration_ms);
+//     track.sec = Math.floor(track.duration_ms / 1000) % 60;
+//     res.render('pages/search', {
+//       track,
+//     });
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
+// });
+
 app.get('/song', (req, res) => {
-    // Right now, the user has to input song ID and it prints that song
-    // On the search page, look up '11dFghVXANMlKmJXsNCbNl' and it should display a song by Carly Rae Jepsen
-    // Or, for example, look up '7hm4HTk9encxT0LYC0J6oI' and it should display a song by the strokes
-    const artist_id = req.query.song; 
-    return spotifyApi.getTrack(artist_id)
-  .then(function(data) { 
-    const track = data.body;
-    track.min = Math.floor(track.duration_ms / 60000);
-    console.log(track.min, track.duration_ms);
-    track.sec = Math.floor(track.duration_ms / 1000) % 60;
-    res.render('pages/search', {
-      track,
+  const songName = req.query.song; // Get the song name from query parameter
+
+  if (!songName) {
+    return res.status(400).json({ error: "Please provide a song name." });
+  }
+
+  spotifyApi
+    .searchTracks(songName) // Use Spotify's search endpoint for tracks
+    .then(function(data) {
+      const tracks = data.body.tracks.items;
+
+      if (tracks.length === 0) {
+        res.render('pages/search', {
+          message: "No song found"
+        })
+      }
+
+      // change if we wanna show more songs
+      const track = tracks[0];
+
+      console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
+      res.render('pages/search', {
+        track,
+      });
+    })
+    .catch(function(err) {
+      res.render('pages/search', {
+        message: "An error occured while searching for the song."
+      })
     });
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
 });
+
+
+
 
 
 // potential solutions to id problem above
