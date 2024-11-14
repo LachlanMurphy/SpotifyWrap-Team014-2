@@ -115,6 +115,51 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.get('/logout', (req, res) => {
+  res.render('pages/logout');
+});
+
+app.get('/register', (req, res) => {
+  res.render('pages/register');
+});
+
+app.get('/profile',(req, res) => {
+  res.render('pages/profile', {
+    user
+  });
+});
+
+app.get('/search', (req, res) => {
+  res.render('pages/search');
+});
+
+app.get('/recommendations', (req, res) => {
+  res.render('pages/recommendations');
+});
+
+app.post('/register', async (req, res) => {
+
+  //hash the password using bcrypt library
+  const hash = await bcrypt.hash(req.body.password, 10);
+  
+  // insert new user in users table
+  const query = 'insert into users (username, password, phone, name) values ($1, $2, $3, $4) returning *;';
+  db.any(query, [
+      req.body.username,
+      hash,
+      req.body.phone,
+      req.body.name
+  ]).then(data => {
+      res.render('pages/login', {
+          message: "Registered successfully!"
+      });
+  }).catch(err => {
+      res.render('pages/register', {
+        message: "Registration failed: username already exists."
+      });
+  });
+});
+
 app.post('/login', async (req, res) => {
   //hash the password using bcrypt library
   const hash = await bcrypt.hash(req.body.password, 10);
@@ -146,26 +191,21 @@ app.post('/login', async (req, res) => {
   });
 });
 
+// Authentication Middleware.
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
+
+app.use(auth);
+
 app.get('/home', (req, res) => {
   res.render('pages/home', {
     user: user
   });
-});
-
-app.get('/logout', (req, res) => {
-  res.render('pages/logout');
-});
-
-app.get('/register', (req, res) => {
-  res.render('pages/register');
-});
-
-app.get('/search', (req, res) => {
-  res.render('pages/search');
-});
-
-app.get('/recommendations', (req, res) => {
-  res.render('pages/recommendations');
 });
 
 app.get('/song', (req, res) => {
@@ -301,35 +341,6 @@ app.get('/searchArtist', (req, res) => {
 //       res.status(500).json({ error: "An error occurred while fetching songs." });
 //     });
 // });
-
-app.post('/register', async (req, res) => {
-
-  //hash the password using bcrypt library
-  const hash = await bcrypt.hash(req.body.password, 10);
-  
-  // insert new user in users table
-  const query = 'insert into users (username, password, phone, name) values ($1, $2, $3, $4) returning *;';
-  db.any(query, [
-      req.body.username,
-      hash,
-      req.body.phone,
-      req.body.name
-  ]).then(data => {
-      res.render('pages/login', {
-          message: "Registered successfully!"
-      });
-  }).catch(err => {
-      res.render('pages/register', {
-        message: "Registration failed: username already exists."
-      });
-  });
-});
-
-app.get('/profile',(req, res) => {
-  res.render('pages/profile', {
-    user
-  });
-});
 
 // app.put('/profile', async (req, res) => {
 //   try {
