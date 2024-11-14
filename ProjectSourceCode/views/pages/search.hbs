@@ -31,29 +31,30 @@
         </form>
 
 
-    {{#if track}}
+    {{#if fiveSongs}}
         <div class="container mt-4">
-        <div class="card song-result mb-3 p-3">
-            <div class="d-flex align-items-center">
-                <!-- Album Cover -->
-                <div class="album-cover me-3">
-                    <img src="{{track.album.images.0.url}}" alt="Album Cover" class="rounded">
-                </div>
-                
-                <!-- Song Details (Stacked Vertically) -->
-                <div class="song-info flex-grow-1">
-                    <h1 class="song-name mb-1">{{track.name}}</h1>
-                    <h5 class="artist-name mb-1">{{track.album.artists.0.name}}</h5>
-                    <p class="album-title mb-0">{{track.album.name}}</p>
-
-                </div>
-                
-                <!-- Duration -->
-                <div class="duration ms-3 text-muted">
-                    <span> Duration: {{track.min}}:{{track.sec}}</span>
+            {{#each fiveSongs}}
+            <div class="card song-result mb-3 p-3">
+                <div class="d-flex align-items-center">
+                    <!-- Album Cover -->
+                    <div class="album-cover me-3">
+                        <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                    </div>
+                    
+                    <!-- Song Details (Stacked Vertically) -->
+                    <div class="song-info flex-grow-1">
+                        <h1 class="song-name mb-1">{{this.name}}</h1>
+                        <h5 class="artist-name mb-1">{{this.album.artists.0.name}}</h5>
+                        <p class="album-title mb-0">{{this.album.name}}</p>
+                    </div>
+                    
+                    <!-- Duration -->
+                    <div class="duration ms-3 text-muted">
+                        <span>Duration: {{this.min}}:{{this.sec}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+            {{/each}}
         </div>
     {{/if}}
 </body>
