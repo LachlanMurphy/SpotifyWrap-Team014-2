@@ -115,10 +115,6 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
-app.get('/logout', (req, res) => {
-  res.render('pages/logout');
-});
-
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
@@ -206,6 +202,11 @@ app.get('/home', (req, res) => {
   res.render('pages/home', {
     user: user
   });
+});
+
+app.get('/logout', (req, res) => {
+  req.session.user = null;
+  res.render('pages/logout');
 });
 
 app.get('/song', (req, res) => {
