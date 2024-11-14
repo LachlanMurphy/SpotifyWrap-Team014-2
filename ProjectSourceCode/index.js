@@ -104,36 +104,6 @@ spotifyApi
     // console.log(data.body);  
   }) 
 
-  // spotifyApi
-  // .clientCredentialsGrant()
-  // .then(function (data) {
-  //   spotifyApi.setAccessToken(data.body['access_token']); 
-
-  //   return spotifyApi.getRecommendations({
-  //     min_energy: 0.4,
-  //     seed_artists: ['6mfK6Q2tzLMEchAr0e9Uzu', '4DYFVNKZ1uixa6SQTvzQwJ'],
-  //     min_popularity: 50,
-  //   });
-  // })
-  // .then(function (data) {
-  //   const tracks = data.body.tracks; // Access the array of recommended tracks
-
-  //   // Make sure there are tracks returned
-  //   if (tracks.length > 0) {
-  //     // Access the first track as an example
-  //     const track = tracks[0];
-  //     console.log('Artist:', track.artists[0].name);
-  //     console.log('Track name:', track.name);
-  //     console.log('Album:', track.album.name);
-  //     console.log('Popularity:', track.popularity);
-  //   } else {
-  //     console.log('No recommendations found.');
-  //   }
-  // })
-  // .catch(function (err) {
-  //   console.log('Error:', err);
-  // });
-
 // Spotify api calls will go below 
 
 app.get('/', (req, res) => {
@@ -193,31 +163,17 @@ app.get('/search', (req, res) => {
   res.render('pages/search');
 });
 
-// app.get('/song', (req, res) => {
-//     // Right now, the user has to input song ID and it prints that song
-//     // On the search page, look up '11dFghVXANMlKmJXsNCbNl' and it should display a song by Carly Rae Jepsen
-//     // Or, for example, look up '7hm4HTk9encxT0LYC0J6oI' and it should display a song by the strokes
-//     const artist_id = req.query.song; 
-//     return spotifyApi.getTrack(artist_id)
-//   .then(function(data) { 
-//     const track = data.body;
-//     track.min = Math.floor(track.duration_ms / 60000);
-//     console.log(track.min, track.duration_ms);
-//     track.sec = Math.floor(track.duration_ms / 1000) % 60;
-//     res.render('pages/search', {
-//       track,
-//     });
-//   })
-//   .catch(function(err) {
-//     console.log(err);
-//   });
-// });
+app.get('/recommendations', (req, res) => {
+  res.render('pages/recommendations');
+});
 
 app.get('/song', (req, res) => {
   const songName = req.query.song; // Get the song name from query parameter
 
   if (!songName) {
-    return res.status(400).json({ error: "Please provide a song name." });
+    res.render('pages/search', {
+      message: "Please enter a song name."
+    });
   }
 
   spotifyApi
@@ -227,14 +183,16 @@ app.get('/song', (req, res) => {
 
       if (tracks.length === 0) {
         res.render('pages/search', {
-          message: "No song found"
+          message: "No song found."
         })
       }
 
       // change if we wanna show more songs
       const track = tracks[0];
 
-      console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
+      // console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
+      track.min = Math.floor(track.duration_ms / 60000);
+      track.sec = Math.floor(track.duration_ms / 1000) % 60;
       res.render('pages/search', {
         track,
       });
@@ -246,21 +204,13 @@ app.get('/song', (req, res) => {
     });
 });
 
-
-
-
-
-// potential solutions to id problem above
-
-// FIXED SOLUTION 1 and added initial functionality to search page
-
-// solution 1 have a function that gets user ids from users names 
-// this function will search for an artist by its name and return its ID in a json object 
 app.get('/searchArtist', (req, res) => {
   const artistName = req.query.artist; // Get artist name from query parameter
 
   if (!artistName) {
-    return res.status(400).json({ error: "Please provide an artist name." });
+    res.render('pages/search', {
+      message: "Please provide an artist name."
+    })
   }
 
   spotifyApi
@@ -269,7 +219,9 @@ app.get('/searchArtist', (req, res) => {
       const artists = data.body.artists.items;
 
       if (artists.length === 0) {
-        return res.status(404).json({ error: "No artist found with that name." });
+        res.render('pages/search', {
+          message: "No artist found with that name."
+        })
       }
 
       // change if we want more than 1 result 
@@ -283,47 +235,12 @@ app.get('/searchArtist', (req, res) => {
       // res.json({ artistId }); // Return the ID as JSON
     })
     .catch(function(err) {
+      res.render('pages/search', {
+        message: "An error occurred while searching for the artist."
+      })
       console.error('Error searching for artist:', err);
-      res.status(500).json({ error: "An error occurred while searching for the artist." });
     });
 });
-
-// potential search solution
-// app.get('/searchSong', (req, res) => {
-//   const songName = req.query.song;
-//   // const artistName = req.query.song;
-//   if (!songName) {
-//     return res.status(400).json({ error: "Please provide a song name." });
-//   }
-//   // if (!artistName){
-//   //   return res.status(400).json({ error: "Please provide an artist name." });
-//   // }
-
-//   spotifyApi
-//     .searchTracks(songName) // Use Spotify's search endpoint and add another input as artistName
-//     .then(function(data) { 
-//       const tracks = data.body.tracks.items;
-
-//       if (tracks.length === 0) {
-//         return res.status(404).json({ error: "No song found with that name." });
-//       }
-
-//       // change if we want more than 1 result 
-//       const track = tracks[0];
-
-//       console.log(`Song found: ${artist.name}`);
-//       res.render('pages/search', {
-//         track,
-//       });
-//       // res.json({ artistId }); // Return the ID as JSON
-//     })
-//     .catch(function(err) {
-//       console.error('Error searching for a track:', err);
-//       res.status(500).json({ error: "An error occurred while searching for the track." });
-//     });
-
-
-// });
 
 // SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
 
