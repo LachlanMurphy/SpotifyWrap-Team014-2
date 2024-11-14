@@ -38,3 +38,8 @@
     -> Gavin and Cody will make the search song work. Then work on the recommendations 
     -> Brady will be working on edit page and favorite songs table
     -> Cole will work on style and create funcationality for saved playlists page.
+
+11/14/24
+- everyone was present
+- We worked on lab 9 testing 
+- We discussed future plans including a new name and how we will navigate the favorites page
