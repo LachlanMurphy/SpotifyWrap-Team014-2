@@ -164,11 +164,9 @@ app.post('/login', async (req, res) => {
           req.session.user = user;
           req.session.save();
 
-          res.json({message: "logged in"});
           res.render('pages/home', {user: user, message: "logged in"});
       }
   }).catch(err => {
-      res.json({message: 'Incorrect Username/Password', status: 400});
       res.render('pages/login', {
           message: "Incorrect Username/Password"
       });
@@ -353,14 +351,10 @@ app.post('/register', async (req, res) => {
       req.body.username,
       hash
   ]).then(data => {
-      res.status(200);
-      res.json({message: "Registered successfully!"});
       res.render('pages/login', {
           message: "Registered successfully!"
       });
   }).catch(err => {
-      res.status(400);
-      res.json({message: "Registration failed: username already exists."});
       res.render('pages/register', {
         message: "Registration failed: username already exists."
       });
