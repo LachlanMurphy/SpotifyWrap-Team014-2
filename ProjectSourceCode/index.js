@@ -170,32 +170,37 @@ app.get('/recommendations', (req, res) => {
 
 app.get('/song', (req, res) => {
   const songName = req.query.song; // Get the song name from query parameter
-
+ 
+ 
   if (!songName) {
     res.render('pages/search', {
-      message: "Please enter a song name."
-    });
+      message: "Please provide a song name"
+    })
   }
-
+ 
+ 
   spotifyApi
     .searchTracks(songName) // Use Spotify's search endpoint for tracks
     .then(function(data) {
       const tracks = data.body.tracks.items;
-
+ 
+ 
       if (tracks.length === 0) {
         res.render('pages/search', {
-          message: "No song found."
+          message: "No song found"
         })
       }
-
+ 
+ 
       // change if we wanna show more songs
-      const track = tracks[0];
-
+      // const track = tracks[4];
+      const fiveSongs = tracks.slice(0, 5);
+ 
+ 
       // console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
-      track.min = Math.floor(track.duration_ms / 60000);
-      track.sec = Math.floor(track.duration_ms / 1000) % 60;
       res.render('pages/search', {
-        track,
+        // track
+        fiveSongs
       });
     })
     .catch(function(err) {
@@ -204,6 +209,7 @@ app.get('/song', (req, res) => {
       })
     });
 });
+   
 
 app.get('/searchArtist', (req, res) => {
   const artistName = req.query.artist; // Get artist name from query parameter
