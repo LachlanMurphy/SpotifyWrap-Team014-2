@@ -299,7 +299,7 @@ app.post('/register', async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   
   // insert new user in users table
-  const query = 'insert into users (username, password) values ($1, $2) returning *;';
+  const query = 'insert into users (username, password, phone, name) values ($1, $2, $3, $4) returning *;';
   db.any(query, [
       req.body.username,
       hash
@@ -332,29 +332,6 @@ app.get('/profile',(req, res) => {
 app.get('/editProfile',(req, res) => {
   res.render('pages/editProfile');
 });
-
-
-
-app.get('/users', (req, res) => {
-  const username = req.query.username;
- //query to get user by username
-  db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
-    if (err) {
-      console.error("Database query error:", err);
-      res.status(500).send("Error retrieving user data");
-      return;
-    }
-      //check if user is found
-    if (results.length > 0) {
-      const user = results[0];
-      // Render the page using Handlebars and pass the user data
-      res.render('/profile', { user });
-    } else {
-      res.status(404).send("User not found");
-    }
-  });
-});
-
 
 
 // *****************************************************

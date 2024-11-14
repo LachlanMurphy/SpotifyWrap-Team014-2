@@ -1,4 +1,6 @@
 CREATE TABLE users(
   username VARCHAR(50) PRIMARY KEY,
-  password CHAR(60) NOT NULL
+  password CHAR(60) NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  name VARCHAR(50) NOT NULL
 );
