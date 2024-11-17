@@ -5,10 +5,10 @@ CREATE TABLE users(
   name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE liked_songs (
-    song_id VARCHAR(255) NOT NULL,
-    song_name VARCHAR(255),
-    artist_name VARCHAR(255),
-    album_name VARCHAR(255),
-    liked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- CREATE TABLE liked_songs (
+--     song_id VARCHAR(255) NOT NULL,
+--     song_name VARCHAR(255),
+--     artist_name VARCHAR(255),
+--     album_name VARCHAR(255),
+--     liked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );

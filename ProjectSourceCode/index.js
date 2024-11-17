@@ -204,6 +204,17 @@ app.get('/home', (req, res) => {
   });
 });
 
+app.get('/favorites', (req, res) => {
+  res.render('pages/favorites', {
+    user: user,
+    favoriteSongs: []
+  });
+});
+
+app.get('/editProfile',(req, res) => {
+  res.render('pages/editProfile');
+});
+
 app.get('/logout', (req, res) => {
   req.session.user = null;
   res.render('pages/logout');
@@ -211,20 +222,17 @@ app.get('/logout', (req, res) => {
 
 app.get('/song', (req, res) => {
   const songName = req.query.song; // Get the song name from query parameter
- 
- 
+
   if (!songName) {
     res.render('pages/search', {
       message: "Please provide a song name"
     })
   }
  
- 
   spotifyApi
     .searchTracks(songName) // Use Spotify's search endpoint for tracks
     .then(function(data) {
       const tracks = data.body.tracks.items;
- 
  
       if (tracks.length === 0) {
         res.render('pages/search', {
@@ -232,15 +240,21 @@ app.get('/song', (req, res) => {
         })
       }
  
- 
       // change if we wanna show more songs
-      // const track = tracks[4];
       const fiveSongs = tracks.slice(0, 5);
- 
- 
+
+      for (let i = 0; i < 5; i++) {
+        fiveSongs[i].min = Math.floor(fiveSongs[i].duration_ms / 60000);
+        fiveSongs[i].sec = Math.floor(fiveSongs[i].duration_ms / 1000) % 60;
+        fiveSongs[i].padding = "";
+        if(fiveSongs[i].sec < 10)
+        {
+          fiveSongs[i].padding = "0";
+        }
+      }
+
       // console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
       res.render('pages/search', {
-        // track
         fiveSongs
       });
     })
@@ -276,7 +290,7 @@ app.get('/searchArtist', (req, res) => {
       const artist = artists[0];
       const artistId = artist.id;
 
-      console.log(`Artist found: ${artist.name}, ID: ${artistId}`);
+      // console.log(`Artist found: ${artist.name}, ID: ${artistId}`);
       res.render('pages/search', {
         artist,
       });
@@ -398,7 +412,6 @@ app.get('/editProfile',(req, res) => {
 //       res.status(500).json({ message: "Error fetching liked songs" });
 //   }
 // });
-
 
 
 // *****************************************************
