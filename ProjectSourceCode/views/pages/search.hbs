@@ -52,11 +52,40 @@
                     <div class="duration ms-3 text-muted">
                         <span>Duration: {{this.min}}:{{this.sec}}</span>
                     </div>
+
+                    <!-- Like Button -->
+                    {{!-- <div class="like-button ms-3">
+                        <button onclick="likeSong('{{this.id}}', '{{this.name}}', '{{this.album.artists.0.name}}', '{{this.album.name}}')" class="btn btn-primary">
+                            Like
+                        </button>
+                    </div> --}}
+
                 </div>
             </div>
             {{/each}}
         </div>
     {{/if}}
+
+    {{!-- <script>
+    function likeSong(songId, songName, artistName, albumName) {
+        fetch('/like-song', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ songId, songName, artistName, albumName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message || "Song liked successfully!");
+        })
+        .catch(error => {
+            console.error("Error liking song:", error);
+            alert("An error occurred while liking the song.");
+        });
+    }
+    </script> --}}
+
 </body>
 
 </html>

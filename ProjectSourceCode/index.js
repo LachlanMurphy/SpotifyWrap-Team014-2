@@ -356,6 +356,50 @@ app.get('/editProfile',(req, res) => {
   res.render('pages/editProfile');
 });
 
+// Route to like a song
+// app.post('/like-song', async (req, res) => {
+//   const { songId, songName, artistName, albumName } = req.body;
+//   const username = req.session.user && req.session.user.username; // Assuming the username is stored in the session
+
+//   if (!username) {
+//       return res.status(403).json({ message: "User not logged in" });
+//   }
+
+//   const query = `
+//       INSERT INTO liked_songs (song_id, song_name, artist_name, album_name, username)
+//       VALUES ($1, $2, $3, $4, $5)
+//       RETURNING *;
+//   `;
+
+//   try {
+//       const result = await db.one(query, [songId, songName, artistName, albumName, username]);
+//       res.json({ message: "Song liked successfully!", song: result });
+//   } catch (error) {
+//       console.error('Error liking song:', error);
+//       res.status(500).json({ message: "Error liking song" });
+//   }
+// });
+
+// // Route to get liked songs for the user
+// app.get('/liked-songs', async (req, res) => {
+//   const username = req.session.user && req.session.user.username;
+
+//   if (!username) {
+//       return res.status(403).json({ message: "User not logged in" });
+//   }
+
+//   const query = 'SELECT * FROM liked_songs WHERE username = $1 ORDER BY date_liked DESC;';
+  
+//   try {
+//       const likedSongs = await db.any(query, [username]);
+//       res.render('pages/liked-songs', { likedSongs });
+//   } catch (error) {
+//       console.error('Error fetching liked songs:', error);
+//       res.status(500).json({ message: "Error fetching liked songs" });
+//   }
+// });
+
+
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
