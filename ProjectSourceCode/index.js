@@ -305,11 +305,11 @@ app.get('/searchArtist', (req, res) => {
 });
 
 app.get('/getRecommendations', (req, res) => {
-  const artist1 = req.body.artist1
-  const artist2 = req.body.artist2
-  const song1 = req.body.song1
-  const song2 = req.body.artist1
-  const genre = req.body.artist1
+  const artist1 = req.query.artist1
+  const artist2 = req.query.artist2
+  const song1 = req.query.song1
+  const song2 = req.query.song2
+  const genre = req.query.genre
 
   spotifyApi
     .searchArtists(artist1) // Use Spotify's search endpoint
@@ -324,6 +324,7 @@ app.get('/getRecommendations', (req, res) => {
 
       const artists1 = artist1[0];
       const artist1Id = artists1.id;
+      console.log(artist1Id);
 
       // artist 2 
       spotifyApi
@@ -332,13 +333,14 @@ app.get('/getRecommendations', (req, res) => {
         const artist2 = data.body.artists.items;
   
         if (artist2.length === 0) {
-          res.render('pages/search', {
+          res.render('pages/recommendations', {
             message: "No artist found with that name."
           })
         }
   
         const artists2 = artist2[0];
         const artist2Id = artists2.id;
+        console.log(artist2Id);
         
         // song 1
         spotifyApi
@@ -347,13 +349,14 @@ app.get('/getRecommendations', (req, res) => {
           const song1 = data.body.tracks.items;
     
           if (song1.length === 0) {
-            res.render('pages/search', {
+            res.render('pages/recommendations', {
               message: "No song found with that name."
             })
           }
     
           const songs1 = song1[0];
           const song1Id = songs1.id;
+          console.log(song1Id);
 
           // song 2
           spotifyApi
@@ -362,7 +365,7 @@ app.get('/getRecommendations', (req, res) => {
             const song2 = data.body.tracks.items;
       
             if (song2.length === 0) {
-              res.render('pages/search', {
+              res.render('pages/recommendations', {
                 message: "No song found with that name."
               })
             }
@@ -376,7 +379,7 @@ app.get('/getRecommendations', (req, res) => {
               const genre = data.body.genres.items;
         
               if (genre.length === 0) {
-                res.render('pages/search', {
+                res.render('pages/recommendations', {
                   message: "No song found with that name."
                 })
               }
@@ -402,14 +405,14 @@ app.get('/getRecommendations', (req, res) => {
             });
             })
             .catch(function(err) {
-              res.render('pages/search', {
-                message: "An error occurred while searching for the first song."
+              res.render('pages/recommendations', {
+                message: "An error occurred while searching for the genre."
               })
-              console.error('Error searching for song 1:', err);
+              console.error('Error searching for genre:', err);
             });
           })
           .catch(function(err) {
-            res.render('pages/search', {
+            res.render('pages/recommendations', {
               message: "An error occurred while searching for the second song."
             })
             console.error('Error searching for song 2:', err);
@@ -417,7 +420,7 @@ app.get('/getRecommendations', (req, res) => {
           
         })
         .catch(function(err) {
-          res.render('pages/search', {
+          res.render('pages/recommendations', {
             message: "An error occurred while searching for the first song."
           })
           console.error('Error searching for song 1:', err);
@@ -425,7 +428,7 @@ app.get('/getRecommendations', (req, res) => {
     
       })
       .catch(function(err) {
-        res.render('pages/search', {
+        res.render('pages/recommendations', {
           message: "An error occurred while searching for the second artist."
         })
         console.error('Error searching for artist 2:', err);
@@ -433,7 +436,7 @@ app.get('/getRecommendations', (req, res) => {
   
     })
     .catch(function(err) {
-      res.render('pages/search', {
+      res.render('pages/recommendations', {
         message: "An error occurred while searching for the first artist."
       })
       console.error('Error searching for artist 1:', err);
