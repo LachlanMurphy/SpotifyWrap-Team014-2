@@ -304,6 +304,145 @@ app.get('/searchArtist', (req, res) => {
     });
 });
 
+app.get('/getRecommendations', (req, res) => {
+  const artist1 = req.body.artist1
+  const artist2 = req.body.artist2
+  const song1 = req.body.song1
+  const song2 = req.body.artist1
+  const genre = req.body.artist1
+
+  spotifyApi
+    .searchArtists(artist1) // Use Spotify's search endpoint
+    .then(function(data) {
+      const artist1 = data.body.artists.items;
+
+      if (artist1.length === 0) {
+        res.render('pages/search', {
+          message: "No artist found with that name."
+        })
+      }
+
+      const artists1 = artist1[0];
+      const artist1Id = artists1.id;
+
+      // artist 2 
+      spotifyApi
+      .searchArtists(artist2) // Use Spotify's search endpoint
+      .then(function(data) {
+        const artist2 = data.body.artists.items;
+  
+        if (artist2.length === 0) {
+          res.render('pages/search', {
+            message: "No artist found with that name."
+          })
+        }
+  
+        const artists2 = artist2[0];
+        const artist2Id = artists2.id;
+        
+        // song 1
+        spotifyApi
+        .searchTracks(song1) // Use Spotify's search endpoint
+        .then(function(data) {
+          const song1 = data.body.tracks.items;
+    
+          if (song1.length === 0) {
+            res.render('pages/search', {
+              message: "No song found with that name."
+            })
+          }
+    
+          const songs1 = song1[0];
+          const song1Id = songs1.id;
+
+          // song 2
+          spotifyApi
+          .searchTracks(song2) // Use Spotify's search endpoint
+          .then(function(data) {
+            const song2 = data.body.tracks.items;
+      
+            if (song2.length === 0) {
+              res.render('pages/search', {
+                message: "No song found with that name."
+              })
+            }
+      
+            const songs2 = song2[0];
+            const song2Id = songs2.id;
+            // genre 1
+            spotifyApi
+            .getAvailableGenreSeeds(genre) // Use Spotify's search endpoint
+            .then(function(data) {
+              const genre = data.body.genres.items;
+        
+              if (genre.length === 0) {
+                res.render('pages/search', {
+                  message: "No song found with that name."
+                })
+              }
+        
+              const genres = genre[0];
+              const genreId = genres.id;
+        
+              // artist1Id
+              // artist2Id
+              // song1Id
+              // song2Id
+              // genreId
+              spotifyApi.getRecommendations({
+                seed_artists: [artist1Id, artist2Id, song1Id, song2Id, genreId],
+              })
+            .then(function(data) {
+              let recommendations = data.body;
+              res.render('pages/recommendations', {
+                recommendations,
+              });
+            }, function(err) {
+              console.log("Something went wrong!", err);
+            });
+            })
+            .catch(function(err) {
+              res.render('pages/search', {
+                message: "An error occurred while searching for the first song."
+              })
+              console.error('Error searching for song 1:', err);
+            });
+          })
+          .catch(function(err) {
+            res.render('pages/search', {
+              message: "An error occurred while searching for the second song."
+            })
+            console.error('Error searching for song 2:', err);
+          });
+          
+        })
+        .catch(function(err) {
+          res.render('pages/search', {
+            message: "An error occurred while searching for the first song."
+          })
+          console.error('Error searching for song 1:', err);
+        });
+    
+      })
+      .catch(function(err) {
+        res.render('pages/search', {
+          message: "An error occurred while searching for the second artist."
+        })
+        console.error('Error searching for artist 2:', err);
+      });
+  
+    })
+    .catch(function(err) {
+      res.render('pages/search', {
+        message: "An error occurred while searching for the first artist."
+      })
+      console.error('Error searching for artist 1:', err);
+    });
+
+
+
+});
+
 // SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
 
 // solution 2 combine the functionality
@@ -329,8 +468,6 @@ app.get('/searchArtist', (req, res) => {
 //       // Step 2: Use the artist ID to fetch tracks
 //       return spotifyApi.getRecommendations({
 //         seed_artists: [artistId], // Use the artist ID as a seed
-//         min_energy: 0.4,
-//         min_popularity: 50,
 //       });
 //     })
 //     .then(function (data) {
