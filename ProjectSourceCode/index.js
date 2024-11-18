@@ -255,7 +255,7 @@ app.get('/song', (req, res) => {
 
       // console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
       res.render('pages/search', {
-        fiveSongs
+        fiveSongs,
       });
     })
     .catch(function(err) {
