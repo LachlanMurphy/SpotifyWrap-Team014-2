@@ -9,17 +9,18 @@
 </head>
 <body>
     <h1 style="text-align: left; color: #ffffff;">Get Recommendations Based on your favorites! </h1>
+    <h5 style="text-align: left; color: #ffffff;"> Input your favorite artist, favorite song, and favorite genre! Then, sit back and relax as we generate 10 recommended songs, just for you!</h5>
 
-    <form method="GET" action="/getRecommendations" class="search-form">
-        <h3 id="favoriteArtist" style="color: #ffffff;"> Artist: </h3>
+    <form method="GET" action="/getRecommendations" class="recommendation-form">
+        <h3 id="favoriteArtist" style="color: #ffffff;"> </h3>
         <input type="artist1" name = "artist1" id = "artist1" class="search-bar" placeholder="Input your favorite artist!"/>
 
-        <h3 id="favoriteSong" style="color: #ffffff;"> Song: </h3>
+        <h3 id="favoriteSong" style="color: #ffffff;"></h3>
         <input type="song1" name = "song1" id = "song1" class="search-bar" placeholder="Input your favorite song!"/>
 
-        <h3 id="favoriteGenre" style="color: #ffffff;"> Genre: </h3>
+        <h3 id="favoriteGenre" style="color: #ffffff;"></h3>
         <input type="genre" name = "genre" id = "genre" class="search-bar" placeholder="Input your favorite genre!"/>
-        <button type="submit" class="search-button"> Search </button>
+        <button type="submit" class="recommendations-search-button"> Search </button>
     </form>
 
     {{#if tenSongs}}

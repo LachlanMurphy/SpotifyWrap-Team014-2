@@ -187,16 +187,16 @@ app.post('/login', async (req, res) => {
   });
 });
 
-// Authentication Middleware.
-const auth = (req, res, next) => {
-  if (!req.session.user) {
-    // Default to login page.
-    return res.redirect('/login');
-  }
-  next();
-};
+// // Authentication Middleware.
+// const auth = (req, res, next) => {
+//   if (!req.session.user) {
+//     // Default to login page.
+//     return res.redirect('/login');
+//   }
+//   next();
+// };
 
-app.use(auth);
+// app.use(auth);
 
 app.get('/home', (req, res) => {
   res.render('pages/home', {
@@ -322,7 +322,7 @@ app.get('/getRecommendations', (req, res) => {
       }
 
       const artist1Id = artists[0].id; 
-      console.log(artist1Id);
+      // console.log(artist1Id);
 
       spotifyApi
         .searchTracks(song1) 
@@ -337,7 +337,7 @@ app.get('/getRecommendations', (req, res) => {
           }
 
           const song1Id = songs[0].id;
-          console.log(song1Id);
+          // console.log(song1Id);
 
           spotifyApi
             .getAvailableGenreSeeds() 
