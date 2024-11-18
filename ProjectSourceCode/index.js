@@ -358,7 +358,7 @@ app.get('/getRecommendations', (req, res) => {
                 seed_genres: [genreId], 
               })
                 .then(function(data) {
-                  const recommendations = data.body;
+                  const recommendations = data.body.tracks;
                   res.render('pages/recommendations', {
                     recommendations,
                   });
