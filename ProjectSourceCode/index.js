@@ -359,8 +359,9 @@ app.get('/getRecommendations', (req, res) => {
               })
                 .then(function(data) {
                   const recommendations = data.body.tracks;
+                  const tenSongs = recommendations.slice(0, 10);
                   res.render('pages/recommendations', {
-                    recommendations,
+                    tenSongs,
                   });
                 })
                 .catch(function(err) {
