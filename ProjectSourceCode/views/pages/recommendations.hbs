@@ -10,23 +10,56 @@
 <body>
     <h1 style="text-align: left; color: #ffffff;">Get Recommendations Based on Input Parameters: </h1>
 
-    <h3 style="text-align: left; color: #ffffff;"> Parameter 1: </h3>
-    <select input-type="dropdown-input" id="dropdown-input">
-        <option value="volvo">Artist</option>
-        <option value="saab">Song</option>
-    </select>
+    <form method="GET"  action="/getRecommendations" class="search-form">
+        <h3 style="text-align: left; color: #ffffff;"> Artist 1: </h3>
+        <input type="artist1" name = "artist1" id = "artist1" class="search-bar" placeholder="Input your first artist!"/>
 
-    <h3 style="text-align: left; color: #ffffff;"> Parameter 2: </h3>
-    <select input-type="dropdown-input" id="dropdown-input">
-        <option value="volvo">Artist</option>
-        <option value="saab">Song</option>
-    </select>
+        <h3 style="text-align: left; color: #ffffff;"> Artist 2: </h3>
+        <input type="artist2" name = "artist2" id = "artist2" class="search-bar" placeholder="Input your second artist!"/>
 
-    <h3 style="text-align: left; color: #ffffff;"> Parameter 3: </h3>
-    <select input-type="dropdown-input" id="dropdown-input">
-        <option value="volvo">Artist</option>
-        <option value="saab">Song</option>
-    </select>
+        <h3 style="text-align: left; color: #ffffff;"> Song 1: </h3>
+        <input type="song1" name = "song1" id = "song1" class="search-bar" placeholder="Input your first song!"/>
+
+        <h3 style="text-align: left; color: #ffffff;"> Song 2: </h3>
+        <input type="song2" name = "song2" id = "song2" class="search-bar" placeholder="Input your second song!"/>
+
+        <h3 style="text-align: left; color: #ffffff;"> Genre: </h3>
+        <input type="genre" name = "genre" id = "genre" class="search-bar" placeholder="Input a genre!"/>
+        <button type="submit" class="search-button"> Search </button>
+    </form>
+
+    {{#if recommendations}}
+        <div class="container mt-4">
+            <table>
+                {{#each recommendations}}   
+                    <tr>
+                        <td>
+                            <div class="card song-result mb-3 p-3">
+                                <div class="d-flex align-items-center">
+                                    <!-- Album Cover -->
+                                    <div class="album-cover me-3">
+                                        <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                                    </div>
+                                    
+                                    <!-- Song Details (Stacked Vertically) -->
+                                    <div class="song-info flex-grow-1">
+                                        <h1 class="song-name mb-1">{{this.name}}</h1>
+                                        <h5 class="artist-name mb-1">{{this.album.artists.0.name}}</h5>
+                                        <p class="album-title mb-0">{{this.album.name}}</p>
+                                    </div>
+                                    
+                                    <!-- Duration -->
+                                    <div class="duration ms-3 text-muted">
+                                        <span>Duration: {{this.min}}:{{this.padding}}{{this.sec}}</span>
+                                    </div>                   
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    {{/if}}
+
 </body>
-
 </html>
