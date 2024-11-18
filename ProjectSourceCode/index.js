@@ -305,145 +305,91 @@ app.get('/searchArtist', (req, res) => {
 });
 
 app.get('/getRecommendations', (req, res) => {
-  const artist1 = req.query.artist1
-  const artist2 = req.query.artist2
-  const song1 = req.query.song1
-  const song2 = req.query.song2
-  const genre = req.query.genre
+  const artist1 = req.query.artist1;
+  const song1 = req.query.song1;
+  const genre = req.query.genre;
 
   spotifyApi
-    .searchArtists(artist1) // Use Spotify's search endpoint
+    .searchArtists(artist1) 
     .then(function(data) {
-      const artist1 = data.body.artists.items;
+      const artists = data.body.artists.items; 
 
-      if (artist1.length === 0) {
+      if (artists.length === 0) {
         res.render('pages/search', {
           message: "No artist found with that name."
-        })
+        });
+        return; 
       }
 
-      const artists1 = artist1[0];
-      const artist1Id = artists1.id;
+      const artist1Id = artists[0].id; 
       console.log(artist1Id);
 
-      // artist 2 
       spotifyApi
-      .searchArtists(artist2) // Use Spotify's search endpoint
-      .then(function(data) {
-        const artist2 = data.body.artists.items;
-  
-        if (artist2.length === 0) {
-          res.render('pages/recommendations', {
-            message: "No artist found with that name."
-          })
-        }
-  
-        const artists2 = artist2[0];
-        const artist2Id = artists2.id;
-        console.log(artist2Id);
-        
-        // song 1
-        spotifyApi
-        .searchTracks(song1) // Use Spotify's search endpoint
+        .searchTracks(song1) 
         .then(function(data) {
-          const song1 = data.body.tracks.items;
-    
-          if (song1.length === 0) {
+          const songs = data.body.tracks.items; 
+
+          if (songs.length === 0) {
             res.render('pages/recommendations', {
               message: "No song found with that name."
-            })
+            });
+            return; 
           }
-    
-          const songs1 = song1[0];
-          const song1Id = songs1.id;
+
+          const song1Id = songs[0].id;
           console.log(song1Id);
 
-          // song 2
           spotifyApi
-          .searchTracks(song2) // Use Spotify's search endpoint
-          .then(function(data) {
-            const song2 = data.body.tracks.items;
-      
-            if (song2.length === 0) {
-              res.render('pages/recommendations', {
-                message: "No song found with that name."
-              })
-            }
-      
-            const songs2 = song2[0];
-            const song2Id = songs2.id;
-            // genre 1
-            spotifyApi
-            .getAvailableGenreSeeds(genre) // Use Spotify's search endpoint
+            .getAvailableGenreSeeds() 
             .then(function(data) {
-              const genre = data.body.genres.items;
-        
-              if (genre.length === 0) {
+              const genres = data.body.genres; 
+
+              if (genres.length === 0) {
                 res.render('pages/recommendations', {
-                  message: "No song found with that name."
-                })
+                  message: "No genre found with that name."
+                });
+                return; 
               }
-        
-              const genres = genre[0];
-              const genreId = genres.id;
-        
-              // artist1Id
-              // artist2Id
-              // song1Id
-              // song2Id
-              // genreId
+              const genreId = genres[0]; 
+
               spotifyApi.getRecommendations({
-                seed_artists: [artist1Id, artist2Id, song1Id, song2Id, genreId],
+                seed_artists: [artist1Id],
+                seed_tracks: [song1Id],
+                seed_genres: [genreId], 
               })
-            .then(function(data) {
-              let recommendations = data.body;
-              res.render('pages/recommendations', {
-                recommendations,
-              });
-            }, function(err) {
-              console.log("Something went wrong!", err);
-            });
+                .then(function(data) {
+                  const recommendations = data.body;
+                  res.render('pages/recommendations', {
+                    recommendations,
+                  });
+                })
+                .catch(function(err) {
+                  console.log("Error fetching recommendations:", err);
+                  res.render('pages/recommendations', {
+                    message: "An error occurred while getting recommendations."
+                  });
+                });
             })
             .catch(function(err) {
+              console.error('Error fetching genres:', err);
               res.render('pages/recommendations', {
-                message: "An error occurred while searching for the genre."
-              })
-              console.error('Error searching for genre:', err);
+                message: "An error occurred while fetching genres."
+              });
             });
-          })
-          .catch(function(err) {
-            res.render('pages/recommendations', {
-              message: "An error occurred while searching for the second song."
-            })
-            console.error('Error searching for song 2:', err);
-          });
-          
         })
         .catch(function(err) {
+          console.error('Error searching for song 1:', err);
           res.render('pages/recommendations', {
             message: "An error occurred while searching for the first song."
-          })
-          console.error('Error searching for song 1:', err);
+          });
         });
-    
-      })
-      .catch(function(err) {
-        res.render('pages/recommendations', {
-          message: "An error occurred while searching for the second artist."
-        })
-        console.error('Error searching for artist 2:', err);
-      });
-  
     })
     .catch(function(err) {
+      console.error('Error searching for artist 1:', err);
       res.render('pages/recommendations', {
         message: "An error occurred while searching for the first artist."
-      })
-      console.error('Error searching for artist 1:', err);
+      });
     });
-
-
-
 });
 
 // SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
