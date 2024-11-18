@@ -188,15 +188,15 @@ app.post('/login', async (req, res) => {
 });
 
 // Authentication Middleware.
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     // Default to login page.
-//     return res.redirect('/login');
-//   }
-//   next();
-// };
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
 
-// app.use(auth);
+app.use(auth);
 
 app.get('/home', (req, res) => {
   res.render('pages/home', {
@@ -360,6 +360,15 @@ app.get('/getRecommendations', (req, res) => {
                 .then(function(data) {
                   const recommendations = data.body.tracks;
                   const tenSongs = recommendations.slice(0, 10);
+                  for (let i = 0; i < 10; i++) {
+                    tenSongs[i].min = Math.floor(tenSongs[i].duration_ms / 60000);
+                    tenSongs[i].sec = Math.floor(tenSongs[i].duration_ms / 1000) % 60;
+                    tenSongs[i].padding = "";
+                    if(tenSongs[i].sec < 10)
+                    {
+                      tenSongs[i].padding = "0";
+                    }
+                  }
                   res.render('pages/recommendations', {
                     tenSongs,
                   });
@@ -392,57 +401,6 @@ app.get('/getRecommendations', (req, res) => {
       });
     });
 });
-
-// SOLUTION 2 IMPLEMENTATION STILL VIABLE LATER ON
-
-// solution 2 combine the functionality
-// app.get('/song', (req, res) => {
-//   const artistName = req.query.artist; 
-
-//   if (!artistName) {
-//     return res.status(400).json({ error: "Please provide an artist name." });
-//   }
-
-//   // Search for the artist to get their ID
-//   spotifyApi
-//     .searchArtists(artistName)
-//     .then(function (data) {
-//       const artists = data.body.artists.items;
-
-//       if (artists.length === 0) {
-//         return res.status(404).json({ error: "No artist found with that name." });
-//       }
-
-//       const artistId = artists[0].id; // Get the first matching artist's ID
-
-//       // Step 2: Use the artist ID to fetch tracks
-//       return spotifyApi.getRecommendations({
-//         seed_artists: [artistId], // Use the artist ID as a seed
-//       });
-//     })
-//     .then(function (data) {
-//       const tracks = data.body.tracks;
-
-//       if (tracks.length === 0) {
-//         return res.status(404).json({ error: "No tracks found for this artist." });
-//       }
-
-//       const track = tracks[0]; // Example: Use the first track
-//       console.log('Track found:', track.name, 'by', track.artists[0].name);
-
-//       // Render the results
-//       res.render('pages/search', {
-//         trackName: track.name,
-//         artistName: track.artists[0].name,
-//         albumName: track.album.name,
-//         popularity: track.popularity,
-//       });
-//     })
-//     .catch(function (err) {
-//       console.error('Error fetching songs:', err);
-//       res.status(500).json({ error: "An error occurred while fetching songs." });
-//     });
-// });
 
 // app.put('/profile', async (req, res) => {
 //   try {
