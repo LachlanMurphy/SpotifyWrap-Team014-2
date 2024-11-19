@@ -59,14 +59,14 @@ h5, h2, h1 {
     display: flex;
     justify-content: center;
 }
-.song-result {
+.song-result {  
     margin-bottom: 5px;
     width: 100%; 
     height: auto; 
     padding: 5px; 
     background-color: #181818;
     border: 1px solid #1DB954; 
-    border-radius: 8px; 
+    border-radius: 20px 0 0 20px;
     box-shadow: none;
 }
 .album-cover img {
@@ -123,6 +123,11 @@ h5, h2, h1 {
     transition: background-color 0.3s ease;
 }
 
+
+.search-button:hover {
+    background-color: #146831;
+}
+
 .recommendations-search-button {
     padding: 10px 20px;
     border-radius: 0 20px 20px 0;
@@ -133,7 +138,7 @@ h5, h2, h1 {
     transition: background-color 0.3s ease;
 }
 
-.search-button:hover {
+.recommendations-search-button:hover {
     background-color: #146831;
 }
 
@@ -150,6 +155,20 @@ table {
     border-spacing: 0; 
     border-collapse: collapse; 
     
+}
+
+.favorite-button {
+    padding: 40 80px;
+    border-radius: 0 20px 20px 0;
+    background-color: #1DB954;
+    color: #fff;
+    border: 2px solid #1DB954;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+} 
+
+.favorite-button:hover {
+    background-color: #146831;
 }
 
 td {

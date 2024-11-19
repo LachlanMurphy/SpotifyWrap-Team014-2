@@ -50,6 +50,15 @@
                                 </div>
                             </div>
                         </td>
+                        <td> 
+                            <form method="post" action="/favorite"> 
+                                {{#if favorited}}
+                                <input class="favorite-button" id="button" type="submit" disabled = "disabled" value="Favorite" style="background-color:#7c7e81;" /> <input type = "hidden" name = "course_id" value = ""/>
+                                {{else}}
+                                <input class="favorite-button" id="button" type="submit" value="Favorite"/> <input type = "hidden" name = "course_id" value = ""/>
+                                {{/if}} 
+                            </form>
+                        </td>
                     </tr>
                 {{/each}}
             </table>
