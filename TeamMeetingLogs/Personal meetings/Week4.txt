@@ -2,7 +2,12 @@
 - In person (before TA meeting)
 - Discussed commits that we all made throughout the week and planned for this upcoming week
     -Cole
-        ->
+        ->Changed Colors for entire website
+        ->Chnaged name on all files because we dont want smoke with spotify
+        ->reorganized home page to ake it look better and sepereate two buttons into two cards
+        ->consolidated stylesheets into one - we had two for some reason
+        TODO:
+        ->finish all style chnages and help everyone else who needs it when im done
     -Josh
         -> 
     -Gavin
