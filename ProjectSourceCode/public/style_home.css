@@ -1,0 +1,137 @@
+body { /* Black background, arial font*/
+    background-color: #1F1F1F; 
+    color: #E0E0E0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav { /* Orange navbar */
+    background-color: #CC5500;
+    padding: 15px;
+}
+
+nav .btn { /* Orange buttons on the navbar with bold font*/
+    color: #fff;
+    background-color: #1F1F1F;
+    border: 2px solid #CC5500;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+nav .btn:hover {
+    background-color: #CC5500;
+    color: #fff;
+}
+
+h1, h5 {
+    color: #ffffff; 
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 700; /*Font Boldness*/
+    color: #ffffff; /* Ensure headers stand out */
+    letter-spacing: 1px; /* Add slight spacing for readability */
+    text-transform: uppercase; /* Optional: Makes text look more formal */
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #cccccc;
+}
+
+.container { /*Centers the containers*/
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.card-container { /*Centers the cards, adds margin between them */
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.card { /* Makes the cards rounded, similar style to rest of page, centered, bold text*/
+    background-color: #333;
+    color: #E0E0E0;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 0px 10px rgba(204, 85, 0, 0.5);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin: 15px 20px;
+}
+
+.btn-primary {
+    background-color: #CC5500; 
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+    margin: 10px auto;
+}
+
+.btn-primary:hover {
+    background-color: #14a143;
+}
+
+.steps { /* Similar formatting for the steps text at the bottom of the page */
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 50px;
+    color: #cccccc;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.steps span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.steps span::before {
+    content: "•";
+    color: #CC5500;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
