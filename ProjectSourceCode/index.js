@@ -202,7 +202,7 @@ const auth = (req, res, next) => {
 app.use(auth);
 
 app.get('/home', (req, res) => {
-  console.log(req.session.user);
+  // console.log(req.session.user);
   res.render('pages/home', {
     user
   });
