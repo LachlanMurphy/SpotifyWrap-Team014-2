@@ -5,8 +5,8 @@ body {
     background-color: #031e03;
     opacity: 0.8;
     background-size: 10px 10px;
-    background-image: repeating-linear-gradient(45deg, #024124 0, #024124 1px, #02290a 0, #02290a 50%);
-} 
+    background-color: #1F1F1F;
+}
 .container {
     display: flex;
     height: 100vh;
@@ -44,12 +44,12 @@ h5, h2, h1 {
     box-shadow: 0 0 20px 10px rgba(29, 185, 84, 0.7);
 }
 .btn-primary {
-    background-color: #1DB954; 
+    background-color: #CC5500; 
     border-color: #146831;
 }
 .btn-primary:hover {
-    background-color: #1DB954;
-    border-color: #146831;
+    background-color: #CC5500;
+    border-color: #CC5500;
 }
 .card-text {
     color: #b3b3b3;
@@ -65,7 +65,7 @@ h5, h2, h1 {
     height: auto; 
     padding: 5px; 
     background-color: #181818;
-    border: 1px solid #1DB954; 
+    border: 1px solid #CC5500; 
     border-radius: 20px 0 0 20px;
     box-shadow: none;
 }
@@ -102,7 +102,7 @@ h5, h2, h1 {
     width: 300px;
     padding: 10px 15px;
     border-radius: 20px 0 0 20px;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     outline: none;
     color: #b3b3b3;
     background-color: #333;
@@ -116,9 +116,9 @@ h5, h2, h1 {
 .search-button {
     padding: 10px 20px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -131,9 +131,9 @@ h5, h2, h1 {
 .recommendations-search-button {
     padding: 10px 20px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -160,9 +160,9 @@ table {
 .favorite-button {
     padding: 40 80px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 } 
