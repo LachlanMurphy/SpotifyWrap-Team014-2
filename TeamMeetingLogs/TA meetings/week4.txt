@@ -1,0 +1,10 @@
+11/19/24
+- Everyone was present
+- Remember to sign up for presentation
+- Finish the README
+- Move files to milestones
+
+Next week
+- finish the README
+- clean up small HTML changes
+- impliment favorites
