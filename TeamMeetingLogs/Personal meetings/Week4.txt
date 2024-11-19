@@ -2,7 +2,12 @@
 - In person (before TA meeting)
 - Discussed commits that we all made throughout the week and planned for this upcoming week
     -Cole
-        ->
+        ->changed color scheme of entire website
+        ->changed website name because we dont want smoke with spotify
+        ->Chnaged formatting of home page, took away sidebar and seperated buttons into two cards
+        TODO:
+        ->Finish color scheme and CSS for ALL pages - fix profile image
+        ->help anyone else who needs help
     -Josh
         -> 
     -Gavin
@@ -29,7 +34,7 @@
         -> Created API Route for Favorite songs
         -> Created html for liking favorite songs on search page
         -> TODO: Finish up recommendations
-        
+
 - Updated epics and stories accordingly to reflect our changes throughout the week
 - Added any new features to project board we plan on adding
 - Changes we plan on making
