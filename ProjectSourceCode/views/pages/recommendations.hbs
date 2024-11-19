@@ -23,6 +23,8 @@
         <button type="submit" class="recommendations-search-button"> Search </button>
     </form>
 
+    {{!-- {{this.uri}} --}}
+
     {{#if tenSongs}}
         <div class="container mt-4">
             <table>
@@ -33,7 +35,9 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Album Cover -->
                                     <div class="album-cover me-3">
-                                        <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                                        <a href="{{this.uri}}">
+                                            <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                                        </a>
                                     </div>
                                     
                                     <!-- Song Details (Stacked Vertically) -->
@@ -46,9 +50,18 @@
                                     <!-- Duration -->
                                     <div class="duration ms-3 text-muted">
                                         <span>Duration: {{this.min}}:{{this.padding}}{{this.sec}}</span>
-                                    </div>                   
+                                    </div>                  
                                 </div>
                             </div>
+                        </td>
+                        <td> 
+                            <form method="post" action="/favorite"> 
+                                {{#if favorited}}
+                                <input class="favorite-button" id="button" type="submit" disabled = "disabled" value="Favorite" style="background-color:#7c7e81;" /> <input type = "hidden" name = "course_id" value = ""/>
+                                {{else}}
+                                <input class="favorite-button" id="button" type="submit" value="Favorite"/> <input type = "hidden" name = "course_id" value = ""/>
+                                {{/if}} 
+                            </form>
                         </td>
                     </tr>
                 {{/each}}
