@@ -15,7 +15,13 @@
     -Cody
         -> 
     -Lachlan
-        -> 
+        -> Finised test cases for registration and login
+        -> Revamped user session so a user stays signed in throughout all pages
+        -> A use is now actually logged out when they click log out
+        -> Added middleware so users cannot access the home page unless they are logged in
+        -> TODO:
+            -> Add middleware to other sites (seach, profile, etc)
+            -> Edit user profile js implementation
     -Brady
         -> 
 - Updated epics and stories accordingly to reflect our changes throughout the week
