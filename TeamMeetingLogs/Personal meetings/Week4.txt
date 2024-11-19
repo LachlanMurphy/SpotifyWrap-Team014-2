@@ -1,0 +1,33 @@
+11/19/24 
+- In person (before TA meeting)
+- Discussed commits that we all made throughout the week and planned for this upcoming week
+    -Cole
+        ->
+    -Josh
+        -> 
+    -Gavin
+        -> Changed html so song results are displayed vertically instead of horizontally
+        -> Worked with cody to correctly render 10 recommendations
+            -> Created recommendations.hbs to display these recommendations
+        -> Created favorites.hbs in the same format as search.hbs and recommendations.hbs
+            -> Added favorite buttons to search.hbs and recommendations.hbs and formatted with CSS
+        -> Added middleware and reorganized endpoints in index.js
+    -Cody
+        -> 
+    -Lachlan
+        -> Finised test cases for registration and login
+        -> Revamped user session so a user stays signed in throughout all pages
+        -> A use is now actually logged out when they click log out
+        -> Added middleware so users cannot access the home page unless they are logged in
+        -> TODO:
+            -> Add middleware to other sites (seach, profile, etc)
+            -> Edit user profile js implementation
+    -Brady
+        -> 
+- Updated epics and stories accordingly to reflect our changes throughout the week
+- Added any new features to project board we plan on adding
+- Changes we plan on making
+    -> Favorites page functionality
+    -> Discussed possibility of changing color scheme and app name to make more unique
+    -> Profile page display fixed and discussed possibility of editing users
+    -> More features if we have time before project deadline
