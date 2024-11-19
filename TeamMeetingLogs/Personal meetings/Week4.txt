@@ -13,7 +13,9 @@
             -> Added favorite buttons to search.hbs and recommendations.hbs and formatted with CSS
         -> Added middleware and reorganized endpoints in index.js
     -Cody
-        -> 
+        -> Made some html changes so when you click on an album picture it brings you to the song
+        -> wrote the getRecommendations for the recommendations page and got them to work
+        -> worked with gavin while he wrote the handlebars that displays the recommendations
     -Lachlan
         -> Finised test cases for registration and login
         -> Revamped user session so a user stays signed in throughout all pages
