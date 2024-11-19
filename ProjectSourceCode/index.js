@@ -112,11 +112,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('pages/login');
+  res.render('pages/login', {user});
 });
 
 app.get('/register', (req, res) => {
-  res.render('pages/register');
+  res.render('pages/register', {user});
 });
 
 app.get('/profile',(req, res) => {
@@ -126,11 +126,11 @@ app.get('/profile',(req, res) => {
 });
 
 app.get('/search', (req, res) => {
-  res.render('pages/search');
+  res.render('pages/search', {user});
 });
 
 app.get('/recommendations', (req, res) => {
-  res.render('pages/recommendations');
+  res.render('pages/recommendations', {user});
 });
 
 app.post('/register', async (req, res) => {
@@ -167,56 +167,64 @@ app.post('/login', async (req, res) => {
       const match = await bcrypt.compare(req.body.password, got.password);
       if (!match) {
           res.render('pages/login', {
-              message: "Incorrect Username/Password."
+              message: "Incorrect Username/Password"
           });
       } else {
           user.username = got.username;
+          user.logged_in = true;
           user.phone = got.phone;
           user.name = got.name;
-          user.logged_in = true;
 
           req.session.user = user;
+
           req.session.save();
 
-          res.render('pages/home', {user: user, message: "logged in"});
+          // res.render('pages/home', {user: user, message: "logged in"});
+          res.redirect('/home');
+
       }
   }).catch(err => {
       res.render('pages/login', {
-          message: "Incorrect Username/Password"
+          message: "Incorrect Username/Password"+err
       });
   });
 });
 
-// // Authentication Middleware.
-// const auth = (req, res, next) => {
-//   if (!req.session.user) {
-//     // Default to login page.
-//     return res.redirect('/login');
-//   }
-//   next();
-// };
+// Authentication Middleware.
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to login page.
+    return res.redirect('/login');
+  }
+  next();
+};
 
-// app.use(auth);
+app.use(auth);
 
 app.get('/home', (req, res) => {
+  console.log(req.session.user);
   res.render('pages/home', {
-    user: user
+    user
   });
 });
 
 app.get('/favorites', (req, res) => {
   res.render('pages/favorites', {
-    user: user,
+    user,
     favoriteSongs: []
   });
 });
 
 app.get('/editProfile',(req, res) => {
-  res.render('pages/editProfile');
+  res.render('pages/editProfile', {user});
 });
 
 app.get('/logout', (req, res) => {
-  req.session.user = null;
+  req.session.destroy();
+  user.username = undefined;
+  user.logged_in = false;
+  user.phone = undefined;
+  user.name = undefined;
   res.render('pages/logout');
 });
 
@@ -229,7 +237,8 @@ app.get('/song', (req, res) => {
 
   if (!songName) {
     res.render('pages/search', {
-      message: "Please provide a song name"
+      message: "Please provide a song name",
+      user
     })
   }
  
@@ -240,7 +249,8 @@ app.get('/song', (req, res) => {
  
       if (tracks.length === 0) {
         res.render('pages/search', {
-          message: "No song found"
+          message: "No song found",
+          user
         })
       }
  
@@ -264,7 +274,8 @@ app.get('/song', (req, res) => {
     })
     .catch(function(err) {
       res.render('pages/search', {
-        message: "An error occured while searching for the song."
+        message: "An error occured while searching for the song.",
+        user
       })
     });
 });
@@ -275,7 +286,8 @@ app.get('/searchArtist', (req, res) => {
 
   if (!artistName) {
     res.render('pages/search', {
-      message: "Please provide an artist name."
+      message: "Please provide an artist name.",
+      user
     })
   }
 
@@ -286,7 +298,8 @@ app.get('/searchArtist', (req, res) => {
 
       if (artists.length === 0) {
         res.render('pages/search', {
-          message: "No artist found with that name."
+          message: "No artist found with that name.",
+          user
         })
       }
 
@@ -302,7 +315,8 @@ app.get('/searchArtist', (req, res) => {
     })
     .catch(function(err) {
       res.render('pages/search', {
-        message: "An error occurred while searching for the artist."
+        message: "An error occurred while searching for the artist.",
+        user
       })
       console.error('Error searching for artist:', err);
     });
@@ -320,7 +334,8 @@ app.get('/getRecommendations', (req, res) => {
 
       if (artists.length === 0) {
         res.render('pages/search', {
-          message: "No artist found with that name."
+          message: "No artist found with that name.",
+          user
         });
         return; 
       }
@@ -335,7 +350,8 @@ app.get('/getRecommendations', (req, res) => {
 
           if (songs.length === 0) {
             res.render('pages/recommendations', {
-              message: "No song found with that name."
+              message: "No song found with that name.",
+              user
             });
             return; 
           }
@@ -350,7 +366,8 @@ app.get('/getRecommendations', (req, res) => {
 
               if (genres.length === 0) {
                 res.render('pages/recommendations', {
-                  message: "No genre found with that name."
+                  message: "No genre found with that name.",
+                  user
                 });
                 return; 
               }
@@ -380,28 +397,32 @@ app.get('/getRecommendations', (req, res) => {
                 .catch(function(err) {
                   console.log("Error fetching recommendations:", err);
                   res.render('pages/recommendations', {
-                    message: "An error occurred while getting recommendations."
+                    message: "An error occurred while getting recommendations.",
+                    user
                   });
                 });
             })
             .catch(function(err) {
               console.error('Error fetching genres:', err);
               res.render('pages/recommendations', {
-                message: "An error occurred while fetching genres."
+                message: "An error occurred while fetching genres.",
+                user
               });
             });
         })
         .catch(function(err) {
           console.error('Error searching for song 1:', err);
           res.render('pages/recommendations', {
-            message: "An error occurred while searching for the first song."
+            message: "An error occurred while searching for the first song.",
+            user
           });
         });
     })
     .catch(function(err) {
       console.error('Error searching for artist 1:', err);
       res.render('pages/recommendations', {
-        message: "An error occurred while searching for the first artist."
+        message: "An error occurred while searching for the first artist.",
+        user
       });
     });
 });
@@ -416,7 +437,7 @@ app.get('/getRecommendations', (req, res) => {
 // });
 
 app.get('/editProfile',(req, res) => {
-  res.render('pages/editProfile');
+  res.render('pages/editProfile', {user});
 });
 
 // Route to like a song
