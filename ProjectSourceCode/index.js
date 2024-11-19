@@ -355,7 +355,6 @@ app.get('/getRecommendations', (req, res) => {
                 return; 
               }
               const genreId = genres[0]; 
-
               spotifyApi.getRecommendations({
                 seed_artists: [artist1Id],
                 seed_tracks: [song1Id],
