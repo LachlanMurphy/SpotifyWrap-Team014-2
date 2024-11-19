@@ -21,12 +21,12 @@ body {
 }
 .sidebar .list-group-item {
     background: transparent;
-    color: #1DB954;
+    color: #CC5500;
     border: none;
 }
 .sidebar .list-group-item a {
     text-decoration: none;
-    color: #1DB954;
+    color: #CC5500;
     font-weight: 500;
     transition: color 0.2s;
 }
@@ -103,7 +103,7 @@ h5 {
 }
 
 .btn-primary {
-    background-color: #1DB954; 
+    background-color: #CC5500; 
     border: none;
     padding: 10px 20px;
     font-size: 1rem;
@@ -112,7 +112,7 @@ h5 {
     transition: background-color 0.3s ease;
 }
 .btn-primary:hover {
-    background-color: #14a143;
+    background-color: #CC5500;
     border: none;
 }
 
@@ -132,6 +132,6 @@ h5 {
 }
 .steps span::before {
     content: "•";
-    color: #1DB954;
+    color: #CC5500;
     font-weight: bold;
 }
