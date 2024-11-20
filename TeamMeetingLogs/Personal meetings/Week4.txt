@@ -9,7 +9,14 @@
         ->Finish color scheme and CSS for ALL pages - fix profile image
         ->help anyone else who needs help
     -Josh
-        -> 
+        ->Removed <style> tag from home.hbs and created a stylesheet for home.hbs
+        ->Added comments to style_home.hbs so that we know what style does what
+        ->General formatting and ease of reading changes to code in several files
+        ->Made changes to HTML in search.hbs -- made cards smaller and made it easier to read multiple songs
+        ->Search.hbs now shows multiple songs
+        TODO:
+        ->Clean up all files (remove unused code, make formatting easier to read)
+        ->Figure out how to make songs closer together in search page
     -Gavin
         -> Changed html so song results are displayed vertically instead of horizontally
         -> Worked with cody to correctly render 10 recommendations
