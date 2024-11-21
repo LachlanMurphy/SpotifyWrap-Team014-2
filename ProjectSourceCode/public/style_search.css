@@ -147,10 +147,10 @@ h5, h2, h1 {
     background-color: #146831;
 }
 
-.artist-search-bar {
+.favorite-artist-search-bar {
     position: relative;
-    top: 65px; 
-    left: 20px; 
+    top: 25px; 
+    left: 400px; 
     width: 500px;
     padding: 10px 15px;
     border-radius: 20px 0 0 0;
@@ -160,10 +160,10 @@ h5, h2, h1 {
     background-color: #333;
 }
 
-.song-search-bar {
+.favorite-song-search-bar {
     position: relative;
-    top: 10px; 
-    left: 20px; 
+    top: -30px; 
+    left: 400px; 
     width: 500px;
     padding: 10px 15px;
     border-radius: 0 0 0 0;
@@ -173,10 +173,10 @@ h5, h2, h1 {
     background-color: #333;
 }
 
-.genre-search-bar {
+.favorite-genre-search-bar {
     position: relative;
-    top: -45px; 
-    left: 20px; 
+    top: -85px; 
+    left: 400px; 
     width: 500px;
     padding: 10px 15px;
     border-radius: 0 0 0 20px;
@@ -188,8 +188,8 @@ h5, h2, h1 {
 
 .recommendations-search-button {
     position: relative;
-    top: 10px; 
-    left: 20px; 
+    top: -30px; 
+    left: 400px; 
     padding: 60px 80px;
     border-radius: 0 20px 20px 0;
     background-color: #CC5500;
