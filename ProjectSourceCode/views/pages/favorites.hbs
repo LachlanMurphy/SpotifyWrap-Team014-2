@@ -9,28 +9,30 @@
     <link rel="stylesheet" href="/style_search.css">
 </head>
 <body>
-    <h1 style="text-align: left; color: #ffffff;"> {{user.name}}'s favorite songs:</h1>
+    <h1 style="text-align: center; color: #ffffff;"> {{user.name}}'s favorite songs:</h1>
     {{#each data}}
         <tr>
             <td>
-                <div class="card song-result mb-3 p-3">
-                    <div class="d-flex align-items-center">
-                        <!-- Album Cover -->
-                        <div class="album-cover me-3">
-                            <img src="{{this.album_url}}" alt="Album Cover" class="rounded">
+                <div class="container">
+                    <div class="card favorites-song-result mb-3 p-3">
+                        <div class="d-flex align-items-center">
+                            <!-- Album Cover -->
+                            <div class="album-cover me-3">
+                                <img src="{{this.album_url}}" alt="Album Cover" class="rounded">
+                            </div>
+                            
+                            <!-- Song Details (Stacked Vertically) -->
+                            <div class="song-info flex-grow-1">
+                                <h1 class="song-name mb-1">{{this.song_name}}</h1>
+                                <h5 class="artist-name mb-1">{{this.artist_name}}</h5>
+                                <p class="album-title mb-0">{{this.album_name}}</p>
+                            </div>
+                            
+                            <!-- Duration -->
+                            <div class="duration ms-3 text-muted">
+                                <span>Duration: {{this.song_duration}}</span>
+                            </div>               
                         </div>
-                        
-                        <!-- Song Details (Stacked Vertically) -->
-                        <div class="song-info flex-grow-1">
-                            <h1 class="song-name mb-1">{{this.song_name}}</h1>
-                            <h5 class="artist-name mb-1">{{this.artist_name}}</h5>
-                            <p class="album-title mb-0">{{this.album_name}}</p>
-                        </div>
-                        
-                        <!-- Duration -->
-                        <div class="duration ms-3 text-muted">
-                            <span>Duration: {{this.song_duration}}</span>
-                        </div>               
                     </div>
                 </div>
             </td>
