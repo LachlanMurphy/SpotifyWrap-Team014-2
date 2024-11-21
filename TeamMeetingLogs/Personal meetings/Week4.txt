@@ -2,9 +2,21 @@
 - In person (before TA meeting)
 - Discussed commits that we all made throughout the week and planned for this upcoming week
     -Cole
-        ->
+        ->changed color scheme of entire website
+        ->changed website name because we dont want smoke with spotify
+        ->Chnaged formatting of home page, took away sidebar and seperated buttons into two cards
+        TODO:
+        ->Finish color scheme and CSS for ALL pages - fix profile image
+        ->help anyone else who needs help
     -Josh
-        -> 
+        ->Removed <style> tag from home.hbs and created a stylesheet for home.hbs
+        ->Added comments to style_home.hbs so that we know what style does what
+        ->General formatting and ease of reading changes to code in several files
+        ->Made changes to HTML in search.hbs -- made cards smaller and made it easier to read multiple songs
+        ->Search.hbs now shows multiple songs
+        TODO:
+        ->Clean up all files (remove unused code, make formatting easier to read)
+        ->Figure out how to make songs closer together in search page
     -Gavin
         -> Changed html so song results are displayed vertically instead of horizontally
         -> Worked with cody to correctly render 10 recommendations
@@ -13,7 +25,9 @@
             -> Added favorite buttons to search.hbs and recommendations.hbs and formatted with CSS
         -> Added middleware and reorganized endpoints in index.js
     -Cody
-        -> 
+        -> Made some html changes so when you click on an album picture it brings you to the song
+        -> wrote the getRecommendations for the recommendations page and got them to work
+        -> worked with gavin while he wrote the handlebars that displays the recommendations
     -Lachlan
         -> Finised test cases for registration and login
         -> Revamped user session so a user stays signed in throughout all pages
@@ -24,7 +38,11 @@
             -> Edit user profile js implementation
             -> fixing tests (mocha, chai)
     -Brady
-        -> 
+        -> Got logo for profile working 
+        -> Created API Route for Favorite songs
+        -> Created html for liking favorite songs on search page
+        -> TODO: Finish up recommendations
+
 - Updated epics and stories accordingly to reflect our changes throughout the week
 - Added any new features to project board we plan on adding
 - Changes we plan on making

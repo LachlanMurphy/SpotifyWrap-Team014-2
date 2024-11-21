@@ -5,8 +5,27 @@ body {
     background-color: #031e03;
     opacity: 0.8;
     background-size: 10px 10px;
-    background-image: repeating-linear-gradient(45deg, #024124 0, #024124 1px, #02290a 0, #02290a 50%);
-} 
+    background-color: #1F1F1F;
+}
+nav {
+    background-color: #CC5500;
+    padding: 15px;
+}
+
+nav .btn {
+    color: #fff;
+    background-color: #1F1F1F;
+    border: 2px solid #CC5500;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+nav .btn:hover {
+    background-color: #CC5500;
+    color: #fff;
+}
 .container {
     display: flex;
     height: 100vh;
@@ -44,12 +63,12 @@ h5, h2, h1 {
     box-shadow: 0 0 20px 10px rgba(29, 185, 84, 0.7);
 }
 .btn-primary {
-    background-color: #1DB954; 
+    background-color: #CC5500; 
     border-color: #146831;
 }
 .btn-primary:hover {
-    background-color: #1DB954;
-    border-color: #146831;
+    background-color: #CC5500;
+    border-color: #CC5500;
 }
 .card-text {
     color: #b3b3b3;
@@ -60,14 +79,15 @@ h5, h2, h1 {
     justify-content: center;
 }
 .song-result {  
-    margin-bottom: 5px;
+    margin-bottom: 0;
     width: 100%; 
     height: auto; 
-    padding: 5px; 
+    padding: 0; 
     background-color: #181818;
-    border: 1px solid #1DB954; 
+    border: 1px solid #CC5500; 
     border-radius: 20px 0 0 20px;
     box-shadow: none;
+    display: block;
 }
 .album-cover img {
     width: 60px;
@@ -102,7 +122,7 @@ h5, h2, h1 {
     width: 300px;
     padding: 10px 15px;
     border-radius: 20px 0 0 20px;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     outline: none;
     color: #b3b3b3;
     background-color: #333;
@@ -116,30 +136,81 @@ h5, h2, h1 {
 .search-button {
     padding: 10px 20px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 
 .search-button:hover {
     background-color: #146831;
 }
 
+.favorite-artist-search-bar {
+    position: relative;
+    top: 25px; 
+    left: 400px; 
+    width: 500px;
+    padding: 10px 15px;
+    border-radius: 20px 0 0 0;
+    border: 2px solid #CC5500;
+    outline: none;
+    color: #b3b3b3;
+    background-color: #333;
+}
+
+.favorite-song-search-bar {
+    position: relative;
+    top: -30px; 
+    left: 400px; 
+    width: 500px;
+    padding: 10px 15px;
+    border-radius: 0 0 0 0;
+    border: 2px solid #CC5500;
+    outline: none;
+    color: #b3b3b3;
+    background-color: #333;
+}
+
+.favorite-genre-search-bar {
+    position: relative;
+    top: -85px; 
+    left: 400px; 
+    width: 500px;
+    padding: 10px 15px;
+    border-radius: 0 0 0 20px;
+    border: 2px solid #CC5500;
+    outline: none;
+    color: #b3b3b3;
+    background-color: #333;
+}
+
 .recommendations-search-button {
-    padding: 10px 20px;
+    position: relative;
+    top: -30px; 
+    left: 400px; 
+    padding: 60px 80px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .recommendations-search-button:hover {
     background-color: #146831;
+}
+
+.recommendations-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    padding: 10px 20px;
+}
+
+.recommendations-description {
+    padding: 5px 10px;
 }
 
 .song-result img {
@@ -160,9 +231,9 @@ table {
 .favorite-button {
     padding: 40 80px;
     border-radius: 0 20px 20px 0;
-    background-color: #1DB954;
+    background-color: #CC5500;
     color: #fff;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
 } 
@@ -175,6 +246,7 @@ td {
     padding: 0; 
     margin: 0; 
     border: none; 
+    line-height: 1;
 }
 
 
