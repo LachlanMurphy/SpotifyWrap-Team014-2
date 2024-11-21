@@ -209,9 +209,15 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/favorites', (req, res) => {
-  res.render('pages/favorites', {
-    user,
-    favoriteSongs: []
+
+  const query = 'select * FROM liked_songs inner join users_liked_songs on liked_songs.song_id = users_liked_songs.song_id inner join users on users_liked_songs.username = users.username;';
+  db.any(query, []).then(data => {
+    res.render('pages/favorites', {
+      user,
+      data
+    })
+  }).catch(err => {
+    console.log(err);
   });
 });
 
@@ -426,61 +432,21 @@ app.get('/getRecommendations', (req, res) => {
     });
 });
 
-// app.put('/profile', async (req, res) => {
-//   try {
-//     const user = await user.findByIdAndUpdate(req.params.id, req.body, { new: true });
-//     res.json(user);
-//   } catch (error) {
-//     res.status(500).json({ error });
-//   }
-// });
+app.post('/favorite', async (req, res) => {
 
-// app.get('/editProfile',(req, res) => {
-//   res.render('pages/editProfile', {user});
-// });
+  const query = "insert into liked_songs (song_id, song_name, artist_name, album_name, album_url, song_duration) values ($1, $2, $3, $4, $5, $6) returning *;";
+  const {song_id, song_name, artist_name, album_name, album_url, song_duration} = req.body;
 
-// Route to like a song
-// app.post('/like-song', async (req, res) => {
-//   const { songId, songName, artistName, albumName } = req.body;
-//   const username = req.session.user && req.session.user.username; // Assuming the username is stored in the session
+  db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration])
+  .catch(err => {
+    console.log();
+  });
 
-//   if (!username) {
-//       return res.status(403).json({ message: "User not logged in" });
-//   }
-
-//   const query = `
-//       INSERT INTO liked_songs (song_id, song_name, artist_name, album_name, username)
-//       VALUES ($1, $2, $3, $4, $5)
-//       RETURNING *;
-//   `;
-
-//   try {
-//       const result = await db.one(query, [songId, songName, artistName, albumName, username]);
-//       res.json({ message: "Song liked successfully!", song: result });
-//   } catch (error) {
-//       console.error('Error liking song:', error);
-//       res.status(500).json({ message: "Error liking song" });
-//   }
-// });
-
-// // Route to get liked songs for the user
-// app.get('/liked-songs', async (req, res) => {
-//   const username = req.session.user && req.session.user.username;
-
-//   if (!username) {
-//       return res.status(403).json({ message: "User not logged in" });
-//   }
-
-//   const query = 'SELECT * FROM liked_songs WHERE username = $1 ORDER BY date_liked DESC;';
-  
-//   try {
-//       const likedSongs = await db.any(query, [username]);
-//       res.render('pages/liked-songs', { likedSongs });
-//   } catch (error) {
-//       console.error('Error fetching liked songs:', error);
-//       res.status(500).json({ message: "Error fetching liked songs" });
-//   }
-// });
+  db.one('insert into users_liked_songs (username, song_id) values ($1, $2) returning *;', [user.username, song_id])
+  .catch(err => {
+    console.log();
+  })
+});
 
 
 app.put('/update_user', function (req, res) {

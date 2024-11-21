@@ -5,10 +5,19 @@ CREATE TABLE users(
   name VARCHAR(50) NOT NULL
 );
 
--- CREATE TABLE liked_songs (
---     song_id VARCHAR(255) NOT NULL,
---     song_name VARCHAR(255),
---     artist_name VARCHAR(255),
---     album_name VARCHAR(255),
---     liked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE liked_songs (
+  song_id VARCHAR(255) NOT NULL PRIMARY KEY,
+  song_name VARCHAR(255),
+  artist_name VARCHAR(255),
+  album_name VARCHAR(255),
+  album_url VARCHAR(255),
+  song_duration VARCHAR(255)
+);
+
+CREATE TABLE users_liked_songs (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL,
+  song_id VARCHAR(255) NOT NULL,
+  FOREIGN KEY (username) REFERENCES users(username),
+  FOREIGN KEY (song_id) REFERENCES liked_songs(song_id)
+);
