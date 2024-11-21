@@ -113,7 +113,7 @@ h5, h2, h1 {
 }
 .search-form {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     margin-top: 20px;
 }
@@ -159,7 +159,6 @@ h5, h2, h1 {
     color: #b3b3b3;
     background-color: #333;
 }
-
 .favorite-song-search-bar {
     position: relative;
     top: -30px; 
@@ -248,5 +247,25 @@ td {
     border: none; 
     line-height: 1;
 }
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+    gap: 30px; /* Space between the search sections */
+}
 
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-title {
+    margin-bottom: 10px;
+}
+
+.artist-info {
+    margin-top: 40px;
+}
 
