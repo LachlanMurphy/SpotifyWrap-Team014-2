@@ -22,6 +22,7 @@
         -> TODO:
             -> Add middleware to other sites (seach, profile, etc)
             -> Edit user profile js implementation
+            -> fixing tests (mocha, chai)
     -Brady
         -> 
 - Updated epics and stories accordingly to reflect our changes throughout the week
