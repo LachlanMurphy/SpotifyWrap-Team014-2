@@ -437,10 +437,15 @@ app.post('/favorite', async (req, res) => {
   const query = "insert into liked_songs (song_id, song_name, artist_name, album_name, album_url, song_duration) values ($1, $2, $3, $4, $5, $6) returning *;";
   const {song_id, song_name, artist_name, album_name, album_url, song_duration} = req.body;
 
-  await db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration]);
+  db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration])
+  .catch(err => {
+    console.log();
+  });
 
-  await db.one('insert into users_liked_songs (username, song_id) values ($1, $2) returning *;', [user.username, song_id]);
-
+  db.one('insert into users_liked_songs (username, song_id) values ($1, $2) returning *;', [user.username, song_id])
+  .catch(err => {
+    console.log();
+  })
 });
 
 
