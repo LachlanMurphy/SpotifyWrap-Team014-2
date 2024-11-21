@@ -68,14 +68,15 @@
                         </div>
                     </td>
                     <td> 
-                        <form method="post" action="/favorite"> 
-                            {{#if favorited}}
-                            <input class="favorite-button" id="button" type="submit" disabled="disabled" value="Favorite" style="background-color:#7c7e81;" /> 
-                            <input type="hidden" name="course_id" value=""/>
-                            {{else}}
-                            <input class="favorite-button" id="button" type="submit" value="Favorite"/> 
-                            <input type="hidden" name="course_id" value=""/>
-                            {{/if}} 
+                        <iframe name="votar" style="display:none"></iframe>
+                        <form method="post" action="/favorite" target="votar">
+                            <input class="favorite-button" id="button" type="submit" value="Favorite"/>
+                            <input type="text" name="song_id" value="{{this.id}}" style="display: none;">
+                            <input type="text" name="song_name" value="{{this.name}}" style="display: none;">
+                            <input type="text" name="artist_name" value="{{this.album.artists.0.name}}" style="display: none;">
+                            <input type="text" name="album_name" value="{{this.album.name}}" style="display: none;">
+                            <input type="text" name="album_url" value="{{this.album.images.0.url}}" style="display: none;">
+                            <input type="text" name="song_duration" value="{{this.min}}:{{this.padding}}{{this.sec}}" style="display: none;">
                         </form>
                     </td>
                 </tr>
