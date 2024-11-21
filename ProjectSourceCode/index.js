@@ -179,13 +179,13 @@ app.post('/login', async (req, res) => {
 
           req.session.save();
 
-          // res.render('pages/home', {user: user, message: "logged in"});
-          res.redirect('/home');
+          res.render('pages/home', {user: user, message: "Successfully Logged in!"});
+          // res.redirect('/home');
 
       }
   }).catch(err => {
       res.render('pages/login', {
-          message: "Incorrect Username/Password"+err
+          message: "User does not exist. Register an account or try again."
       });
   });
 });
@@ -202,7 +202,7 @@ const auth = (req, res, next) => {
 app.use(auth);
 
 app.get('/home', (req, res) => {
-  console.log(req.session.user);
+  // console.log(req.session.user);
   res.render('pages/home', {
     user
   });
@@ -412,7 +412,7 @@ app.get('/getRecommendations', (req, res) => {
         .catch(function(err) {
           console.error('Error searching for song 1:', err);
           res.render('pages/recommendations', {
-            message: "An error occurred while searching for the first song.",
+            message: "An error occurred while searching for the song.",
             user
           });
         });
@@ -420,7 +420,7 @@ app.get('/getRecommendations', (req, res) => {
     .catch(function(err) {
       console.error('Error searching for artist 1:', err);
       res.render('pages/recommendations', {
-        message: "An error occurred while searching for the first artist.",
+        message: "An error occurred while searching for the artist.",
         user
       });
     });
@@ -435,9 +435,9 @@ app.get('/getRecommendations', (req, res) => {
 //   }
 // });
 
-app.get('/editProfile',(req, res) => {
-  res.render('pages/editProfile', {user});
-});
+// app.get('/editProfile',(req, res) => {
+//   res.render('pages/editProfile', {user});
+// });
 
 // Route to like a song
 // app.post('/like-song', async (req, res) => {
