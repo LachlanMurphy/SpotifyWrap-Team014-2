@@ -6,6 +6,8 @@ body {
     opacity: 0.8;
     background-size: 10px 10px;
     background-color: #1F1F1F;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 700; 
 }
 nav {
     background-color: #CC5500;
@@ -26,11 +28,6 @@ nav .btn:hover {
     background-color: #CC5500;
     color: #fff;
 }
-.container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-}
 .sidebar {
     width: 100px;
     background-color: #333;
@@ -49,6 +46,9 @@ nav .btn:hover {
 h5, h2, h1 {
     color: #ffffff; 
     text-align: center;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 700; 
+    text-transform: uppercase; 
 }
 .card {
     width: 45rem; 
@@ -113,7 +113,7 @@ h5, h2, h1 {
 }
 .search-form {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     margin-top: 20px;
 }
@@ -159,7 +159,6 @@ h5, h2, h1 {
     color: #b3b3b3;
     background-color: #333;
 }
-
 .favorite-song-search-bar {
     position: relative;
     top: -30px; 
@@ -222,12 +221,6 @@ h5, h2, h1 {
     font-size: 1rem; 
     margin-bottom: 0; 
 }
-table {
-    border-spacing: 0; 
-    border-collapse: collapse; 
-    
-}
-
 .favorite-button {
     padding: 40 80px;
     border-radius: 0 20px 20px 0;
@@ -236,6 +229,8 @@ table {
     border: 2px solid #CC5500;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative;
+    top: 5px;
 } 
 
 .favorite-button:hover {
@@ -248,5 +243,47 @@ td {
     border: none; 
     line-height: 1;
 }
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+    gap: 30px; /* Space between the search sections */
+}
 
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-title {
+    margin-bottom: 10px;
+}
+
+.artist-info {
+    margin-top: 40px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+    margin-top: 20px;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: auto; 
+}
+
+.card.song-result {
+    margin: 10px 0; 
+    width: 100%; 
+    max-width: 600px; 
+}
+
+.song-result {
+    text-align: left;
+}
 
