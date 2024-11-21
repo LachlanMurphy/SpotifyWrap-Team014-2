@@ -2,8 +2,7 @@
 
 **Application Description:**
 
-A web application to display spotify listeners stats.
-
+A web application to search and get song recommendations on Spotify. You can favorite songs you like to listen to them later! 
 
  **Project Contributors:**
 
@@ -21,9 +20,23 @@ A web application to display spotify listeners stats.
 
 **Technology Stack Utilized:**
 
+NodeJS
+
+Docker
+
+JavaScript
+
+HTML/Handlebars/Css
+
+SQL
+
 **Prerequisites Required To Run:**
 
+Must run on a Linux OS
+
 **How To Run The Application Locally:**
+
+docker-compose up 
 
 **How To Run The Tests:**
 
