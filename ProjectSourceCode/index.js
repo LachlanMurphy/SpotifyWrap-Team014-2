@@ -483,6 +483,28 @@ app.get('/getRecommendations', (req, res) => {
 // });
 
 
+app.put('/update_user', function (req, res) {
+  const query =
+    'update userinfo set name = $1 where username = $2 returning * ;';
+  // $1 and $2 will be replaced by req.body.name, req.body.username
+  db.any(query, [req.body.name, req.body.username])
+    // if query execution succeeds
+    // send success message
+    .then(function (data) {
+      res.status(201).json({
+        status: 'success',
+        data: data,
+        message: 'data updated successfully',
+      });
+    })
+    // if query execution fails
+    // send error message
+    .catch(function (err) {
+      return console.log(err);
+    });
+});
+
+
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
