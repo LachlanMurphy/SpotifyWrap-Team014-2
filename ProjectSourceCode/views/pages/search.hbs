@@ -41,47 +41,47 @@
 
     <!-- Song Results -->
     {{#if fiveSongs}}
-        <div class="container mt-4">
-            <table>
-                {{#each fiveSongs}}   
-                    <tr>
-                        <td>
-                            <div class="card song-result mb-3 p-3">
-                                <div class="d-flex align-items-center">
-                                    <!-- Album Cover -->
-                                    <div class="album-cover me-3">
-                                        <a href="{{this.uri}}">
-                                            <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="song-info flex-grow-1">
-                                        <h1 class="song-name mb-1">{{this.name}}</h1>
-                                        <h5 class="artist-name mb-1">{{this.album.artists.0.name}}</h5>
-                                        <p class="album-title mb-0">{{this.album.name}}</p>
-                                    </div>
-                                    
-                                    <div class="duration ms-3 text-muted">
-                                        <span>Duration: {{this.min}}:{{this.padding}}{{this.sec}}</span>
-                                    </div>                   
+    <div class="container">
+        <table>
+            {{#each fiveSongs}}   
+                <tr>
+                    <td>
+                        <div class="card song-result mb-3 p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="album-cover me-3">
+                                    <a href="{{this.uri}}">
+                                        <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                                    </a>
                                 </div>
+                                
+                                <div class="song-info flex-grow-1">
+                                    <h1 class="song-name mb-1">{{this.name}}</h1>
+                                    <h5 class="artist-name mb-1">{{this.album.artists.0.name}}</h5>
+                                    <p class="album-title mb-0">{{this.album.name}}</p>
+                                </div>
+                                
+                                <div class="duration ms-3 text-muted">
+                                    <span>Duration: {{this.min}}:{{this.padding}}{{this.sec}}</span>
+                                </div>                   
                             </div>
-                        </td>
-                        <td> 
-                            <form method="post" action="/favorite"> 
-                                {{#if favorited}}
-                                <input class="favorite-button" id="button" type="submit" disabled="disabled" value="Favorite" style="background-color:#7c7e81;" /> 
-                                <input type="hidden" name="course_id" value=""/>
-                                {{else}}
-                                <input class="favorite-button" id="button" type="submit" value="Favorite"/> 
-                                <input type="hidden" name="course_id" value=""/>
-                                {{/if}} 
-                            </form>
-                        </td>
-                    </tr>
-                {{/each}}
-            </table>
-        </div>
-    {{/if}}
+                        </div>
+                    </td>
+                    <td> 
+                        <form method="post" action="/favorite"> 
+                            {{#if favorited}}
+                            <input class="favorite-button" id="button" type="submit" disabled="disabled" value="Favorite" style="background-color:#7c7e81;" /> 
+                            <input type="hidden" name="course_id" value=""/>
+                            {{else}}
+                            <input class="favorite-button" id="button" type="submit" value="Favorite"/> 
+                            <input type="hidden" name="course_id" value=""/>
+                            {{/if}} 
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+{{/if}}
+
 </body>
 </html>
