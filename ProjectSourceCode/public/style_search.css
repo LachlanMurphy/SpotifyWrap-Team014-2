@@ -158,6 +158,12 @@ h5, h2, h1 {
     transition: background-color 0.3s ease;
 }
 
+.recommendations-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    
+}
+
 .recommendations-search-button:hover {
     background-color: #146831;
 }
