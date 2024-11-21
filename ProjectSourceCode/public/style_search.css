@@ -6,6 +6,8 @@ body {
     opacity: 0.8;
     background-size: 10px 10px;
     background-color: #1F1F1F;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 700; 
 }
 nav {
     background-color: #CC5500;
@@ -44,6 +46,9 @@ nav .btn:hover {
 h5, h2, h1 {
     color: #ffffff; 
     text-align: center;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 700; 
+    text-transform: uppercase; 
 }
 .card {
     width: 45rem; 
