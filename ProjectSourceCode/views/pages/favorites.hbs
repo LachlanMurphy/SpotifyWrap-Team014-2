@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style_search.css">
 </head>
-<body>
+<body>            
     <h1 style="text-align: center; color: #ffffff;"> {{user.name}}'s favorite songs:</h1>
     {{#each data}}
         <tr>
@@ -18,7 +18,9 @@
                         <div class="d-flex align-items-center">
                             <!-- Album Cover -->
                             <div class="album-cover me-3">
-                                <img src="{{this.album_url}}" alt="Album Cover" class="rounded">
+                                <a href="{{this.uri}}">
+                                    <img src="{{this.album_url}}" alt="Album Cover" class="rounded">
+                                </a>
                             </div>
                             
                             <!-- Song Details (Stacked Vertically) -->
