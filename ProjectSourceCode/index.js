@@ -236,7 +236,7 @@ app.get('/logout', (req, res) => {
 });
 
 
-// All spotify relted functions were referenced and adpated from 
+// All spotify related functions were referenced and adpated from 
 // this website which defines and references the functions in the
 // library we used, visit this for more examples: https://www.npmjs.com/package/spotify-web-api-node#more-examples
 app.get('/song', (req, res) => {
