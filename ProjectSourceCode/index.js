@@ -244,7 +244,7 @@ app.get('/song', (req, res) => {
 
   if (!songName) {
     res.render('pages/search', {
-      message: "Please provide a song name",
+      message: "Please provide a song name.",
       user
     })
   }
@@ -274,8 +274,8 @@ app.get('/song', (req, res) => {
         }
       }
 
-      // console.log(`Track found: ${track.name} by ${track.artists[0].name}`);
       res.render('pages/search', {
+        message: `Showing search results for: ${songName}`,
         fiveSongs,
       });
     })
@@ -312,13 +312,29 @@ app.get('/searchArtist', (req, res) => {
 
       // change if we want more than 1 result 
       const artist = artists[0];
-      const artistId = artist.id;
 
-      // console.log(`Artist found: ${artist.name}, ID: ${artistId}`);
-      res.render('pages/search', {
-        artist,
-      });
-      // res.json({ artistId }); // Return the ID as JSON
+      // Convert follower count into a string with commas separating it 
+      artist.followers.total = artist.followers.total.toLocaleString();
+
+      spotifyApi.getArtistTopTracks(artist.id)
+      .then(function(data) {
+          const topTracks = data.body.tracks.slice(0, 5);
+
+          for (let i = 0; i < 5; i++) {
+            topTracks[i].min = Math.floor(topTracks[i].duration_ms / 60000);
+            topTracks[i].sec = Math.floor(topTracks[i].duration_ms / 1000) % 60;
+            topTracks[i].padding = "";
+            if(topTracks[i].sec < 10)
+            {
+              topTracks[i].padding = "0";
+            }
+          }
+          res.render('pages/search', {
+            message: `Artist Found: ${artist.name}`,
+            artist,
+            topTracks,
+          });
+        });
     })
     .catch(function(err) {
       res.render('pages/search', {
