@@ -226,6 +226,14 @@ app.get('/editProfile',(req, res) => {
   res.render('pages/editProfile', {user});
 });
 
+app.get('/searchByArtist',(req, res) => {
+  res.render('pages/searchByArtist', {user});
+});
+
+app.get('/searchBySong',(req, res) => {
+  res.render('pages/searchBySong', {user});
+});
+
 app.get('/logout', (req, res) => {
   req.session.destroy();
   user.username = undefined;
@@ -243,7 +251,7 @@ app.get('/song', (req, res) => {
   const songName = req.query.song; // Get the song name from query parameter
 
   if (!songName) {
-    res.render('pages/search', {
+    res.render('pages/searchBySong', {
       message: "Please provide a song name.",
       user
     })
@@ -255,7 +263,7 @@ app.get('/song', (req, res) => {
       const tracks = data.body.tracks.items;
  
       if (tracks.length === 0) {
-        res.render('pages/search', {
+        res.render('pages/searchBySong', {
           message: "No song found",
           user
         })
@@ -274,13 +282,13 @@ app.get('/song', (req, res) => {
         }
       }
 
-      res.render('pages/search', {
-        message: `Showing search results for: ${songName}`,
+      res.render('pages/searchBySong', {
+        message: `Showing searchBySong results for: ${songName}`,
         fiveSongs,
       });
     })
     .catch(function(err) {
-      res.render('pages/search', {
+      res.render('pages/searchBySong', {
         message: "An error occured while searching for the song.",
         user
       })
@@ -304,7 +312,7 @@ app.get('/searchArtist', (req, res) => {
       const artists = data.body.artists.items;
 
       if (artists.length === 0) {
-        res.render('pages/search', {
+        res.render('pages/searchByArtist', {
           message: "No artist found with that name.",
           user
         })
@@ -329,7 +337,7 @@ app.get('/searchArtist', (req, res) => {
               topTracks[i].padding = "0";
             }
           }
-          res.render('pages/search', {
+          res.render('pages/searchByArtist', {
             message: `Artist Found: ${artist.name}`,
             artist,
             topTracks,
@@ -337,7 +345,7 @@ app.get('/searchArtist', (req, res) => {
         });
     })
     .catch(function(err) {
-      res.render('pages/search', {
+      res.render('pages/searchByArtist', {
         message: "An error occurred while searching for the artist.",
         user
       })
@@ -345,109 +353,109 @@ app.get('/searchArtist', (req, res) => {
     });
 });
 
-app.get('/getRecommendations', (req, res) => {
-  const artist1 = req.query.artist1;
-  const song1 = req.query.song1;
-  const genre = req.query.genre;
+// app.get('/getRecommendations', (req, res) => {
+//   const artist1 = req.query.artist1;
+//   const song1 = req.query.song1;
+//   const genre = req.query.genre;
 
-  spotifyApi
-    .searchArtists(artist1) 
-    .then(function(data) {
-      const artists = data.body.artists.items; 
+//   spotifyApi
+//     .searchArtists(artist1) 
+//     .then(function(data) {
+//       const artists = data.body.artists.items; 
 
-      if (artists.length === 0) {
-        res.render('pages/search', {
-          message: "No artist found with that name.",
-          user
-        });
-        return; 
-      }
+//       if (artists.length === 0) {
+//         res.render('pages/search', {
+//           message: "No artist found with that name.",
+//           user
+//         });
+//         return; 
+//       }
 
-      const artist1Id = artists[0].id; 
-      // console.log(artist1Id);
+//       const artist1Id = artists[0].id; 
+//       // console.log(artist1Id);
 
-      spotifyApi
-        .searchTracks(song1) 
-        .then(function(data) {
-          const songs = data.body.tracks.items; 
+//       spotifyApi
+//         .searchTracks(song1) 
+//         .then(function(data) {
+//           const songs = data.body.tracks.items; 
 
-          if (songs.length === 0) {
-            res.render('pages/recommendations', {
-              message: "No song found with that name.",
-              user
-            });
-            return; 
-          }
+//           if (songs.length === 0) {
+//             res.render('pages/recommendations', {
+//               message: "No song found with that name.",
+//               user
+//             });
+//             return; 
+//           }
 
-          const song1Id = songs[0].id;
-          // console.log(song1Id);
+//           const song1Id = songs[0].id;
+//           // console.log(song1Id);
 
-          spotifyApi
-            .getAvailableGenreSeeds() 
-            .then(function(data) {
-              const genres = data.body.genres; 
+//           spotifyApi
+//             .getAvailableGenreSeeds() 
+//             .then(function(data) {
+//               const genres = data.body.genres; 
 
-              if (genres.length === 0) {
-                res.render('pages/recommendations', {
-                  message: "No genre found with that name.",
-                  user
-                });
-                return; 
-              }
-              const genreId = genres[0]; 
-              spotifyApi.getRecommendations({
-                seed_artists: [artist1Id],
-                seed_tracks: [song1Id],
-                seed_genres: [genreId], 
-              })
-                .then(function(data) {
-                  const recommendations = data.body.tracks;
-                  const tenSongs = recommendations.slice(0, 10);
-                  for (let i = 0; i < 10; i++) {
-                    tenSongs[i].min = Math.floor(tenSongs[i].duration_ms / 60000);
-                    tenSongs[i].sec = Math.floor(tenSongs[i].duration_ms / 1000) % 60;
-                    tenSongs[i].padding = "";
-                    if(tenSongs[i].sec < 10)
-                    {
-                      tenSongs[i].padding = "0";
-                    }
-                  }
-                  res.render('pages/recommendations', {
-                    tenSongs,
-                  });
-                })
-                .catch(function(err) {
-                  console.log("Error fetching recommendations:", err);
-                  res.render('pages/recommendations', {
-                    message: "An error occurred while getting recommendations.",
-                    user
-                  });
-                });
-            })
-            .catch(function(err) {
-              console.error('Error fetching genres:', err);
-              res.render('pages/recommendations', {
-                message: "An error occurred while fetching genres.",
-                user
-              });
-            });
-        })
-        .catch(function(err) {
-          console.error('Error searching for song 1:', err);
-          res.render('pages/recommendations', {
-            message: "An error occurred while searching for the song.",
-            user
-          });
-        });
-    })
-    .catch(function(err) {
-      console.error('Error searching for artist 1:', err);
-      res.render('pages/recommendations', {
-        message: "An error occurred while searching for the artist.",
-        user
-      });
-    });
-});
+//               if (genres.length === 0) {
+//                 res.render('pages/recommendations', {
+//                   message: "No genre found with that name.",
+//                   user
+//                 });
+//                 return; 
+//               }
+//               const genreId = genres[0]; 
+//               spotifyApi.getRecommendations({
+//                 seed_artists: [artist1Id],
+//                 seed_tracks: [song1Id],
+//                 seed_genres: [genreId], 
+//               })
+//                 .then(function(data) {
+//                   const recommendations = data.body.tracks;
+//                   const tenSongs = recommendations.slice(0, 10);
+//                   for (let i = 0; i < 10; i++) {
+//                     tenSongs[i].min = Math.floor(tenSongs[i].duration_ms / 60000);
+//                     tenSongs[i].sec = Math.floor(tenSongs[i].duration_ms / 1000) % 60;
+//                     tenSongs[i].padding = "";
+//                     if(tenSongs[i].sec < 10)
+//                     {
+//                       tenSongs[i].padding = "0";
+//                     }
+//                   }
+//                   res.render('pages/recommendations', {
+//                     tenSongs,
+//                   });
+//                 })
+//                 .catch(function(err) {
+//                   console.log("Error fetching recommendations:", err);
+//                   res.render('pages/recommendations', {
+//                     message: "An error occurred while getting recommendations.",
+//                     user
+//                   });
+//                 });
+//             })
+//             .catch(function(err) {
+//               console.error('Error fetching genres:', err);
+//               res.render('pages/recommendations', {
+//                 message: "An error occurred while fetching genres.",
+//                 user
+//               });
+//             });
+//         })
+//         .catch(function(err) {
+//           console.error('Error searching for song 1:', err);
+//           res.render('pages/recommendations', {
+//             message: "An error occurred while searching for the song.",
+//             user
+//           });
+//         });
+//     })
+//     .catch(function(err) {
+//       console.error('Error searching for artist 1:', err);
+//       res.render('pages/recommendations', {
+//         message: "An error occurred while searching for the artist.",
+//         user
+//       });
+//     });
+// });
 
 app.post('/favorite', async (req, res) => {
 
