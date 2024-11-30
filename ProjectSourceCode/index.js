@@ -211,8 +211,8 @@ app.get('/home', (req, res) => {
 
 app.get('/favorites', (req, res) => {
 
-  const query = 'select * FROM liked_songs inner join users_liked_songs on liked_songs.song_id = users_liked_songs.song_id inner join users on users_liked_songs.username = users.username;';
-  db.any(query, []).then(data => {
+  const query = 'select * FROM users inner join users_liked_songs on users.username = users_liked_songs.username inner join liked_songs on liked_songs.song_id = users_liked_songs.song_id where users.username = $1;';
+  db.any(query, [user.username]).then(data => {
     res.render('pages/favorites', {
       user,
       data
@@ -462,12 +462,12 @@ app.post('/favorite', async (req, res) => {
   const query = "insert into liked_songs (song_id, song_name, artist_name, album_name, album_url, song_duration) values ($1, $2, $3, $4, $5, $6) returning *;";
   const {song_id, song_name, artist_name, album_name, album_url, song_duration} = req.body;
 
-  db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration])
+  await db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration])
   .catch(err => {
     console.log();
   });
 
-  db.one('insert into users_liked_songs (username, song_id) values ($1, $2) returning *;', [user.username, song_id])
+  await db.one('insert into users_liked_songs (username, song_id) values ($1, $2) returning *;', [user.username, song_id])
   .catch(err => {
     console.log();
   })
