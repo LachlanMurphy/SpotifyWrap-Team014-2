@@ -1,2 +1,44 @@
-Release Notes:
+FINAL RELEASE NOTES
 
+Navbar:
+    -> Displays a "Home" button, a "Favorites" button, and a "Logout" button. These buttons will only function when a user is logged in.
+    -> Once a user logs in, a button will appear on the right side of the navbar that allows the user to view their profile.
+
+Login/Register Page:
+    -> A link is present that takes users back and forth between the register and login pages as needed
+    -> The register page requests input for full name, phone number, username, and password
+        -> Error handling is present in the case that a user attempts to register an account under a username that already exists
+    -> The login page only requests username and password
+        -> Error handling implemented in the case that a user enters the wrong password for an existing account or still needs to register one
+
+Home Page:
+    -> A description of the website that walks users through how to use it step by step
+    -> Links within two separate cards to access song search pages
+        -> Search Songs by Song Name page
+        -> Search Songs by Artist Name page
+
+Search Songs by Song Name Page:
+    -> User inputs a song name and page displays the 5 most signifigant songs with that name
+    -> Each song has a "favorite" button next to it to add that song to the user's favorites page
+    -> Clicking on the album cover of the song opens that song in Spotify and starts playing it
+
+Search Songs by Artist Name Page:
+    -> User inputs an artist name and page displays the top 5 songs of that artist
+    -> Similarly to the above search feature...
+        -> Each song has a "favorite" button next to it to add that song to the user's favorites page
+        -> Clicking on the album cover of the song opens that song in spotify and starts playing it
+
+Recommendations Page: 
+    -> User inputs in a song/genre/artist and page displays 10 songs that are similar to those inputs
+    -> Similarly to the above search features...
+        -> Each song has a "favorite" button next to it to add that song to the user's favorites page
+        -> Clicking on the album cover of the song opens that song in spotify and starts playing it
+    -> NOTE: Spotify API experienced major changes on 11/27. Recommendations endpoint was removed completely from the API and the group was forced to pivot some of the functionality of our website. 
+
+Favorites Page:
+    -> Displays all of the songs that a user adds to their favorites list in chronological order.
+
+Profile Page:
+    -> Displays the user information of the user that is currently logged in
+        -> Lists full name, username, and phone number
+        -> Does not list the user's password
