@@ -6,8 +6,8 @@ body {
     opacity: 0.8;
     background-size: 10px 10px;
     background-color: #1F1F1F;
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 700; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
 }
 nav {
     background-color: #CC5500;
@@ -22,12 +22,14 @@ nav .btn {
     font-weight: 600;
     margin-right: 10px;
     transition: all 0.3s ease;
+    border-radius: 30px; /* Rounded corners for buttons */
 }
 
 nav .btn:hover {
     background-color: #CC5500;
     color: #fff;
 }
+
 .sidebar {
     width: 100px;
     background-color: #333;
@@ -36,6 +38,7 @@ nav .btn:hover {
     display: flex;
     align-items: start;
 }
+
 .main-content {
     flex-grow: 1;
     padding: 20px;
@@ -43,88 +46,104 @@ nav .btn:hover {
     align-items: start;
     justify-content: center;
 }
+
 h5, h2, h1, h8, h4 {
-    color: #ffffff; 
+    color: #ffffff;
     text-align: center;
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 700; 
-    text-transform: uppercase; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
 }
+
 .card {
-    width: 45rem; 
-    height: 18rem; 
+    width: 45rem;
+    height: 18rem;
     background-color: #181818;
     border: 2px solid #CC5500;
-    border-radius: 10px;
+    border-radius: 25px; /* Rounded corners for cards */
     color: #b3b3b3;
     box-shadow: 0px 0px 10px rgba(204, 85, 0, 0.5);
 }
+
 .card:hover {
     box-shadow: 0px 0px 10px rgba(204, 85, 0, 0.5);
 }
+
 .btn-primary {
-    background-color: #CC5500; 
+    background-color: #CC5500;
     border-color: #146831;
+    border-radius: 25px; /* Rounded corners for buttons */
 }
+
 .btn-primary:hover {
     background-color: #CC5500;
     border-color: #CC5500;
 }
+
 .card-text {
     color: #b3b3b3;
 }
+
 .card-container {
     padding-top: 15vh;
     display: flex;
     justify-content: center;
 }
-.song-result {  
+
+.song-result {
     margin-bottom: 0;
-    width: 100%; 
-    height: auto; 
-    padding: 0; 
+    width: 100%;
+    height: auto;
+    padding: 0;
     background-color: #181818;
-    border: 1px solid #CC5500; 
-    border-radius: 20px 0 0 20px;
+    border: 1px solid #CC5500;
+    border-radius: 25px; /* Rounded corners for song result cards */
     box-shadow: none;
     display: block;
 }
-.favorites-song-result {  
+
+.favorites-song-result {
     margin-bottom: 0;
-    width: 100%; 
-    height: auto; 
-    padding: 0; 
+    width: 100%;
+    height: auto;
+    padding: 0;
     background-color: #181818;
-    border: 1px solid #CC5500; 
-    border-radius: 20px 20px 20px 20px;
+    border: 1px solid #CC5500;
+    border-radius: 25px; /* Rounded corners for favorite song result cards */
     box-shadow: none;
     display: block;
 }
+
 .album-cover img {
     width: 60px;
     height: 60px;
     object-fit: cover;
+    border-radius: 10px; /* Rounded corners for album cover image */
 }
+
 .song-name {
     color: #ffffff;
     font-size: 1rem;
 }
+
 .album-title {
     color: #b3b3b3;
     font-size: 0.9rem;
 }
+
 .duration {
     font-size: 0.9rem;
     color: #b3b3b3;
 }
+
 .song-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .search-form {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     margin-top: 20px;
 }
@@ -132,7 +151,7 @@ h5, h2, h1, h8, h4 {
 .search-bar {
     width: 300px;
     padding: 10px 15px;
-    border-radius: 20px 0 0 20px;
+    border-radius: 30px; /* Rounded corners for search bar */
     border: 2px solid #CC5500;
     outline: none;
     color: #b3b3b3;
@@ -146,7 +165,7 @@ h5, h2, h1, h8, h4 {
 
 .search-button {
     padding: 10px 20px;
-    border-radius: 0 20px 20px 0;
+    border-radius: 30px; /* Rounded corners for search button */
     background-color: #CC5500;
     color: #fff;
     border: 2px solid #CC5500;
@@ -158,38 +177,13 @@ h5, h2, h1, h8, h4 {
     background-color: #146831;
 }
 
-.favorite-artist-search-bar {
-    position: relative;
-    top: 25px; 
-    left: 400px; 
-    width: 500px;
-    padding: 10px 15px;
-    border-radius: 20px 0 0 0;
-    border: 2px solid #CC5500;
-    outline: none;
-    color: #b3b3b3;
-    background-color: #333;
-}
-.favorite-song-search-bar {
-    position: relative;
-    top: -30px; 
-    left: 400px; 
-    width: 500px;
-    padding: 10px 15px;
-    border-radius: 0 0 0 0;
-    border: 2px solid #CC5500;
-    outline: none;
-    color: #b3b3b3;
-    background-color: #333;
-}
-
+.favorite-artist-search-bar,
+.favorite-song-search-bar,
 .favorite-genre-search-bar {
     position: relative;
-    top: -85px; 
-    left: 400px; 
     width: 500px;
     padding: 10px 15px;
-    border-radius: 0 0 0 20px;
+    border-radius: 30px; /* Rounded corners for all search bars */
     border: 2px solid #CC5500;
     outline: none;
     color: #b3b3b3;
@@ -198,10 +192,10 @@ h5, h2, h1, h8, h4 {
 
 .recommendations-search-button {
     position: relative;
-    top: -30px; 
-    left: 400px; 
+    top: -30px;
+    left: 400px;
     padding: 60px 80px;
-    border-radius: 0 20px 20px 0;
+    border-radius: 30px; /* Rounded corners for recommendation button */
     background-color: #CC5500;
     color: #fff;
     border: 2px solid #CC5500;
@@ -223,23 +217,22 @@ h5, h2, h1, h8, h4 {
     padding: 5px 10px;
 }
 
-.song-result img {
-    width: 50px; 
-    height: 50px;
-    object-fit: cover; 
-}
+.song-result img,
 .favorites-song-result img {
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    object-fit: cover; 
+    object-fit: cover;
+    border-radius: 10px; /* Rounded corners for images inside song result cards */
 }
+
 .song-name {
-    font-size: 1rem; 
-    margin-bottom: 0; 
+    font-size: 1rem;
+    margin-bottom: 0;
 }
+
 .favorite-button {
-    padding: 40 80px;
-    border-radius: 0 20px 20px 0;
+    padding: 10px 20px;
+    border-radius: 30px; /* Rounded corners for favorite buttons */
     background-color: #CC5500;
     color: #fff;
     border: 2px solid #CC5500;
@@ -247,24 +240,25 @@ h5, h2, h1, h8, h4 {
     transition: background-color 0.3s ease;
     position: relative;
     top: 5px;
-} 
+}
 
 .favorite-button:hover {
     background-color: #146831;
 }
 
 td {
-    padding: 0; 
-    margin: 0; 
-    border: none; 
+    padding: 0;
+    margin: 0;
+    border: none;
     line-height: 1;
 }
+
 .search-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin: 20px;
-    gap: 30px; /* Space between the search sections */
+    gap: 30px;
 }
 
 .search-section {
@@ -280,36 +274,30 @@ td {
 .artist-info {
     margin-top: 40px;
 }
+
 .container {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     flex-direction: column;
     margin-top: 20px;
 }
+
 table {
     border-spacing: 0;
     border-collapse: collapse;
-    margin: auto; 
+    margin: auto;
 }
 
-.card.song-result {
-    margin: 10px 0; 
-    width: 100%; 
-    max-width: 600px; 
-}
-
+.card.song-result,
 .card.favorites-song-result {
-    margin: 10px 0; 
-    width: 100%; 
-    max-width: 600px; 
+    margin: 10px 0;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 25px; /* Rounded corners for cards */
 }
 
-.song-result {
-    text-align: left;
-}
-
+.song-result,
 .favorites-song-result {
     text-align: left;
 }
-
