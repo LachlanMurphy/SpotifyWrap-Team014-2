@@ -43,7 +43,7 @@ nav .btn:hover {
     align-items: start;
     justify-content: center;
 }
-h5, h2, h1, h8 {
+h5, h2, h1, h8, h4 {
     color: #ffffff; 
     text-align: center;
     font-family: 'Poppins', sans-serif; 
@@ -54,13 +54,13 @@ h5, h2, h1, h8 {
     width: 45rem; 
     height: 18rem; 
     background-color: #181818;
-    border: 2px solid #1DB954;
+    border: 2px solid #CC5500;
     border-radius: 10px;
     color: #b3b3b3;
-    box-shadow: 0 0 10px 5px rgba(29, 185, 84, 0.5);
+    box-shadow: 0px 0px 10px rgba(204, 85, 0, 0.5);
 }
 .card:hover {
-    box-shadow: 0 0 20px 10px rgba(29, 185, 84, 0.7);
+    box-shadow: 0px 0px 10px rgba(204, 85, 0, 0.5);
 }
 .btn-primary {
     background-color: #CC5500; 
@@ -210,11 +210,11 @@ h5, h2, h1, h8 {
 }
 
 .recommendations-search-button:hover {
-    background-color: #146831;
+    background-color: #CC5500;
 }
 
 .recommendations-title {
-    font-size: 3.5rem;
+    font-size: 3 rem;
     font-weight: 700;
     padding: 10px 20px;
 }
