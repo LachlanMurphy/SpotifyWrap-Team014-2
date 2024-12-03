@@ -4,6 +4,8 @@
 
 // Make sure to include spotify web api library in package.json file too 
 const SpotifyWebApi = require("spotify-web-api-node");
+
+// Include LastFMApi library too
 const LastFmApi = require("last-fm");
 
 const express = require('express'); // To build an application server or API
@@ -94,10 +96,10 @@ app.get('/welcome', (req, res) => {
 
 const lastFmApi = new LastFmApi(process.env.CLIENT_API);
 
-lastFmApi.trackSearch({ q: 'the greatest' }, (err, data) => {
-  if (err) console.error(err)
-  else console.log(data)
-})
+// lastFmApi.trackSearch({q: 'the greatest'}, (err, data) => {
+//   if (err) console.error(err)
+//   else console.log(data)
+// })
 
 // Adapted code from this repository in order to fetch and update bearer access_token 
 // https://github.com/diana-moreno/spotify-express/blob/master/index.js
@@ -290,10 +292,30 @@ app.get('/song', (req, res) => {
         }
       }
 
-      res.render('pages/searchBySong', {
-        message: `Showing searchBySong results for: ${songName}`,
-        fiveSongs,
-      });
+      const recSong = { 
+        name: fiveSongs[0].name,
+        artistName: fiveSongs[0].album.artists[0].name
+      };
+
+      // Studied and adapted function definitions from https://www.npmjs.com/package/last-fm?activeTab=readme 
+      // to correctly pass arguments into functions defined in 'last-fm' library
+      lastFmApi.trackSimilar({name: recSong.name, artistName: recSong.artistName}, function(error, result) {
+        if (error){
+          res.render('pages/searchBySong', {
+            message: `An error occurred while getting recommendations`,
+            fiveSongs,
+          });
+        } 
+        else 
+        {
+          const songRecommendations = result.track.slice(0, 10);
+          res.render('pages/searchBySong', {
+            songRecommendations: songRecommendations,
+            message: `Showing searchBySong results for: ${songName}`,
+            fiveSongs,
+          });
+        }
+      })
     })
     .catch(function(err) {
       res.render('pages/searchBySong', {

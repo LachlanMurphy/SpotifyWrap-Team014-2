@@ -64,5 +64,11 @@
     </div>
 {{/if}}
 
+{{#if songRecommendations}}
+    <h1> You may also like... </h1>
+    {{#each songRecommendations}}   
+        <h1 class="recommendation-name mb-1">{{this.name}}</h1>
+    {{/each}}
+{{/if}}
 </body>
 </html>
