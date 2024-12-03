@@ -258,7 +258,7 @@ app.get('/logout', (req, res) => {
 // All spotify related functions were referenced and adpated from 
 // this website which defines and references the functions in the
 // library we used, visit this for more examples: https://www.npmjs.com/package/spotify-web-api-node#more-examples
-app.get('/song', (req, res) => {
+app.get('/song', async (req, res) => {
   const songName = req.query.song; // Get the song name from query parameter
 
   if (!songName) {
@@ -300,7 +300,7 @@ app.get('/song', (req, res) => {
 
       // Studied and adapted function definitions from https://www.npmjs.com/package/last-fm?activeTab=readme 
       // to correctly pass arguments into functions defined in 'last-fm' library
-      lastFmApi.trackSimilar({name: recSong.name, artistName: recSong.artistName}, (error, result) => {
+      lastFmApi.trackSimilar({name: recSong.name, artistName: recSong.artistName}, async (error, result) => {
         if (error){
           res.render('pages/searchBySong', {
             message: `An error occurred while getting recommendations`,
@@ -311,16 +311,25 @@ app.get('/song', (req, res) => {
         {
           const songRecommendations = result.track.slice(0, 10);
           let spotReccomendedSongs = [];
-
-          console.log(songRecommendations);
           
-          for (let track = 0; track < songRecommendations.length(); track++) {
-            spotifyApi.searchTracks(songRecommendations[])
+          for (let track = 0; track < songRecommendations.length; track++) {
+            await spotifyApi.searchTracks(songRecommendations[track].name).then(d => {
+              spotReccomendedSongs.push(d.body.tracks.items[0]);
+            });
           }
-          spotifyApi.searchTracks()
+
+          for (let i = 0; i < spotReccomendedSongs.length; i++) {
+            spotReccomendedSongs[i].min = Math.floor(spotReccomendedSongs[i].duration_ms / 60000);
+            spotReccomendedSongs[i].sec = Math.floor(spotReccomendedSongs[i].duration_ms / 1000) % 60;
+            spotReccomendedSongs[i].padding = "";
+            if(spotReccomendedSongs[i].sec < 10)
+            {
+              spotReccomendedSongs[i].padding = "0";
+            }
+          }
 
           res.render('pages/searchBySong', {
-            songRecommendations: songRecommendations,
+            spotReccomendedSongs: spotReccomendedSongs,
             message: `Showing searchBySong results for: ${songName}`,
             fiveSongs,
           });
