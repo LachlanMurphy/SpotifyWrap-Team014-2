@@ -26,7 +26,7 @@
 
 <!-- Search Section -->
 <div class="search-section">
-    <h1 class="search-title" style="color: #ffffff;">Search for Artists</h1>
+    <h1 class="search-title" style="color: #ffffff;">Seek an Artists</h1>
     <form method="GET" action="/searchArtist" class="search-form">
         <input type="text" name="artist" class="search-bar" placeholder="Search for an artist...">
         <button type="submit" class="search-button">Search</button>
@@ -91,7 +91,7 @@
     <!-- Right Section: Recommendations -->
     <div class="recommendations-section">
         {{#if artistRecommendations}}
-            <h1 class="recommendations-title">Recommendations for you:</h1>
+            <h1 class="recommendations-title">Recommendations:</h1>
             <div>
                 {{#each artistRecommendations}}
                     <div class="card favorites-song-result mb-3 p-3">
