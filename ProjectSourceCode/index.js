@@ -94,6 +94,7 @@ app.get('/welcome', (req, res) => {
   res.json({status: 'success', message: 'Welcome!'});
 });
 
+// Api key authentication method sourced from library documentation. Can be found at: https://www.npmjs.com/package/last-fm?activeTab=readme 
 const lastFmApi = new LastFmApi(process.env.CLIENT_API);
 
 // lastFmApi.trackSearch({q: 'the greatest'}, (err, data) => {
@@ -299,7 +300,7 @@ app.get('/song', (req, res) => {
 
       // Studied and adapted function definitions from https://www.npmjs.com/package/last-fm?activeTab=readme 
       // to correctly pass arguments into functions defined in 'last-fm' library
-      lastFmApi.trackSimilar({name: recSong.name, artistName: recSong.artistName}, function(error, result) {
+      lastFmApi.trackSimilar({name: recSong.name, artistName: recSong.artistName}, (error, result) => {
         if (error){
           res.render('pages/searchBySong', {
             message: `An error occurred while getting recommendations`,
@@ -367,9 +368,9 @@ app.get('/searchArtist', (req, res) => {
               topTracks[i].padding = "0";
             }
           }
-          // console.log(artist.name)
-          // HHAHHAA IM MAKING  A COMMENT
-          lastFmApi.artistSimilar({name: artist.name}, function(error, result) {
+          // Studied and adapted function definitions from https://www.npmjs.com/package/last-fm?activeTab=readme 
+          // to correctly pass arguments into functions defined in 'last-fm' library
+          lastFmApi.artistSimilar({name: artist.name}, (error, result) => {
             if (error){
               res.render('pages/searchByArtist', {
                 message: `An error occurred while getting recommendations`,
