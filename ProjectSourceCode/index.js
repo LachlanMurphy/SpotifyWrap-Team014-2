@@ -367,11 +367,27 @@ app.get('/searchArtist', (req, res) => {
               topTracks[i].padding = "0";
             }
           }
-          res.render('pages/searchByArtist', {
-            message: `Artist Found: ${artist.name}`,
-            artist,
-            topTracks,
-          });
+          // console.log(artist.name)
+          lastFmApi.artistSimilar({name: artist.name}, function(error, result) {
+            if (error){
+              res.render('pages/searchByArtist', {
+                message: `An error occurred while getting recommendations`,
+                artist,
+                topTracks,
+              });
+            } 
+            else 
+            {
+              const artistRecommendations = result.artist.slice(0, 10);
+              console.log(artistRecommendations)
+              res.render('pages/searchByArtist', {
+                artistRecommendations: artistRecommendations,
+                message: `Artist Found: ${artist.name}`,
+                artist,
+                topTracks,
+              });
+            }
+          })
         });
     })
     .catch(function(err) {
