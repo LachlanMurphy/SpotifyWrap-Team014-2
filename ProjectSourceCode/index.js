@@ -399,7 +399,7 @@ app.get('/searchArtist', (req, res) => {
             else 
             {
               const artistRecommendations = result.artist.slice(0, 10);
-              console.log(artistRecommendations)
+              // console.log(artistRecommendations)
               res.render('pages/searchByArtist', {
                 artistRecommendations: artistRecommendations,
                 message: `Artist Found: ${artist.name}`,

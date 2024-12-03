@@ -69,6 +69,7 @@
                                 <div class="duration text-muted me-3">
                                     <span>{{this.min}}:{{this.padding}}{{this.sec}}</span>
                                 </div>
+                                <iframe name="votar" style="display:none"></iframe>
                                 <form method="post" action="/favorite" target="votar" class="d-inline-block">
                                     <input class="favorite-button" type="submit" value="Favorite"/>
                                     <input type="hidden" name="song_id" value="{{this.id}}">
