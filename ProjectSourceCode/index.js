@@ -309,7 +309,7 @@ app.get('/song', async (req, res) => {
         } 
         else 
         {
-          const songRecommendations = result.track.slice(0, 10);
+          const songRecommendations = result.track.slice(0, 5);
           let spotReccomendedSongs = [];
           
           for (let track = 0; track < songRecommendations.length; track++) {
@@ -322,7 +322,7 @@ app.get('/song', async (req, res) => {
             spotReccomendedSongs[i].min = Math.floor(spotReccomendedSongs[i].duration_ms / 60000);
             spotReccomendedSongs[i].sec = Math.floor(spotReccomendedSongs[i].duration_ms / 1000) % 60;
             spotReccomendedSongs[i].padding = "";
-            if(spotReccomendedSongs[i].sec < 10)
+            if(spotReccomendedSongs[i].sec < 5)
             {
               spotReccomendedSongs[i].padding = "0";
             }
