@@ -309,6 +309,15 @@ app.get('/song', (req, res) => {
         else 
         {
           const songRecommendations = result.track.slice(0, 10);
+          let spotReccomendedSongs = [];
+
+          console.log(songRecommendations);
+          
+          for (let track = 0; track < songRecommendations.length(); track++) {
+            spotifyApi.searchTracks(songRecommendations[])
+          }
+          spotifyApi.searchTracks()
+
           res.render('pages/searchBySong', {
             songRecommendations: songRecommendations,
             message: `Showing searchBySong results for: ${songName}`,
