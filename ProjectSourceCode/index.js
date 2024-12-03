@@ -368,6 +368,7 @@ app.get('/searchArtist', (req, res) => {
             }
           }
           // console.log(artist.name)
+          // HHAHHAA IM MAKING  A COMMENT
           lastFmApi.artistSimilar({name: artist.name}, function(error, result) {
             if (error){
               res.render('pages/searchByArtist', {
