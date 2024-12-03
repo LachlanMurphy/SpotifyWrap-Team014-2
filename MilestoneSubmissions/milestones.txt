@@ -1,44 +1,102 @@
-FINAL RELEASE NOTES
+WEEK 1 RELEASE NOTES:
+    -> Directory Structure and repository set up
+    -> Spotify API initial testing
+    -> Brainstorming for possible website features
 
-Navbar:
-    -> Displays a "Home" button, a "Favorites" button, and a "Logout" button. These buttons will only function when a user is logged in.
-    -> Once a user logs in, a button will appear on the right side of the navbar that allows the user to view their profile.
+WEEK 2 RELEASE NOTES:
+    -> Front-end HTML for home.hbs, login.hbs, logout.hbs, search.hbs, and register.hbs
+    -> Navbar created
+    -> Updated .env file docker-compose.yaml, and package.json
+    -> API databse connection established in index.js, testing of getTrack and getRecommendations with console.log()
+    -> package.json file, gitignore, .env, and index.js created so website correctly hosts on localhost:3000
+    -> SQL database: login and registration
 
-Login/Register Page:
-    -> A link is present that takes users back and forth between the register and login pages as needed
-    -> The register page requests input for full name, phone number, username, and password
-        -> Error handling is present in the case that a user attempts to register an account under a username that already exists
-    -> The login page only requests username and password
-        -> Error handling implemented in the case that a user enters the wrong password for an existing account or still needs to register one
+WEEK 3 RELEASE NOTES:
+    -> Finished html for home page - changed picture for copyright reasons
+    -> Made profile page html
+    -> Started making a stylesheet instead of in-line css
+    -> Redesigned search.hbs html
+    -> Removed the lengthy <style> tag from search.hbs and replaced it with a CSS stylesheet
+    -> Added index.js support for CSS stylesheets
+    -> Implemented getTrack function that takes in song name
+    -> Implemented getArtist function that takes in artist name
+    -> Updated search.hbs with handlebars in order to collect user input and display information about the given song
+    -> Added messages to each page so if an event occurs (log in, register, etc) there is a message sent
+    -> Fixed bugs in the index.js file so that the database is consitently working.
+    -> Added user sessions to each page so a user is logged in when they are in the home page
+        -> When logged in they can click on their username and go to a page ot edit their profile.
+    -> Created edit profile page 
+    -> User information from the login show up on profile page.
 
-Home Page:
-    -> A description of the website that walks users through how to use it step by step
-    -> Links within two separate cards to access song search pages
-        -> Search Songs by Song Name page
-        -> Search Songs by Artist Name page
+WEEK 4 AND BEYOND RELEASE NOTES
+-> Changed color scheme of entire website
+    -> Changed website name 
+    -> Changed formatting of home page, took away sidebar and seperated buttons into two cards
+-> Removed <style> tag from home.hbs and created a stylesheet for home.hbs
+-> Added comments to style_home.hbs so that we know what style does what
+-> General formatting and ease of reading changes to code in several files
+-> Made changes to HTML in search.hbs -- made cards smaller and made it easier to read multiple songs
+-> Search.hbs now shows multiple songs
+-> Initial Spotify recommendations function working. User inputs a song, artist, and a genre and page displays ten recommendations.
+        -> Changed html so song results are displayed vertically instead of horizontally in search.hbs and recommendations.hbs
+        -> Added favorite buttons to search.hbs and recommendations.hbs and formatted with CSS
+-> Added middleware and reorganized endpoints in index.js
+-> Made some html changes so when you click on an album picture it brings you to the song
+-> Finised test cases for registration and login
+-> Revamped user session so a user stays signed in throughout all pages
+-> A user is now actually logged out when they click log out
+-> Added middleware so users cannot access the home page unless they are logged in
+-> Resolved favorites button favoriting for every user
+-> Over Thanksgiving break, Spotify API experienced major changes on 11/27. Our recommendations endpoint was no longer working, and we were forced to pivot.
+        -> Split up search by song and search by artist. When searching by artist, page now displays the artist's ten most popular songs.
+        -> Implemented trackSimilar and artistSimilar functions through the 'last-fm' API/library. 
+        -> Recommendations pop up when you search for an artist or a song on each page.
 
-Search Songs by Song Name Page:
-    -> User inputs a song name and page displays the 5 most signifigant songs with that name
-    -> Each song has a "favorite" button next to it to add that song to the user's favorites page
-    -> Clicking on the album cover of the song opens that song in Spotify and starts playing it
+FINAL SUBMISSION FEATURES
+    Navbar:
+        -> Displays a "Home" button, a "Favorites" button, and a "Logout" button. These buttons will only function when a user is logged in.
+        -> Once a user logs in, a button will appear on the right side of the navbar that allows the user to view their profile.
 
-Search Songs by Artist Name Page:
-    -> User inputs an artist name and page displays the top 5 songs of that artist
-    -> Similarly to the above search feature...
+    Login/Register Page:
+        -> A link is present that takes users back and forth between the register and login pages as needed
+        -> The register page requests input for full name, phone number, username, and password
+            -> Error handling is present in the case that a user attempts to register an account under a username that already exists
+        -> The login page only requests username and password
+            -> Error handling implemented in the case that a user enters the wrong password for an existing account or still needs to register one
+
+    Home Page:
+        -> A description of the website that walks users through how to use it step by step
+        -> Links within two separate cards to access song search pages
+            -> Search Songs by Song Name page
+            -> Search Songs by Artist Name page
+
+    Search Songs by Song Name Page:
+        -> User inputs a song name and page displays the 5 most signifigant songs with that name
         -> Each song has a "favorite" button next to it to add that song to the user's favorites page
-        -> Clicking on the album cover of the song opens that song in spotify and starts playing it
+        -> Clicking on the album cover of the song opens that song in Spotify and starts playing it
+        -> Song recommendations implemented through last-fm api 
+            -> When you search for a song, the names of 10 similar songs are displayed
 
-Recommendations Page: 
-    -> User inputs in a song/genre/artist and page displays 10 songs that are similar to those inputs
-    -> Similarly to the above search features...
-        -> Each song has a "favorite" button next to it to add that song to the user's favorites page
-        -> Clicking on the album cover of the song opens that song in spotify and starts playing it
-    -> NOTE: Spotify API experienced major changes on 11/27. Recommendations endpoint was removed completely from the API and the group was forced to pivot some of the functionality of our website. 
+    Search Songs by Artist Name Page:
+        -> User inputs an artist name and page displays the top 5 songs of that artist
+        -> Similarly to the above search feature...
+            -> Each song has a "favorite" button next to it to add that song to the user's favorites page
+            -> Clicking on the album cover of the song opens that song in spotify and starts playing it
+        -> Artist recommendations implemented through last-fm api 
+            -> When you search for an artist, the names of 10 similar artists are displayed
 
-Favorites Page:
-    -> Displays all of the songs that a user adds to their favorites list in chronological order.
+    (Removed) Spotify Recommendations Page: 
+        -> User inputs in a song/genre/artist and page displays 10 songs that are similar to those inputs
+        -> Similarly to the above search features...
+            -> Each song has a "favorite" button next to it to add that song to the user's favorites page
+            -> Clicking on the album cover of the song opens that song in spotify and starts playing it
+        -> NOTE: Spotify API experienced major changes on 11/27. Recommendations endpoint was removed completely from the API and the group was forced to pivot some of the functionality of our website. 
 
-Profile Page:
-    -> Displays the user information of the user that is currently logged in
-        -> Lists full name, username, and phone number
-        -> Does not list the user's password
+    Favorites Page:
+        -> Displays all of the songs that a user adds to their favorites list in chronological order.
+
+    Profile Page:
+        -> Displays the user information of the user that is currently logged in
+            -> Lists full name, username, and phone number
+            -> Does not list the user's password
+
