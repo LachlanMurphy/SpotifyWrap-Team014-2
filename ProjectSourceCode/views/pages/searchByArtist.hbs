@@ -7,80 +7,101 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style_search.css">
+    <style>
+        /* Override specific layout for side-by-side cards */
+        .artist-recommendation-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .artist-section, .recommendations-section {
+            flex: 1;
+        }
+        .song-result, .favorites-song-result {
+            width: 100%; /* Ensure cards take up available space */
+        }
+    </style>
 </head>
 <body>
-        <!-- Search for Artists -->
-        <div class="search-section">
-            <h1 class="search-title" style="color: #ffffff;">Search for Artists</h1>
-            <form method="GET" action="/searchArtist" class="search-form">
-                <input type="text" name="artist" class="search-bar" placeholder="Search for an artist...">
-                <button type="submit" class="search-button">Search</button>
-            </form>
-        </div>
-    </div>
 
-    <!-- Artist Info -->
+<!-- Search Section -->
+<div class="search-section">
+    <h1 class="search-title" style="color: #ffffff;">Search for Artists</h1>
+    <form method="GET" action="/searchArtist" class="search-form">
+        <input type="text" name="artist" class="search-bar" placeholder="Search for an artist...">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+</div>
+
+<!-- Main Content Section -->
+<div class="artist-recommendation-container">
+    <!-- Left Section: Top Tracks -->
+   <div class="artist-section">
     {{#if artist}}
-        <div class="artist-info text-center mt-4">
+        <div class="artist-info text-center">
             <h1 class="artist-name">{{artist.name}}</h1>
             <h5 style="color:#ffffff;">Followers: {{artist.followers.total}}</h5>
-            <div>
-                <img src="{{artist.images.0.url}}" alt="Artist Cover" width="250" height="250"/>
-            </div>
+            <img src="{{artist.images.0.url}}" alt="Artist Cover" width="250" height="250" class="rounded mb-3"/>
         </div>
+        
         {{#if topTracks}}
-            <hr>
-            <h5 style="color:#ffffff;">Top 5 Tracks:</h5>
-            <div class="container">
-            <table>
+            <h5 class="text-white">Top 5 Tracks:</h5>
+            <div>
                 {{#each topTracks}}   
-                    <tr>
-                        <td>
-                            <div class="card song-result mb-3 p-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="album-cover me-3">
-                                        <a href="{{this.uri}}">
-                                            <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="song-info flex-grow-1">
-                                        <h1 class="song-name mb-1">{{this.name}}</h1>
-                                        <h5 class="artist-name mb-1">{{this.album.artists.0.name}}</h5>
-                                        <p class="album-title mb-0">{{this.album.name}}</p>
-                                    </div>
-                                    
-                                    <div class="duration ms-3 text-muted">
-                                        <span>Duration: {{this.min}}:{{this.padding}}{{this.sec}}</span>
-                                    </div>                   
+                    <div class="card song-result mb-3 p-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <!-- Left Section: Song Info -->
+                            <div class="d-flex align-items-center">
+                                <div class="album-cover me-3">
+                                    <a href="{{this.uri}}">
+                                        <img src="{{this.album.images.0.url}}" alt="Album Cover" class="rounded">
+                                    </a>
+                                </div>
+                                <div class="song-info">
+                                    <h1 class="song-name">{{this.name}}</h1>
+                                    <h5 class="artist-name">{{this.album.artists.0.name}}</h5>
+                                    <p class="album-title">{{this.album.name}}</p>
                                 </div>
                             </div>
-                        </td>
-                        <td> 
-                            <iframe name="votar" style="display:none"></iframe>
-                            <form method="post" action="/favorite" target="votar">
-                                <input class="favorite-button" id="button" type="submit" value="Favorite"/>
-                                <input type="text" name="song_id" value="{{this.id}}" style="display: none;">
-                                <input type="text" name="song_name" value="{{this.name}}" style="display: none;">
-                                <input type="text" name="artist_name" value="{{this.album.artists.0.name}}" style="display: none;">
-                                <input type="text" name="album_name" value="{{this.album.name}}" style="display: none;">
-                                <input type="text" name="album_url" value="{{this.album.images.0.url}}" style="display: none;">
-                                <input type="text" name="song_duration" value="{{this.min}}:{{this.padding}}{{this.sec}}" style="display: none;">
-                            </form>
-                        </td>
-                    </tr>
+                            
+                            <!-- Right Section: Duration and Favorite Button -->
+                            <div class="d-flex align-items-center">
+                                <div class="duration text-muted me-3">
+                                    <span>{{this.min}}:{{this.padding}}{{this.sec}}</span>
+                                </div>
+                                <form method="post" action="/favorite" target="votar" class="d-inline-block">
+                                    <input class="favorite-button" type="submit" value="Favorite"/>
+                                    <input type="hidden" name="song_id" value="{{this.id}}">
+                                    <input type="hidden" name="song_name" value="{{this.name}}">
+                                    <input type="hidden" name="artist_name" value="{{this.album.artists.0.name}}">
+                                    <input type="hidden" name="album_name" value="{{this.album.name}}">
+                                    <input type="hidden" name="album_url" value="{{this.album.images.0.url}}">
+                                    <input type="hidden" name="song_duration" value="{{this.min}}:{{this.padding}}{{this.sec}}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 {{/each}}
-            </table>
             </div>
         {{/if}}
     {{/if}}
+</div>
 
-{{#if artistRecommendations}}
-    <h1> You may also like... </h1>
-    {{#each artistRecommendations}}   
-        <h1 class="recommendation-name mb-1">{{this.name}}</h1>
-    {{/each}}
-{{/if}}
+
+    <!-- Right Section: Recommendations -->
+    <div class="recommendations-section">
+        {{#if artistRecommendations}}
+            <h1 class="recommendations-title">You May Also Like...</h1>
+            <div>
+                {{#each artistRecommendations}}
+                    <div class="card favorites-song-result mb-3 p-3">
+                        <h5 class="recommendation-name">{{this.name}}</h5>
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
+</div>
 
 </body>
 </html>
