@@ -4,6 +4,7 @@
 
 // Make sure to include spotify web api library in package.json file too 
 const SpotifyWebApi = require("spotify-web-api-node");
+const LastFmApi = require("last-fm");
 
 const express = require('express'); // To build an application server or API
 const app = express();
@@ -90,6 +91,13 @@ db.connect()
 app.get('/welcome', (req, res) => {
   res.json({status: 'success', message: 'Welcome!'});
 });
+
+const lastFmApi = new LastFmApi(process.env.CLIENT_API);
+
+lastFmApi.trackSearch({ q: 'the greatest' }, (err, data) => {
+  if (err) console.error(err)
+  else console.log(data)
+})
 
 // Adapted code from this repository in order to fetch and update bearer access_token 
 // https://github.com/diana-moreno/spotify-express/blob/master/index.js
