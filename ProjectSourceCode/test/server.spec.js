@@ -118,7 +118,7 @@ describe('Server!', () => {
       chai
         .request(server)
         .post('/register')
-        .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
+        .send({username: "Big_Guy_123", password: "BigDoubleWoop!321", phone: "7208116942", name: "Guy Big"})
         .end((err, res) => {
           expect(res).to.have.status(200);
           assert.strictEqual(res.text.includes("Registered successfully!"), true);
@@ -129,7 +129,7 @@ describe('Server!', () => {
       chai
         .request(server)
         .post('/register')
-        .send({username: "Big_Guy_123", password:"BigDoubleWoop!321"})
+        .send({username: "Big_Guy_123", password:"BigDoubleWoop!321", phone: "7208116942", name: "Guy Big"})
         .end((err, res) => {
           expect(res).to.have.status(200);
           assert.strictEqual(res.text.includes('Registration failed: username already exists.'), true);
@@ -139,14 +139,14 @@ describe('Server!', () => {
   });
 
 describe('Testing Login API', () => {
-    it('positive : /login', done => {
+    it('Positive : /login', done => {
         chai
         .request(server)
         .post('/login')
         .send({username: "Big_Guy_123", password: "BigDoubleWoop!321"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.text.includes('logged in'), true);
+          assert.strictEqual(res.text.includes('Successfully Logged in!'), true);
           done();
         });
     });
@@ -157,7 +157,7 @@ describe('Testing Login API', () => {
         .send({username: "skooby_doo", password:"doobee dah"})
         .end((err, res) => {
           expect(res).to.have.status(200);
-          assert.strictEqual(res.text.includes('Incorrect Username/Password'), true);
+          assert.strictEqual(res.text.includes('User does not exist. Register an account or try again.'), true);
           done();
         });
     });
