@@ -162,3 +162,28 @@ describe('Testing Login API', () => {
         });
     });
   });
+
+  describe('Testing Favorite API', () => {
+    it('Positive : /favorite', done => {
+        chai
+        .request(server)
+        .post('/favorite')
+        .send({song_id: "1OJxI8lIWRqBvouJxW1nzN", song_name: "Subwoofer Lullaby", artist_name: "C418", album_name: "Minecraft - Volume Alpha", album_url: "https://i.scdn.co/image/ab67616d0000b273aaeb5c9fb6131977995b7f0e", song_duration: "3:28"})
+        .end((err, res) => {
+          const b = res.text !== null;
+          assert.strictEqual(b, true);
+          done();
+        });
+    });
+    chai.request(server).get('/logout');
+    it('Negative : /favorite. Check user is signed in', done => {
+      chai
+        .request(server)
+        .post('/favorite')
+        .send({song_id: "1OJxI8lIWRqBvouJxW1nzN", song_name: "Subwoofer Lullaby", artist_name: "C418", album_name: "Minecraft - Volume Alpha", album_url: "https://i.scdn.co/image/ab67616d0000b273aaeb5c9fb6131977995b7f0e", song_duration: "3:28"})
+        .end((err, res) => {
+          assert.strictEqual(res.text.includes('Login'), true);
+          done();
+        });
+    });
+  });

@@ -528,6 +528,13 @@ app.post('/favorite', async (req, res) => {
   const query = "insert into liked_songs (song_id, song_name, artist_name, album_name, album_url, song_duration) values ($1, $2, $3, $4, $5, $6) returning *;";
   const {song_id, song_name, artist_name, album_name, album_url, song_duration} = req.body;
 
+  if (user.logged_in === false) {
+    res.render('/login', {
+      message: "Please log in."
+    });
+    return;
+  }
+
   await db.one(query, [song_id, song_name, artist_name, album_name, album_url, song_duration])
   .catch(err => {
     console.log();
