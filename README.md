@@ -2,7 +2,7 @@
 
 **Application Description:**
 
-A web application to search artists and songs on Spotify. You can also get song recommendations from the music streaming service Last.fm. You can favorite songs you like to listen to them later! 
+A web application to search artists and songs on Spotify. You can also get song and artist recommendations from the music streaming service Last.fm. You can favorite songs you like to listen to them later! 
 
  **Project Contributors:**
 
@@ -52,15 +52,11 @@ In order to Run the application locally, you must have access to two different A
 
 **How To Run The Tests:**
 
-1. Open the docker-compose.yaml file
+1. Open the Docker desktop app
 
-2. Comment out this line -> command: 'npm start'
+2. Run the command docker-compose up
 
-3. Uncomment this line -> command: 'npm run testandrun'
-
-4. Run the command docker-compose up
-
-5. Test cases and their results should be printed in the terminal
+3. Test cases and their results should be printed in the terminal
 
 **Link To The Deployed Application:**
 
