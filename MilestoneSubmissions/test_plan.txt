@@ -35,16 +35,8 @@ Test Plan:
         - A non logged in session must not be able to access the profile page
     
 
-4:A logged in user should be able to insert three songs that they like and get similar songs that they may like
-    - Required fields for the search page:
-        - Song #1
-        - Song #2
-        - Song #3
-    - After clicking submit the user should get a list of songs that the spotify API reccomends that are similar
-      to the three songs they submited.
+4:A logged in user should be able to favorite songs and recommendations that are displayed
     Positive tests:
-        - A search request should take 3 inputs and return a list of songs
+        - A logged in user can successfully favorite any song returned by the Spotify API
     Negitive tests:
-        - A sesssion should not be able to access the search page if they are not logged in
-        - A search must not process unless 3 input fields are given by the user
-
+        - If not logged in, favoriting should not be possible. The user should be redirected to the login page in this case

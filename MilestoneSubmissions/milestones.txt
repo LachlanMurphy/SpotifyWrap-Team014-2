@@ -75,7 +75,7 @@ FINAL SUBMISSION FEATURES
         -> Each song has a "favorite" button next to it to add that song to the user's favorites page
         -> Clicking on the album cover of the song opens that song in Spotify and starts playing it
         -> Song recommendations implemented through last-fm api 
-            -> When you search for a song, the names of 10 similar songs are displayed
+            -> When you search for a song, 5 similar songs are displayed
 
     Search Songs by Artist Name Page:
         -> User inputs an artist name and page displays the top 5 songs of that artist
