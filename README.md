@@ -2,7 +2,7 @@
 
 **Application Description:**
 
-A web application to search artists and songs on Spotify. You can also get song and artist recommendations from the music streaming service Last.fm. You can favorite songs you like to listen to them later! 
+SongSeeker - A web application to search artists and songs on Spotify. You can also get song and artist recommendations from the music streaming service Last.fm. You can favorite songs you like to listen to them later! 
 
  **Project Contributors:**
 
